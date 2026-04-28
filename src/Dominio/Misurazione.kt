@@ -1,0 +1,4 @@
+package Dominio
+
+class Misurazione {
+}
