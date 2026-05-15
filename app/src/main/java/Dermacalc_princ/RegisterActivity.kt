@@ -3,6 +3,7 @@ package Dermacalc_princ
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -28,9 +29,17 @@ class RegisterActivity : AppCompatActivity() {
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val tvLogin = findViewById<TextView>(R.id.tvLogin)
 
         // Inizializzazione del database
         val database = AppDatabase.getDatabase(this)
+
+        // Torna alla schermata di Login
+        tvLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         // Gestione del click sul tasto Registrati
         btnRegister.setOnClickListener {

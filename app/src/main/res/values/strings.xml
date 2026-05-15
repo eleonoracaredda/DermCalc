@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">DermCalc</string>
+    <string name="calcolatore_easi">Calcolatore EASI</string>
+    <string name="seleziona_distretto">Seleziona Distretto Corporeo:</string>
+    <string name="already_have_account">Hai già un account? Accedi</string>
+    <string name="gravit_dei_segni_clinici">Gravità dei segni clinici</string>
+    <string name="eritema">Eritema (rossore)</string>
+    <string name="edema">Edema / Papulazione (gonfiore)</string>
+    <string name="escoriazioni">Escoriazioni (lesioni da grattamento)</string>
+    <string name="lichenificazione">Lichenificazione (ispessimento della cute)</string>
+    <string name="zero">0</string>
+    <string name="calcola_e_salva">Calcola e Salva</string>
+    <string name="risultato_label">Risultato: %s</string>
+    <string-array name="body_parts_easi">
+        <item>Testa e collo</item>
+        <item>Tronco</item>
+        <item>Arti superiori</item>
+        <item>Arti inferiori</item>
+    </string-array>
 </resources>

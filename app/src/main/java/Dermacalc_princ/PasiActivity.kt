@@ -1,4 +1,4 @@
-package Dermcalc_princ
+package Dermacalc_princ
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

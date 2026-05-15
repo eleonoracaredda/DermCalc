@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FB"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/calcolatore_easi"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBodyPartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/seleziona_distretto"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <Spinner
+            android:id="@+id/spinnerBodyPart"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/body_parts_easi"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBodyPartLabel" />
+
+        <TextView
+            android:id="@+id/tvGravityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/gravit_dei_segni_clinici"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerBodyPart" />
+
+        <!-- Eritema -->
+        <TextView
+            android:id="@+id/tvEritemaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/eritema"
+            android:textColor="#666666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvGravityLabel" />
+
+        <SeekBar
+            android:id="@+id/sbEritema"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:max="3"
+            android:progress="0"
+            app:layout_constraintEnd_toStartOf="@+id/tvEritemaValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEritemaLabel" />
+
+        <TextView
+            android:id="@+id/tvEritemaValue"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#5B4DFF"
+            app:layout_constraintBottom_toBottomOf="@id/sbEritema"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sbEritema" />
+
+        <!-- Edema -->
+        <TextView
+            android:id="@+id/tvEdemaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/edema"
+            android:textColor="#666666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbEritema" />
+
+        <SeekBar
+            android:id="@+id/sbEdema"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:max="3"
+            android:progress="0"
+            app:layout_constraintEnd_toStartOf="@+id/tvEdemaValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEdemaLabel" />
+
+        <TextView
+            android:id="@+id/tvEdemaValue"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#5B4DFF"
+            app:layout_constraintBottom_toBottomOf="@id/sbEdema"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sbEdema" />
+
+        <!-- Escoriazioni -->
+        <TextView
+            android:id="@+id/tvEscoriazioniLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/escoriazioni"
+            android:textColor="#666666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbEdema" />
+
+        <SeekBar
+            android:id="@+id/sbEscoriazioni"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:max="3"
+            android:progress="0"
+            app:layout_constraintEnd_toStartOf="@+id/tvEscoriazioniValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEscoriazioniLabel" />
+
+        <TextView
+            android:id="@+id/tvEscoriazioniValue"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#5B4DFF"
+            app:layout_constraintBottom_toBottomOf="@id/sbEscoriazioni"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sbEscoriazioni" />
+
+        <!-- Lichenificazione -->
+        <TextView
+            android:id="@+id/tvLichenificazioneLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/lichenificazione"
+            android:textColor="#666666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbEscoriazioni" />
+
+        <SeekBar
+            android:id="@+id/sbLichenificazione"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:max="3"
+            android:progress="0"
+            app:layout_constraintEnd_toStartOf="@+id/tvLichenificazioneValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLichenificazioneLabel" />
+
+        <TextView
+            android:id="@+id/tvLichenificazioneValue"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#5B4DFF"
+            app:layout_constraintBottom_toBottomOf="@id/sbLichenificazione"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/sbLichenificazione" />
+
+        <Button
+            android:id="@+id/btnCalculateEasi"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#5B4DFF"
+            android:text="@string/calcola_e_salva"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbLichenificazione" />
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/risultato_label"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi"
+            app:layout_constraintVertical_bias="0.26" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
