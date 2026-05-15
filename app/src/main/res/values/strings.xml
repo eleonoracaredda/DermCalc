@@ -8,7 +8,20 @@
     <string name="edema">Edema / Papulazione (gonfiore)</string>
     <string name="escoriazioni">Escoriazioni (lesioni da grattamento)</string>
     <string name="lichenificazione">Lichenificazione (ispessimento della cute)</string>
-    <string name="zero">0</string>
+    <string name="area">Area interessata (% di superficie)</string>
+    <string name="desc_zero">Assente (0)</string>
+    <string name="desc_uno">Lieve (1)</string>
+    <string name="desc_due">Moderato (2)</string>
+    <string name="desc_tre">Grave (3)</string>
+
+    <string name="area_0">0% (0)</string>
+    <string name="area_1">1-9% (1)</string>
+    <string name="area_2">10-29% (2)</string>
+    <string name="area_3">30-49% (3)</string>
+    <string name="area_4">50-69% (4)</string>
+    <string name="area_5">70-89% (5)</string>
+    <string name="area_6">90-100% (6)</string>
+
     <string name="calcola_e_salva">Calcola e Salva</string>
     <string name="risultato_label">Risultato: %s</string>
     <string-array name="body_parts_easi">
