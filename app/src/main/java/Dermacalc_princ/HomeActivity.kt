@@ -20,8 +20,8 @@ class HomeActivity : AppCompatActivity() {
 
         // Gestione dell'uscita dall'applicazione (Logout)
         btnLogout.setOnClickListener {
-            // Crea un Intent per tornare alla schermata di Login (MainActivity)
-            val intent = Intent(this, MainActivity::class.java)
+            // Crea un Intent per tornare alla schermata di Login
+            val intent = Intent(this, LoginActivity::class.java)
             
             // Pulisce tutta la cronologia delle schermate precedenti.
             // Serve per evitare che l'utente possa tornare al menu segreto dopo il logout premendo il tasto back.

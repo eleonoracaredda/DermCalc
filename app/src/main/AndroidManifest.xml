@@ -19,6 +19,10 @@
         </activity>
 
         <activity
+            android:name="Dermacalc_princ.LoginActivity"
+            android:exported="false" />
+
+        <activity
             android:name="Dermacalc_princ.HomeActivity"
             android:exported="false" />
 
