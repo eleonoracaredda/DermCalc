@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -17,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menu Principale"
+            android:text="@string/menu_principale"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_gravity="center"
@@ -28,24 +29,27 @@
             android:id="@+id/btnBmi"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Calcolatore BMI"
+            android:text="@string/calcolatore_bmi1"
             android:layout_marginBottom="12dp"
-            android:backgroundTint="#5B4DFF"/>
+            android:backgroundTint="#5B4DFF"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/btnPasi"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Calcolatore PASI"
+            android:text="@string/calcolatore_pasi1"
             android:layout_marginBottom="12dp"
-            android:backgroundTint="#5B4DFF"/>
+            android:backgroundTint="#5B4DFF"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/btnEasi"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Calcolatore EASI"
-            android:backgroundTint="#5B4DFF"/>
+            android:text="@string/calcolatore_easi1"
+            android:backgroundTint="#5B4DFF"
+            tools:ignore="VisualLintButtonSize" />
 
     </LinearLayout>
 
@@ -55,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@android:color/transparent"
-        android:text="Log out"
+        android:text="@string/log_out"
         android:textColor="#000000"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"

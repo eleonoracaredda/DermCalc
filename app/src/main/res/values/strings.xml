@@ -29,6 +29,17 @@
     <string name="altezza_cm">Altezza (cm)</string>
     <string name="calcola_e_salva1">Calcola e Salva</string>
     <string name="risultato">Risultato: --</string>
+    <string name="codice_fiscale">Codice Fiscale</string>
+    <string name="cognome">Cognome</string>
+    <string name="email">Email</string>
+    <string name="nome">Nome</string>
+    <string name="password">Password</string>
+    <string name="registrati">Registrati</string>
+    <string name="menu_principale">Menu Principale</string>
+    <string name="calcolatore_bmi1">Calcolatore BMI</string>
+    <string name="calcolatore_easi1">Calcolatore EASI</string>
+    <string name="log_out">Log out</string>
+    <string name="calcolatore_pasi1">Calcolatore PASI</string>
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>
