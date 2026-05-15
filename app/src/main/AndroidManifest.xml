@@ -30,6 +30,18 @@
             android:name="Dermacalc_princ.RegisterActivity"
             android:exported="false" />
 
+        <activity
+            android:name="Dermacalc_princ.BmiActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="Dermacalc_princ.EasiActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="Dermacalc_princ.PasiActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

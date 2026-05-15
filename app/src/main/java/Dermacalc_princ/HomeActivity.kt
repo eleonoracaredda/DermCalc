@@ -32,6 +32,11 @@ class HomeActivity : AppCompatActivity() {
         }
         
         // NOTA: I bottoni BMI, PASI ed EASI sono già presenti nel layout XML.
-        // Andranno collegati alle rispettive Activity quando saranno create.
+        val btnBmi = findViewById<Button>(R.id.btnBmi)
+
+        btnBmi.setOnClickListener {
+            val intent = Intent(this, BmiActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -1,5 +1,6 @@
 package Dermacalc_princ
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -58,7 +59,11 @@ class RegisterActivity : AppCompatActivity() {
                         database.userDao().insertUser(newUser)
                         Toast.makeText(this@RegisterActivity, "Registrazione completata!", Toast.LENGTH_SHORT).show()
                         
-                        // Chiude l'activity e torna alla schermata di Login
+                        // Naviga direttamente alla HomeActivity
+                        val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
+                        // Pulisce il task per evitare che l'utente torni alla registrazione col tasto back
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
                         finish()
                     } else {
                         Toast.makeText(this@RegisterActivity, "Utente già registrato con questo Codice Fiscale", Toast.LENGTH_SHORT).show()
