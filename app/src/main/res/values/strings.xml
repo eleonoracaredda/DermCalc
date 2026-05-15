@@ -24,6 +24,11 @@
 
     <string name="calcola_e_salva">Calcola e Salva</string>
     <string name="risultato_label">Punteggio Regione: %1$.1f\nTOTALE EASI: %2$.1f (%3$s)</string>
+    <string name="calcolatore_bmi">Calcolatore BMI</string>
+    <string name="peso_kg">Peso (kg)</string>
+    <string name="altezza_cm">Altezza (cm)</string>
+    <string name="calcola_e_salva1">Calcola e Salva</string>
+    <string name="risultato">Risultato: --</string>
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>
