@@ -1,15 +1,27 @@
+# ========== Android ==========
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
+.gradle/
+local.properties
+
 /build
 /captures
-.externalNativeBuild
-.cxx
-local.properties
+.externalNativeBuild/
+.cxx/
+
+# ========== Android Studio ==========
+.idea/
+
+# opzionale per team
+!.idea/misc.xml
+!.idea/runConfigurations.xml
+
+# ========== OS ==========
+.DS_Store
+Thumbs.db
+
+# ========== Firebase / Google Services ==========
+google-services.json
+
+# ========== Kotlin / Java ==========
+*.class
+*.log
