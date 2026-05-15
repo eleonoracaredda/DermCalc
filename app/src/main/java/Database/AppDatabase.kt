@@ -34,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
                         AppDatabase::class.java,
                         "dermcalc_database"
                     )
-                        .fallbackToDestructiveMigration()
+                        .fallbackToDestructiveMigration(false)
                         .build()
 
                 INSTANCE = instance
