@@ -40,7 +40,7 @@ class BmiActivity : AppCompatActivity() {
                 val height = heightStr.toDouble()
 
                 val bmi = bmiCalculator.calculate(weight, height)
-                val severity = calcolaSeveritaBmi(bmi)
+                val severity = bmiCalculator.getSeverity(bmi)
 
                 tvResult.text = "Risultato: %.2f (%s)".format(bmi, severity)
 
@@ -65,15 +65,6 @@ class BmiActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 Toast.makeText(this@BmiActivity, "Salvato nel database", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun calcolaSeveritaBmi(bmi: Double): String {
-        return when {
-            bmi < 18.5 -> "Sottopeso"
-            bmi < 25 -> "Normopeso"
-            bmi < 30 -> "Sovrappeso"
-            else -> "Obesità"
         }
     }
 }

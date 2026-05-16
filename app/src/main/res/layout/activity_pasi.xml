@@ -205,7 +205,8 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbArea" />
+            app:layout_constraintTop_toBottomOf="@id/sbArea"
+            tools:ignore="VisualLintButtonSize" />
 
         <TextView
             android:id="@+id/tvResult"

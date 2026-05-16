@@ -25,6 +25,7 @@
 
     <string name="calcola_e_salva">Calcola e Salva</string>
     <string name="risultato_label">Punteggio Regione: %1$.1f\nTOTALE EASI: %2$.1f (%3$s)</string>
+    <string name="risultato_pasi_label">Punteggio Regione: %1$.1f\nTOTALE PASI: %2$.1f (%3$s)</string>
     <string name="calcolatore_bmi">Calcolatore BMI</string>
     <string name="peso_kg">Peso (kg)</string>
     <string name="altezza_cm">Altezza (cm)</string>

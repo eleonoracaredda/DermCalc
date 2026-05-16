@@ -3,10 +3,12 @@ package Logic
 import Dominio.DatiDistretto
 
 // Classe per il calcolo del PASI (Psoriasis Area and Severity Index)
+// Il calcolo si basa sulla somma dei segni clinici pesati per l'estensione dell'area 
+// e per il peso specifico del distretto corporeo.
 class PasiCalculator {
 
     // Calcola il punteggio PASI totale sommando i punteggi dei quattro distretti corporei:
-    // testa, arti superiori, tronco e arti inferiori.
+    // Testa (10%), Arti Superiori (20%), Tronco (30%), Arti Inferiori (40%).
     fun calculate(
         testa: DatiDistretto,
         artiSup: DatiDistretto,
@@ -21,9 +23,9 @@ class PasiCalculator {
     }
 
     // Calcola il punteggio parziale per un singolo distretto corporeo.
-    // Il calcolo somma i valori di eritema, indurimento e desquamazione,
-    // e moltiplica il risultato per il valore dell'area e per il peso del distretto.
-    private fun score(d: DatiDistretto): Double {
+    // Formula: (Eritema + Indurimento + Desquamazione) * Area * Peso del distretto.
+    // I segni (E, I, D) hanno punteggio 0-4. L'area (A) ha punteggio 0-6.
+    fun score(d: DatiDistretto): Double {
         return (d.eritema +
                 d.indurimento +
                 d.desquamazione) *
@@ -31,12 +33,12 @@ class PasiCalculator {
                 d.peso
     }
 
-    // Determina la categoria di gravità della psoriasi in base al valore PASI calcolato.
+    // Determina la categoria di gravità della psoriasi in base al valore PASI totale.
     fun severity(value: Double): String {
         return when {
-            value < 5 -> "Lieve"       // Gravità lieve per punteggi minori di 5
-            value <= 10 -> "Moderata"  // Gravità moderata per punteggi tra 5 e 10 (inclusi)
-            else -> "Severa"           // Gravità severa per punteggi superiori a 10
+            value < 10 -> "Lieve"       // Punteggio inferiore a 10
+            value <= 20 -> "Moderata"   // Punteggio compreso tra 10 e 20 (inclusi)
+            else -> "Grave"             // Punteggio superiore a 20
         }
     }
 }

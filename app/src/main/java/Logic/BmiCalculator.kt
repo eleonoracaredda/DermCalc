@@ -3,13 +3,20 @@ package Logic
 // Classe per il calcolo dell'Indice di Massa Corporea (BMI)
 class BmiCalculator {
     
-    // Calcola il BMI partendo da peso (in kg) e altezza (in cm)
+    // Formula: peso / (altezza in metri al quadrato)
+    // L'altezza viene divisa per 100 per convertirla da cm a metri
     fun calculate(weight: Double, height: Double): Double {
-        // Se l'altezza è zero o negativa, restituisce 0 per evitare errori di divisione
         if (height <= 0) return 0.0
-        
-        // Formula: peso / (altezza in metri al quadrato)
-        // L'altezza viene divisa per 100 per convertirla da cm a metri
         return weight / ((height / 100) * (height / 100))
+    }
+
+    // Determina la categoria di peso in base al BMI
+    fun getSeverity(bmi: Double): String {
+        return when {
+            bmi < 18.5 -> "Sottopeso"
+            bmi < 25 -> "Normopeso"
+            bmi < 30 -> "Sovrappeso"
+            else -> "Obesità"
+        }
     }
 }
