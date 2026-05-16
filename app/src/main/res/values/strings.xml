@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DermCalc</string>
+    <string name="app_name">DermaCare</string>
     <string name="calcolatore_easi">Calcolatore EASI</string>
     <string name="seleziona_distretto">Seleziona Distretto Corporeo:</string>
     <string name="already_have_account">Hai già un account? Accedi</string>
@@ -13,6 +13,7 @@
     <string name="desc_uno">Lieve (1)</string>
     <string name="desc_due">Moderato (2)</string>
     <string name="desc_tre">Grave (3)</string>
+    <string name="desc_quattro">Molto Grave (4)</string>
 
     <string name="area_0">0% (0)</string>
     <string name="area_1">1-9% (1)</string>
@@ -40,10 +41,19 @@
     <string name="calcolatore_easi1">Calcolatore EASI</string>
     <string name="log_out">Log out</string>
     <string name="calcolatore_pasi1">Calcolatore PASI</string>
+    <string name="calcolatore_pasi">Calcolatore PASI</string>
+    <string name="indurimento_spessore_infiltrazione">Indurimento(spessore/infiltrazione)</string>
+    <string name="Desquamazione">Desquamazione</string>
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>
         <item>Arti superiori</item>
+        <item>Arti inferiori</item>
+    </string-array>
+    <string-array name="body_parts_pasi">
+        <item>Testa</item>
+        <item>Arti superiori</item>
+        <item>Tronco</item>
         <item>Arti inferiori</item>
     </string-array>
 </resources>

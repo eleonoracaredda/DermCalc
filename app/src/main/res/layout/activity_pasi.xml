@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/calcolatore_easi"
+            android:text="@string/calcolatore_pasi"
             android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="#333333"
@@ -36,19 +36,17 @@
             android:textColor="#555555"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
         <Spinner
             android:id="@+id/spinnerBodyPart"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginTop="8dp"
             android:background="@android:drawable/btn_dropdown"
-            android:entries="@array/body_parts_easi"
+            android:entries="@array/body_parts_pasi"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvBodyPartLabel" />
-
         <TextView
             android:id="@+id/tvGravityLabel"
             android:layout_width="wrap_content"
@@ -71,18 +69,16 @@
             android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvGravityLabel" />
-
         <SeekBar
             android:id="@+id/sbEritema"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:max="3"
+            android:max="4"
             android:progress="0"
             app:layout_constraintEnd_toStartOf="@+id/tvEritemaValue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvEritemaLabel" />
-
         <TextView
             android:id="@+id/tvEritemaValue"
             android:layout_width="wrap_content"
@@ -97,30 +93,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbEritema" />
 
-        <!-- Edema -->
+        <!-- Indurimento -->
         <TextView
-            android:id="@+id/tvEdemaLabel"
+            android:id="@+id/tvIndurimentoLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/edema"
+            android:text="@string/indurimento_spessore_infiltrazione"
             android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbEritema" />
-
         <SeekBar
-            android:id="@+id/sbEdema"
+            android:id="@+id/sbIndurimento"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:max="3"
+            android:max="4"
             android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvEdemaValue"
+            app:layout_constraintEnd_toStartOf="@+id/tvIndurimentoValue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEdemaLabel" />
-
+            app:layout_constraintTop_toBottomOf="@id/tvIndurimentoLabel" />
         <TextView
-            android:id="@+id/tvEdemaValue"
+            android:id="@+id/tvIndurimentoValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
@@ -129,34 +123,32 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#5B4DFF"
-            app:layout_constraintBottom_toBottomOf="@id/sbEdema"
+            app:layout_constraintBottom_toBottomOf="@id/sbIndurimento"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbEdema" />
+            app:layout_constraintTop_toTopOf="@id/sbIndurimento" />
 
-        <!-- Escoriazioni -->
+        <!-- Desquamazione -->
         <TextView
-            android:id="@+id/tvEscoriazioniLabel"
+            android:id="@+id/tvDesquamazioneLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/escoriazioni"
+            android:text="@string/Desquamazione"
             android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbEdema" />
-
+            app:layout_constraintTop_toBottomOf="@id/sbIndurimento" />
         <SeekBar
-            android:id="@+id/sbEscoriazioni"
+            android:id="@+id/sbDesquamazione"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:max="3"
+            android:max="4"
             android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvEscoriazioniValue"
+            app:layout_constraintEnd_toStartOf="@+id/tvDesquamazioneValue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEscoriazioniLabel" />
-
+            app:layout_constraintTop_toBottomOf="@id/tvDesquamazioneLabel" />
         <TextView
-            android:id="@+id/tvEscoriazioniValue"
+            android:id="@+id/tvDesquamazioneValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
@@ -165,45 +157,9 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#5B4DFF"
-            app:layout_constraintBottom_toBottomOf="@id/sbEscoriazioni"
+            app:layout_constraintBottom_toBottomOf="@id/sbDesquamazione"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbEscoriazioni" />
-
-        <!-- Lichenificazione -->
-        <TextView
-            android:id="@+id/tvLichenificazioneLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lichenificazione"
-            android:textColor="#666666"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbEscoriazioni" />
-
-        <SeekBar
-            android:id="@+id/sbLichenificazione"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:max="3"
-            android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvLichenificazioneValue"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLichenificazioneLabel" />
-
-        <TextView
-            android:id="@+id/tvLichenificazioneValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:gravity="end"
-            android:text="@string/desc_zero"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#5B4DFF"
-            app:layout_constraintBottom_toBottomOf="@id/sbLichenificazione"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbLichenificazione" />
+            app:layout_constraintTop_toTopOf="@id/sbDesquamazione" />
 
         <!-- Area -->
         <TextView
@@ -214,8 +170,7 @@
             android:text="@string/area"
             android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbLichenificazione" />
-
+            app:layout_constraintTop_toBottomOf="@id/sbDesquamazione" />
         <SeekBar
             android:id="@+id/sbArea"
             android:layout_width="0dp"
@@ -226,7 +181,6 @@
             app:layout_constraintEnd_toStartOf="@+id/tvAreaValue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAreaLabel" />
-
         <TextView
             android:id="@+id/tvAreaValue"
             android:layout_width="wrap_content"
@@ -240,9 +194,8 @@
             app:layout_constraintBottom_toBottomOf="@id/sbArea"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbArea" />
-
         <Button
-            android:id="@+id/btnCalculateEasi"
+            android:id="@+id/btnCalculatePasi"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginTop="32dp"
@@ -252,8 +205,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbArea"
-            tools:ignore="VisualLintButtonSize" />
+            app:layout_constraintTop_toBottomOf="@id/sbArea" />
 
         <TextView
             android:id="@+id/tvResult"
@@ -269,7 +221,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi"
+            app:layout_constraintTop_toBottomOf="@id/btnCalculatePasi"
             app:layout_constraintVertical_bias="0.26" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
