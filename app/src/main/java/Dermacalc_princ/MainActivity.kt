@@ -4,18 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-/**
- * MainActivity ora funge da entry point che reindirizza l'utente alla LoginActivity.
- */
+// Classe MainActivity: punto di ingresso dell'applicazione che gestisce il reindirizzamento iniziale
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Reindirizza immediatamente l'utente alla schermata di Login
+        // Crea un Intent per avviare la schermata di login
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         
-        // Chiude la MainActivity in modo che non rimanga nello stack delle attività
+        // Chiude la MainActivity per rimuoverla dallo stack delle attività, 
+        // evitando che l'utente ci torni premendo il tasto "indietro" dal login
         finish()
     }
 }

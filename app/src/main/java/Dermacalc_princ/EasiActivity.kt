@@ -18,12 +18,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// Classe EasiActivity: gestisce il calcolo complesso dell'indice EASI per la dermatite atopica
 class EasiActivity : AppCompatActivity() {
 
     private lateinit var db: AppDatabase
     private val easiCalculator = EasiCalculator()
 
-    // Stato per le 4 regioni (Testa, Tronco, Arti Sup, Arti Inf)
+    // Classe interna per mantenere lo stato dei dati per ciascuna delle 4 regioni corporee
     private data class RegionData(
         var eritema: Int = 0,
         var edema: Int = 0,
@@ -31,12 +32,15 @@ class EasiActivity : AppCompatActivity() {
         var lichenificazione: Int = 0,
         var area: Int = 0
     ) {
+        // Calcola la somma dei quattro segni clinici per la regione
         fun signsSum() = eritema + edema + escoriazioni + lichenificazione
     }
 
+    // Array che contiene i dati delle 4 regioni: Testa, Tronco, Arti Superiori, Arti Inferiori
     private val regions = Array(4) { RegionData() }
     private var currentRegionIndex = 0
 
+    // Componenti della UI (SeekBar per i valori e TextView per le etichette)
     private lateinit var sbEritema: SeekBar
     private lateinit var sbEdema: SeekBar
     private lateinit var sbEscoriazioni: SeekBar
@@ -54,12 +58,18 @@ class EasiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easi)
 
+        // Inizializzazione database
         db = AppDatabase.getDatabase(this)
+        
+        // Collegamento viste e setup dei listener
         initViews()
         setupListeners()
+        
+        // Aggiorna l'interfaccia con i valori iniziali (tutti a zero)
         updateTotalUI()
     }
 
+    // Inizializza i riferimenti agli elementi del layout
     private fun initViews() {
         sbEritema = findViewById(R.id.sbEritema)
         sbEdema = findViewById(R.id.sbEdema)
@@ -75,16 +85,21 @@ class EasiActivity : AppCompatActivity() {
         tvTotalResult = findViewById(R.id.tvResult)
     }
 
+    // Configura i listener per gestire le interazioni dell'utente
     private fun setupListeners() {
         val spinnerBodyPart = findViewById<Spinner>(R.id.spinnerBodyPart)
+        
+        // Gestisce il cambio della regione corporea tramite lo Spinner
         spinnerBodyPart.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 currentRegionIndex = position
+                // Carica i dati salvati per la nuova regione selezionata nelle SeekBar
                 loadRegionData(regions[position])
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        // Listener per tutte le SeekBar: ogni volta che l'utente sposta un cursore, i dati vengono salvati e il totale aggiornato
         val seekBars = listOf(sbEritema, sbEdema, sbEscoriazioni, sbLichenificazione, sbArea)
         seekBars.forEach { sb ->
             sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -100,13 +115,15 @@ class EasiActivity : AppCompatActivity() {
             })
         }
 
+        // Gestione del pulsante di salvataggio finale
         findViewById<Button>(R.id.btnCalculateEasi).setOnClickListener {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
-            salvaEasi(1, totalScore, severita)
+            salvaEasi(1, totalScore, severita) // ID paziente fittizio per il prototipo
         }
     }
 
+    // Salva i valori attuali delle SeekBar nell'array delle regioni
     private fun saveCurrentRegionData() {
         val data = regions[currentRegionIndex]
         data.eritema = sbEritema.progress
@@ -116,6 +133,7 @@ class EasiActivity : AppCompatActivity() {
         data.area = sbArea.progress
     }
 
+    // Imposta il progresso delle SeekBar in base ai dati della regione selezionata
     private fun loadRegionData(data: RegionData) {
         sbEritema.progress = data.eritema
         sbEdema.progress = data.edema
@@ -125,6 +143,7 @@ class EasiActivity : AppCompatActivity() {
         updateLabels()
     }
 
+    // Aggiorna le scritte descrittive sotto ogni cursore
     private fun updateLabels() {
         tvEritemaVal.text = getSignDesc(sbEritema.progress)
         tvEdemaVal.text = getSignDesc(sbEdema.progress)
@@ -133,6 +152,7 @@ class EasiActivity : AppCompatActivity() {
         tvAreaVal.text = getAreaDesc(sbArea.progress)
     }
 
+    // Converte il valore numerico del segno in descrizione testuale
     private fun getSignDesc(progress: Int) = when(progress) {
         0 -> getString(R.string.desc_zero)
         1 -> getString(R.string.desc_uno)
@@ -141,6 +161,7 @@ class EasiActivity : AppCompatActivity() {
         else -> progress.toString()
     }
 
+    // Converte il valore numerico dell'area in descrizione percentuale
     private fun getAreaDesc(progress: Int) = when(progress) {
         0 -> getString(R.string.area_0)
         1 -> getString(R.string.area_1)
@@ -152,6 +173,7 @@ class EasiActivity : AppCompatActivity() {
         else -> progress.toString()
     }
 
+    // Esegue la somma dei punteggi ponderati di tutte le 4 regioni
     private fun calculateTotalEasi(): Double {
         var total = 0.0
         regions.forEachIndexed { index, data ->
@@ -160,6 +182,7 @@ class EasiActivity : AppCompatActivity() {
         return total
     }
 
+    // Aggiorna la visualizzazione del punteggio parziale e totale nella UI
     private fun updateTotalUI() {
         val total = calculateTotalEasi()
         val regionScore = easiCalculator.calculateRegionScore(
@@ -171,6 +194,7 @@ class EasiActivity : AppCompatActivity() {
         tvTotalResult.text = getString(R.string.risultato_label, regionScore, total, easiCalculator.severity(total))
     }
 
+    // Funzione per il salvataggio asincrono nel database locale Room
     private fun salvaEasi(idPaziente: Int, valore: Double, severita: String) {
         CoroutineScope(Dispatchers.IO).launch {
             db.misurazioneDao().insert(
