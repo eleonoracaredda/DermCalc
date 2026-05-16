@@ -16,12 +16,12 @@
     <string name="desc_quattro">Molto Grave (4)</string>
 
     <string name="area_0">0% (0)</string>
-    <string name="area_1">1-9% (1)</string>
-    <string name="area_2">10-29% (2)</string>
-    <string name="area_3">30-49% (3)</string>
-    <string name="area_4">50-69% (4)</string>
-    <string name="area_5">70-89% (5)</string>
-    <string name="area_6">90-100% (6)</string>
+    <string name="area_1">1–9% (1)</string>
+    <string name="area_2">10–29% (2)</string>
+    <string name="area_3">30–49% (3)</string>
+    <string name="area_4">50–69% (4)</string>
+    <string name="area_5">70–89% (5)</string>
+    <string name="area_6">90–100% (6)</string>
 
     <string name="calcola_e_salva">Calcola e Salva</string>
     <string name="risultato_label">Punteggio Regione: %1$.1f\nTOTALE EASI: %2$.1f (%3$s)</string>
@@ -30,7 +30,7 @@
     <string name="peso_kg">Peso (kg)</string>
     <string name="altezza_cm">Altezza (cm)</string>
     <string name="calcola_e_salva1">Calcola e Salva</string>
-    <string name="risultato">Risultato: --</string>
+    <string name="risultato">Risultato: —</string>
     <string name="codice_fiscale">Codice Fiscale</string>
     <string name="cognome">Cognome</string>
     <string name="email">Email</string>
@@ -46,6 +46,8 @@
     <string name="indurimento_spessore_infiltrazione">Indurimento(spessore/infiltrazione)</string>
     <string name="Desquamazione">Desquamazione</string>
     <string name="lista_pazienti">Lista pazienti</string>
+    <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
+    <string name="visualizza_storico">Visualizza storico</string>
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>

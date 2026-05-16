@@ -29,12 +29,12 @@
             android:id="@+id/tvSelectedPaziente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nessun paziente selezionato"
-            android:textColor="#4A90E2"
-            android:textSize="16sp"
-            android:textStyle="italic"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="20dp"
+            android:text="@string/nessun_paziente_selezionato"
+            android:textColor="#5C6BC0"
+            android:textSize="16sp"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/btnBmi"
@@ -59,12 +59,21 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/calcolatore_easi1"
+            android:layout_marginBottom="12dp"
             android:backgroundTint="#5B4DFF"
             tools:ignore="VisualLintButtonSize" />
 
+        <Button
+            android:id="@+id/btnStorico"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/visualizza_storico"
+            android:backgroundTint="#5B4DFF"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -75,21 +84,23 @@
 
         <Button
             android:id="@+id/btnBackToList"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="@string/lista_pazienti"
-            android:textColor="#4A90E2"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="#5C6BC0" />
 
         <Button
             android:id="@+id/btnLogout"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="@string/log_out"
-            android:textColor="#4A90E2"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="#5C6BC0" />
 
     </LinearLayout>
 
