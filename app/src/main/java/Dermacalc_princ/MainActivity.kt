@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         
-        // Chiude la MainActivity per rimuoverla dallo stack delle attività, 
+        // Chiude la MainActivity per rimuoverla dallo stack delle attività,
         // evitando che l'utente ci torni premendo il tasto "indietro" dal login
         finish()
     }

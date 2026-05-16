@@ -2,6 +2,7 @@ package Dominio
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 // Entità Room che rappresenta una singola misurazione clinica salvata nel database
 @Entity(tableName = "misurazioni")
@@ -23,6 +24,6 @@ data class Misurazione(
     // Categoria di gravità associata al valore (es. Lieve, Moderata, Severa)
     val severita: String,
 
-    // Timestamp della data in cui è stata effettuata la misurazione
-    val data: Long
+    // Data in cui è stata effettuata la misurazione
+    val data: Date
 )

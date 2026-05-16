@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import Database.AppDatabase
 import Dominio.Misurazione
+import java.util.Date
 import Logic.BmiCalculator
 import com.example.Dermcalc_princ.R
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +60,7 @@ class BmiActivity : AppCompatActivity() {
                     tipo = "BMI",
                     valore = valore,
                     severita = severita,
-                    data = System.currentTimeMillis()
+                    data = Date()
                 )
             )
             withContext(Dispatchers.Main) {

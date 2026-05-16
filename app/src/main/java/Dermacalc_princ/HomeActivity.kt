@@ -3,8 +3,12 @@ package Dermacalc_princ
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.Dermcalc_princ.R
+import Database.AppDatabase
+import kotlinx.coroutines.launch
 
 // Classe HomeActivity: Menu principale dell'app dove l'utente sceglie quale calcolatore utilizzare
 class HomeActivity : AppCompatActivity() {
@@ -20,6 +24,24 @@ class HomeActivity : AppCompatActivity() {
         val btnBmi = findViewById<Button>(R.id.btnBmi)
         val btnPasi = findViewById<Button>(R.id.btnPasi)
         val btnEasi = findViewById<Button>(R.id.btnEasi)
+        val btnBackToList = findViewById<Button>(R.id.btnBackToList)
+        val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
+
+        val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
+        if (pazienteId != -1) {
+            val database = AppDatabase.getDatabase(this)
+            lifecycleScope.launch {
+                val paziente = database.pazienteDao().getById(pazienteId)
+                if (paziente != null) {
+                    tvSelectedPaziente.text = "Paziente: ${paziente.nome} ${paziente.cognome}"
+                }
+            }
+        }
+
+        // Gestione del pulsante per tornare alla lista pazienti
+        btnBackToList.setOnClickListener {
+            finish() // Semplicemente chiude la HomeActivity per tornare alla lista (PazientiActivity)
+        }
 
         // Gestione del pulsante Logout per uscire dall'account
         btnLogout.setOnClickListener {

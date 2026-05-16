@@ -7,43 +7,43 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 // Definizione del database principale dell'applicazione tramite Room
 @Database(
-    // Elenco delle classi entità che compongono il database
     entities = [
         User::class,
         Pazienti::class,
         Misurazione::class
     ],
-    // Versione dello schema del database (da incrementare in caso di modifiche alla struttura)
-    version = 2
+    // Aumenta questo numero SOLO se cambi la struttura delle tabelle (aggiungi colonne, etc.)
+    version = 4,
+    exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    // Metodi astratti per ottenere i DAO (Data Access Objects) relativi a ciascuna entità
     abstract fun userDao(): UserDao
     abstract fun pazienteDao(): PazienteDao
     abstract fun misurazioneDao(): MisurazioneDao
 
     companion object {
-        // Singleton del database per evitare l'apertura di più istanze costose
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        // Metodo per ottenere l'unica istanza del database
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                // Se l'istanza non esiste, viene creata utilizzando Room.databaseBuilder
-                val instance =
-                    Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java,
-                        "dermcalc_database"
-                    )
-                        // In caso di cambio versione senza migrazione definita, non cancella i dati (false)
-                        .fallbackToDestructiveMigration(false)
-                        .build()
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "dermcalc_database"
+                )
+                // Se aumenti la versione e non vuoi perdere i dati, devi usare .addMigrations()
+                // .fallbackToDestructiveMigration(false) impedisce la cancellazione automatica,
+                // ma farà crashare l'app se la versione non coincide e manca una migrazione.
+                // Questo è utile per accorgersi dell'errore durante lo sviluppo.
+                .fallbackToDestructiveMigration(false) 
+                .build()
 
                 INSTANCE = instance
                 instance

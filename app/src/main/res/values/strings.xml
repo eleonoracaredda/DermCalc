@@ -45,6 +45,7 @@
     <string name="calcolatore_pasi">Calcolatore PASI</string>
     <string name="indurimento_spessore_infiltrazione">Indurimento(spessore/infiltrazione)</string>
     <string name="Desquamazione">Desquamazione</string>
+    <string name="lista_pazienti">Lista pazienti</string>
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>

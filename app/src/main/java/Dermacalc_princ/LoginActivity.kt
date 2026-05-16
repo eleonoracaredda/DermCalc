@@ -44,9 +44,9 @@ class LoginActivity : AppCompatActivity() {
                     val user = database.userDao().login(email, password)
                     
                     if (user != null) {
-                        // Se l'utente è trovato, mostra un messaggio di successo e passa alla Home
+                        // Se l'utente è trovato, mostra un messaggio di successo e passa alla Lista Pazienti
                         Toast.makeText(this@LoginActivity, "Accesso eseguito: ${user.firstName}", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        val intent = Intent(this@LoginActivity, PazientiActivity::class.java)
                         startActivity(intent)
                         finish() // Chiude il login per non tornare indietro con il tasto back
                     } else {

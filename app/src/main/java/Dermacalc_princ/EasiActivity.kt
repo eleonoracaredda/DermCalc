@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import Database.AppDatabase
 import Dominio.Misurazione
+import java.util.Date
 import Logic.EasiCalculator
 import com.example.Dermcalc_princ.R
 import kotlinx.coroutines.CoroutineScope
@@ -203,7 +204,7 @@ class EasiActivity : AppCompatActivity() {
                     tipo = "EASI",
                     valore = valore,
                     severita = severita,
-                    data = System.currentTimeMillis()
+                    data = Date()
                 )
             )
             withContext(Dispatchers.Main) {

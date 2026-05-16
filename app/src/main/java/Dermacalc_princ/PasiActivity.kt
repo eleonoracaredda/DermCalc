@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import Database.AppDatabase
 import Dominio.DatiDistretto
 import Dominio.Misurazione
+import java.util.Date
 import Logic.PasiCalculator
 import com.example.Dermcalc_princ.R
 import kotlinx.coroutines.CoroutineScope
@@ -247,7 +248,7 @@ class PasiActivity : AppCompatActivity() {
                         tipo = "PASI",
                         valore = valore,
                         severita = severita,
-                        data = System.currentTimeMillis()
+                        data = Date()
                     )
                 )
                 // Ritorna sul thread principale per mostrare il feedback all'utente

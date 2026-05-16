@@ -1,0 +1,38 @@
+package Dermacalc_princ
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.Dermcalc_princ.R
+import Dominio.Pazienti
+
+class PazienteAdapter(
+    private val pazienti: List<Pazienti>,
+    private val onPazienteClick: (Pazienti) -> Unit
+) : RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder>() {
+
+    class PazienteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvNome: TextView = view.findViewById(R.id.tvNomePaziente)
+        val tvCodiceFiscale: TextView = view.findViewById(R.id.tvCodiceFiscale)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PazienteViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_paziente, parent, false)
+        return PazienteViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: PazienteViewHolder, position: Int) {
+        val paziente = pazienti[position]
+        holder.tvNome.text = "${paziente.nome} ${paziente.cognome}"
+        holder.tvCodiceFiscale.text = paziente.codiceFiscale
+        
+        holder.itemView.setOnClickListener {
+            onPazienteClick(paziente)
+        }
+    }
+
+    override fun getItemCount() = pazienti.size
+}
