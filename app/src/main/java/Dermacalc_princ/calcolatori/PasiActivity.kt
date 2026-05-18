@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.calcolatori
 
 import android.os.Bundle
 import android.view.View

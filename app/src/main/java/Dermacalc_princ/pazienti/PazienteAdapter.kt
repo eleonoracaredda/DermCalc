@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.pazienti
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.Dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
 import Database.AppDatabase
+import Dermacalc_princ.pazienti.PazientiActivity
 import kotlinx.coroutines.launch
 
 // Classe LoginActivity: gestisce l'interfaccia di accesso per l'utente

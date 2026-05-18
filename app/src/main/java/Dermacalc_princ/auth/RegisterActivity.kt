@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.Dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
 import Database.AppDatabase
+import Dermacalc_princ.home.HomeActivity
 import Dominio.User
 import kotlinx.coroutines.launch
 

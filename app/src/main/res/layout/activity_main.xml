@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F7FB"
-    tools:context="Dermacalc_princ.LoginActivity">
+    tools:context="Dermacalc_princ.auth.LoginActivity">
 
     <!-- Logo / Titolo -->
     <TextView

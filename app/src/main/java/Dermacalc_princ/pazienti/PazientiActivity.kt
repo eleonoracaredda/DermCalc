@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.pazienti
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Dermcalc_princ.R
 import Database.AppDatabase
-import Dominio.Pazienti
+import Dermacalc_princ.home.HomeActivity
 import kotlinx.coroutines.launch
 
 class PazientiActivity : AppCompatActivity() {

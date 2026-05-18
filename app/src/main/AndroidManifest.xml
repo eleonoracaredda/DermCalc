@@ -10,7 +10,7 @@
         android:theme="@style/Theme.DermCalc">
 
         <activity
-            android:name="Dermacalc_princ.MainActivity"
+            android:name="Dermacalc_princ.home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,35 +19,35 @@
         </activity>
 
         <activity
-            android:name="Dermacalc_princ.LoginActivity"
+            android:name="Dermacalc_princ.auth.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.HomeActivity"
+            android:name="Dermacalc_princ.home.HomeActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.RegisterActivity"
+            android:name="Dermacalc_princ.auth.RegisterActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.BmiActivity"
+            android:name="Dermacalc_princ.calcolatori.BmiActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.EasiActivity"
+            android:name="Dermacalc_princ.calcolatori.EasiActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.PasiActivity"
+            android:name="Dermacalc_princ.calcolatori.PasiActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.PazientiActivity"
+            android:name="Dermacalc_princ.pazienti.PazientiActivity"
             android:exported="false" />
 
         <activity
-            android:name="Dermacalc_princ.CreatePazienteActivity"
+            android:name="Dermacalc_princ.pazienti.CreatePazienteActivity"
             android:exported="false" />
 
     </application>

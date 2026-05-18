@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.Dermcalc_princ.R
 import Database.AppDatabase
+import Dermacalc_princ.auth.LoginActivity
+import Dermacalc_princ.calcolatori.BmiActivity
+import Dermacalc_princ.calcolatori.EasiActivity
+import Dermacalc_princ.calcolatori.PasiActivity
 import kotlinx.coroutines.launch
 
 // Classe HomeActivity: Menu principale dell'app dove l'utente sceglie quale calcolatore utilizzare

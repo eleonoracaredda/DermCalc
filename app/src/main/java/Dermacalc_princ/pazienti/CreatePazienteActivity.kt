@@ -1,4 +1,4 @@
-package Dermacalc_princ
+package Dermacalc_princ.pazienti
 
 import android.os.Bundle
 import android.widget.Button
