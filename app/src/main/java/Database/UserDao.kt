@@ -21,4 +21,8 @@ interface UserDao {
     // Cerca un utente specifico tramite il codice fiscale
     @Query("SELECT * FROM users WHERE taxCode = :taxCode")
     suspend fun getUserByTaxCode(taxCode: String): User?
+
+    // controllo email già registrata
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    suspend fun getUserByEmail(email: String): User?
 }

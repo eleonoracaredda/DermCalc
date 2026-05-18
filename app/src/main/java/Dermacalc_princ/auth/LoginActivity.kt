@@ -13,13 +13,14 @@ import com.google.android.material.textfield.TextInputEditText
 import Database.AppDatabase
 import Dermacalc_princ.pazienti.PazientiActivity
 import kotlinx.coroutines.launch
+import Utils.InputValidator
 
 // Classe LoginActivity: gestisce l'interfaccia di accesso per l'utente
 class LoginActivity : AppCompatActivity() {
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         // Forza l'applicazione a non usare il tema scuro per mantenere l'estetica desiderata
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
@@ -32,39 +33,52 @@ class LoginActivity : AppCompatActivity() {
 
         // Inizializzazione del database per la verifica delle credenziali
         val database = AppDatabase.getDatabase(this)
-        
+
         // Listener per il pulsante di login
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Controllo che i campi non siano vuoti
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Esecuzione della query di login in una coroutine (thread in background)
-                lifecycleScope.launch {
-                    val user = database.userDao().login(email, password)
-                    
-                    if (user != null) {
-                        // Se l'utente è trovato, mostra un messaggio di successo e passa alla Lista Pazienti
-                        Toast.makeText(this@LoginActivity, "Accesso eseguito: ${user.firstName}", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LoginActivity, PazientiActivity::class.java)
-                        startActivity(intent)
-                        finish() // Chiude il login per non tornare indietro con il tasto back
-                    } else {
-                        // Se le credenziali sono errate, mostra un errore
-                        Toast.makeText(this@LoginActivity, "Credenziali non valide", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } else {
-                // Avviso se i campi sono incompleti
-                Toast.makeText(this, "Inserisci tutti i dati richiesti", Toast.LENGTH_SHORT).show()
-            }
-        }
+            // VALIDAZIONE COMPLETA PRIMA DEL LOGIN
 
-        // Listener per il testo "Registrati", avvia l'attività di registrazione
-        txtRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            // Campi vuoti
+            if (!InputValidator.isNotEmpty(email, password)) {
+                etEmail.error = "Inserisci email e password"
+                return@setOnClickListener
+            }
+
+            // Email valida
+            if (!InputValidator.isEmailValid(email)) {
+                etEmail.error = "Formato email non valido"
+                return@setOnClickListener
+            }
+
+            // Password forte
+            if (!InputValidator.isPasswordStrong(password)) {
+                etPassword.error = "La password deve contenere almeno 8 caratteri, numeri e lettere"
+                return@setOnClickListener
+            }
+            // Login
+            lifecycleScope.launch {
+                val user = database.userDao().login(email, password)
+
+                if (user != null) {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Bentornato \${user.firstName}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@LoginActivity, PazientiActivity::class.java))
+                    finish()
+                } else {
+                    etPassword.error = "Credenziali errate"
+                }
+            }
+            // Listener per il testo "Registrati", avvia l'attività di registrazione
+            txtRegister.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ import Database.AppDatabase
 import Dermacalc_princ.home.HomeActivity
 import Dominio.User
 import kotlinx.coroutines.launch
+import Utils.InputValidator
 
 // Classe RegisterActivity: gestisce la creazione di un nuovo account utente
 class RegisterActivity : AppCompatActivity() {
@@ -48,40 +49,75 @@ class RegisterActivity : AppCompatActivity() {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Verifica che tutti i campi siano stati compilati
-            if (firstName.isNotEmpty() && lastName.isNotEmpty() && taxCode.isNotEmpty() &&
-                email.isNotEmpty() && password.isNotEmpty()
-            ) {
-                lifecycleScope.launch {
-                    // Verifica se esiste già un utente con lo stesso codice fiscale (chiave primaria)
-                    val existingUser = database.userDao().getUserByTaxCode(taxCode)
-                    if (existingUser == null) {
-                        // Creazione dell'oggetto User con i dati inseriti
-                        val newUser = User(
-                            taxCode = taxCode,
-                            firstName = firstName,
-                            lastName = lastName,
-                            email = email,
-                            password = password
-                        )
-                        // Salvataggio permanente nel database
-                        database.userDao().insertUser(newUser)
-                        Toast.makeText(this@RegisterActivity, "Registrazione completata!", Toast.LENGTH_SHORT).show()
-                        
-                        // Avvio della HomeActivity dopo la registrazione avvenuta con successo
-                        val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
-                        // Rimuove le attività precedenti dallo stack (per sicurezza e pulizia)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        // Messaggio se il codice fiscale è già presente a sistema
-                        Toast.makeText(this@RegisterActivity, "Utente già registrato con questo Codice Fiscale", Toast.LENGTH_SHORT).show()
-                    }
+            // VALIDAZIONE COMPLETA
+            if (!InputValidator.isNotEmpty(firstName, lastName, taxCode, email, password)) {
+                Toast.makeText(this, "Compila tutti i campi", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!InputValidator.isNameValid(firstName)) {
+                etFirstName.error = "Nome non valido"
+                return@setOnClickListener
+            }
+
+            if (!InputValidator.isNameValid(lastName)) {
+                etLastName.error = "Cognome non valido"
+                return@setOnClickListener
+            }
+
+            if (!InputValidator.isCodiceFiscaleValid(taxCode)) {
+                etTaxCode.error = "Codice fiscale non valido"
+                return@setOnClickListener
+            }
+
+            if (!InputValidator.isEmailValid(email)) {
+                etEmail.error = "Email non valida"
+                return@setOnClickListener
+            }
+
+            if (!InputValidator.isPasswordStrong(password)) {
+                etPassword.error = "La password deve contenere almeno 8 caratteri, numeri e lettere"
+                return@setOnClickListener
+            }
+
+            // CONTROLLO EMAIL GIÀ REGISTRATA
+            lifecycleScope.launch {
+
+                val existingEmail = database.userDao().getUserByEmail(email)
+                if (existingEmail != null) {
+                    etEmail.error = "Email già registrata"
+                    return@launch
                 }
-            } else {
-                // Notifica all'utente se mancano dei campi obbligatori
-                Toast.makeText(this, "Per favore, compila tutti i campi", Toast.LENGTH_SHORT).show()
+
+                // CONTROLLO CODICE FISCALE GIÀ REGISTRATO
+                val existingUser = database.userDao().getUserByTaxCode(taxCode)
+                if (existingUser != null) {
+                    etTaxCode.error = "Codice fiscale già registrato"
+                    return@launch
+                }
+
+                // CREAZIONE UTENTE
+                val newUser = User(
+                    taxCode = taxCode,
+                    firstName = firstName,
+                    lastName = lastName,
+                    email = email,
+                    password = password
+                )
+
+                database.userDao().insertUser(newUser)
+
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "Registrazione completata!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                // Vai alla Home
+                val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
             }
         }
     }
