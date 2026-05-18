@@ -27,7 +27,9 @@ class HomeActivity : AppCompatActivity() {
         val btnBackToList = findViewById<Button>(R.id.btnBackToList)
         val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
 
+        // Recupero ID paziente passato da PazientiActivity
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
+        // Sicurezza: se manca l’ID, chiudo
         if (pazienteId != -1) {
             val database = AppDatabase.getDatabase(this)
             lifecycleScope.launch {
@@ -54,22 +56,26 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        
+
+        //Passaggio ID alle activity
         // Listener per avviare il calcolatore dell'Indice di Massa Corporea (BMI)
         btnBmi.setOnClickListener {
             val intent = Intent(this, BmiActivity::class.java)
+            intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
         }
 
         // Listener per avviare il calcolatore PASI (Psoriasi)
         btnPasi.setOnClickListener {
             val intent = Intent(this, PasiActivity::class.java)
+            intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
         }
 
         // Listener per avviare il calcolatore EASI (Eczema)
         btnEasi.setOnClickListener {
             val intent = Intent(this, EasiActivity::class.java)
+            intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
         }
     }

@@ -74,9 +74,17 @@ class PasiActivity : AppCompatActivity() {
         // Inizializzazione del database Room tramite singleton
         db = AppDatabase.getDatabase(this)
 
+        // Recupero ID paziente
+        val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
+        if (pazienteId == -1) {
+            Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
         // Collegamento delle viste XML al codice e impostazione dei listener
         initViews()
-        setupListeners()
+        setupListeners(pazienteId)
         
         // Aggiorna l'interfaccia iniziale per mostrare i valori di default
         updateTotalUI()
@@ -101,7 +109,7 @@ class PasiActivity : AppCompatActivity() {
     /**
      * Configura i listener per lo Spinner dei distretti e per le SeekBar dei segni clinici.
      */
-    private fun setupListeners() {
+    private fun setupListeners(pazienteId: Int) {
         val spinnerBodyPart = findViewById<Spinner>(R.id.spinnerBodyPart)
 
         // Gestisce il cambio di distretto corporeo selezionato
@@ -135,7 +143,7 @@ class PasiActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculatePasi).setOnClickListener {
             val totalScore = calculateTotalPasi()
             val severita = pasiCalculator.severity(totalScore)
-            salvaPasi(1, totalScore, severita) // ID paziente fissato a 1 per il prototipo
+            salvaPasi(pazienteId, totalScore, severita) // ID paziente fissato a 1 per il prototipo
         }
     }
 

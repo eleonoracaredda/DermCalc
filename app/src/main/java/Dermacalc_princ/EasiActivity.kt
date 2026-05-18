@@ -61,10 +61,17 @@ class EasiActivity : AppCompatActivity() {
 
         // Inizializzazione database
         db = AppDatabase.getDatabase(this)
-        
+
+        // Recupero ID paziente
+        val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
+        if (pazienteId == -1) {
+            Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
         // Collegamento viste e setup dei listener
         initViews()
-        setupListeners()
+        setupListeners(pazienteId)
         
         // Aggiorna l'interfaccia con i valori iniziali (tutti a zero)
         updateTotalUI()
@@ -87,7 +94,7 @@ class EasiActivity : AppCompatActivity() {
     }
 
     // Configura i listener per gestire le interazioni dell'utente
-    private fun setupListeners() {
+    private fun setupListeners(pazienteId: Int) {
         val spinnerBodyPart = findViewById<Spinner>(R.id.spinnerBodyPart)
         
         // Gestisce il cambio della regione corporea tramite lo Spinner
@@ -120,7 +127,7 @@ class EasiActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculateEasi).setOnClickListener {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
-            salvaEasi(1, totalScore, severita) // ID paziente fittizio per il prototipo
+            salvaEasi(pazienteId, totalScore, severita) // ID paziente fittizio per il prototipo
         }
     }
 

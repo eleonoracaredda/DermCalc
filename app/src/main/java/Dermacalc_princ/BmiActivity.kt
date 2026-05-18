@@ -27,6 +27,14 @@ class BmiActivity : AppCompatActivity() {
 
         db = AppDatabase.getDatabase(this)
 
+        // Recupero ID paziente
+        val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
+        if (pazienteId == -1) {
+            Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
         val etWeight = findViewById<EditText>(R.id.etWeight)
         val etHeight = findViewById<EditText>(R.id.etHeight)
         val btnCalculate = findViewById<Button>(R.id.btnCalculateBmi)
@@ -45,7 +53,7 @@ class BmiActivity : AppCompatActivity() {
 
                 tvResult.text = "Risultato: %.2f (%s)".format(bmi, severity)
 
-                salvaBmi(1, bmi, severity) // Placeholder ID paziente
+                salvaBmi(pazienteId, bmi, severity) // Placeholder ID paziente
             } else {
                 Toast.makeText(this, "Inserisci tutti i valori", Toast.LENGTH_SHORT).show()
             }
