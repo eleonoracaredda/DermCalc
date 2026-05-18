@@ -18,11 +18,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import Repository.MisurazioneRepository
+
 
 // Classe EasiActivity: gestisce il calcolo complesso dell'indice EASI per la dermatite atopica
 class EasiActivity : AppCompatActivity() {
 
     private lateinit var db: AppDatabase
+    private lateinit var repository: MisurazioneRepository
     private val easiCalculator = EasiCalculator()
 
     // Classe interna per mantenere lo stato dei dati per ciascuna delle 4 regioni corporee
@@ -61,6 +64,7 @@ class EasiActivity : AppCompatActivity() {
 
         // Inizializzazione database
         db = AppDatabase.getDatabase(this)
+        repository = MisurazioneRepository(db)
 
         // Recupero ID paziente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
@@ -205,7 +209,7 @@ class EasiActivity : AppCompatActivity() {
     // Funzione per il salvataggio asincrono nel database locale Room
     private fun salvaEasi(idPaziente: Int, valore: Double, severita: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            db.misurazioneDao().insert(
+            repository.insertMisurazione(
                 Misurazione(
                     pazienteId = idPaziente,
                     tipo = "EASI",

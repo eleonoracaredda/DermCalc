@@ -15,10 +15,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import Repository.MisurazioneRepository
+
 
 class BmiActivity : AppCompatActivity() {
 
     private lateinit var db: AppDatabase
+    // VARIABILE REPOSITORY
+    private lateinit var repository: MisurazioneRepository
     private val bmiCalculator = BmiCalculator()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +30,8 @@ class BmiActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bmi)
 
         db = AppDatabase.getDatabase(this)
+        // INIZIALIZZAZIONE REPOSITORY
+        repository = MisurazioneRepository(db)
 
         // Recupero ID paziente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
@@ -62,7 +68,7 @@ class BmiActivity : AppCompatActivity() {
 
     private fun salvaBmi(idPaziente: Int, valore: Double, severita: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            db.misurazioneDao().insert(
+            repository.insertMisurazione(
                 Misurazione(
                     pazienteId = idPaziente,
                     tipo = "BMI",

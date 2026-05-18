@@ -19,6 +19,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import Repository.MisurazioneRepository
+
 
 /**
  * Classe PasiActivity: gestisce l'interfaccia utente per il calcolo del PASI (Psoriasis Area and Severity Index).
@@ -26,6 +28,7 @@ import kotlinx.coroutines.withContext
  */
 class PasiActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
+    private lateinit var repository: MisurazioneRepository
     private val pasiCalculator = PasiCalculator()
 
     /**
@@ -73,7 +76,7 @@ class PasiActivity : AppCompatActivity() {
         
         // Inizializzazione del database Room tramite singleton
         db = AppDatabase.getDatabase(this)
-
+        repository = MisurazioneRepository(db)
         // Recupero ID paziente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         if (pazienteId == -1) {
@@ -250,7 +253,7 @@ class PasiActivity : AppCompatActivity() {
         // Avvia una coroutine nel dispatcher IO per le operazioni su DB
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                db.misurazioneDao().insert(
+                repository.insertMisurazione(
                     Misurazione(
                         pazienteId = idPaziente,
                         tipo = "PASI",

@@ -18,4 +18,21 @@ interface MisurazioneDao {
         ORDER BY data ASC
     """)
     suspend fun getStorico(id: Int): List<Misurazione>
+
+    // Storico filtrato per tipo (BMI, PASI, EASI)
+    @Query("""
+        SELECT * FROM misurazioni
+        WHERE pazienteId = :id AND tipo = :tipo
+        ORDER BY data ASC
+    """)
+    suspend fun getByTipo(id: Int, tipo: String): List<Misurazione>
+
+    // Ultime N misurazioni (per grafici)
+    @Query("""
+        SELECT * FROM misurazioni
+        WHERE pazienteId = :id AND tipo = :tipo
+        ORDER BY data DESC
+        LIMIT :limit
+    """)
+    suspend fun getUltime(id: Int, tipo: String, limit: Int): List<Misurazione>
 }
