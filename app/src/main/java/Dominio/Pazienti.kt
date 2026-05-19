@@ -17,6 +17,8 @@ data class Pazienti(
     val terapia: String? = null, // Terapia
     val dataInizioTerapia: Date? = null, // Data inizio terapia
     val consenso: Boolean = false,
-    val comorbilita : String? =null
+    val comorbilita : String? =null,
+    val caregiverNome: String? = null, //contatti di emergenza
+    val caregiverTelefono: String? = null //contatti di emergenza
 
     )

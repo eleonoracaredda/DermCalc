@@ -78,8 +78,10 @@ class CreatePazienteActivity : AppCompatActivity() {
                                 dataNascita = date,
                                 terapia = pazienteEsistente!!.terapia, // per ora invariato
                                 dataInizioTerapia = pazienteEsistente!!.dataInizioTerapia,
-                                consenso = pazienteEsistente!!.consenso,      // 👈 mantieni il valore già salvato
-                                comorbilita = pazienteEsistente!!.comorbilita
+                                consenso = pazienteEsistente!!.consenso,      // mantieni il valore già salvato
+                                comorbilita = pazienteEsistente!!.comorbilita,
+                                caregiverNome = pazienteEsistente!!.caregiverNome,
+                                caregiverTelefono = pazienteEsistente!!.caregiverTelefono
                             )
                             database.pazienteDao().update(pazienteAggiornato)
                             Toast.makeText(this@CreatePazienteActivity, "Paziente aggiornato con successo", Toast.LENGTH_SHORT).show()
@@ -94,7 +96,9 @@ class CreatePazienteActivity : AppCompatActivity() {
                                 terapia = null,
                                 dataInizioTerapia = null,
                                 consenso = false,          // per ora sempre false
-                                comorbilita = null
+                                comorbilita = null,
+                                caregiverNome = null,
+                                caregiverTelefono = null
                             )
                             database.pazienteDao().insert(nuovoPaziente)
                             Toast.makeText(this@CreatePazienteActivity, "Paziente salvato con successo", Toast.LENGTH_SHORT).show()
