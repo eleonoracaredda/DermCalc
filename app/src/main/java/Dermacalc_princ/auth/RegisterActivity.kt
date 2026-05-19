@@ -10,10 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.Dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
 import Database.AppDatabase
-import Dermacalc_princ.home.HomeActivity
+import Dermacalc_princ.pazienti.PazientiActivity
 import Dominio.User
 import kotlinx.coroutines.launch
 import Utils.InputValidator
+import Utils.SessionManager
 
 // Classe RegisterActivity: gestisce la creazione di un nuovo account utente
 class RegisterActivity : AppCompatActivity() {
@@ -21,6 +22,8 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        val sessionManager = SessionManager(this)
 
         // Associazione dei widget del layout agli oggetti Kotlin
         val etFirstName = findViewById<TextInputEditText>(R.id.etFirstName)
@@ -30,9 +33,32 @@ class RegisterActivity : AppCompatActivity() {
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         val tvLogin = findViewById<TextView>(R.id.tvLogin)
+        val tvTitle = findViewById<TextView>(R.id.tvRegisterTitle)
 
         // Riferimento al database Room
         val database = AppDatabase.getDatabase(this)
+
+        // Controllo se sono in modalità modifica profilo
+        val isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
+        val currentDoctorId = sessionManager.getDoctorId()
+
+        if (isEditMode && currentDoctorId != null) {
+            tvTitle.text = "Modifica Profilo"
+            btnRegister.text = "Aggiorna Profilo"
+            tvLogin.visibility = android.view.View.GONE
+            etTaxCode.isEnabled = false // Il codice fiscale solitamente non si cambia essendo PK
+
+            lifecycleScope.launch {
+                val user = database.userDao().getUserByTaxCode(currentDoctorId)
+                user?.let {
+                    etFirstName.setText(it.firstName)
+                    etLastName.setText(it.lastName)
+                    etTaxCode.setText(it.taxCode)
+                    etEmail.setText(it.email)
+                    etPassword.setText(it.password)
+                }
+            }
+        }
 
         // Listener per tornare alla schermata di login se l'utente ha già un account
         tvLogin.setOnClickListener {
@@ -83,21 +109,23 @@ class RegisterActivity : AppCompatActivity() {
             // CONTROLLO EMAIL GIÀ REGISTRATA
             lifecycleScope.launch {
 
-                val existingEmail = database.userDao().getUserByEmail(email)
-                if (existingEmail != null) {
-                    etEmail.error = "Email già registrata"
-                    return@launch
+                if (!isEditMode) {
+                    val existingEmail = database.userDao().getUserByEmail(email)
+                    if (existingEmail != null) {
+                        etEmail.error = "Email già registrata"
+                        return@launch
+                    }
+
+                    // CONTROLLO CODICE FISCALE GIÀ REGISTRATO
+                    val existingUser = database.userDao().getUserByTaxCode(taxCode)
+                    if (existingUser != null) {
+                        etTaxCode.error = "Codice fiscale già registrato"
+                        return@launch
+                    }
                 }
 
-                // CONTROLLO CODICE FISCALE GIÀ REGISTRATO
-                val existingUser = database.userDao().getUserByTaxCode(taxCode)
-                if (existingUser != null) {
-                    etTaxCode.error = "Codice fiscale già registrato"
-                    return@launch
-                }
-
-                // CREAZIONE UTENTE
-                val newUser = User(
+                // CREAZIONE O AGGIORNAMENTO UTENTE
+                val user = User(
                     taxCode = taxCode,
                     firstName = firstName,
                     lastName = lastName,
@@ -105,19 +133,26 @@ class RegisterActivity : AppCompatActivity() {
                     password = password
                 )
 
-                database.userDao().insertUser(newUser)
+                database.userDao().insertUser(user)
+
+                // Salva sessione (aggiorna nome se cambiato)
+                sessionManager.saveDoctor(taxCode, firstName)
 
                 Toast.makeText(
                     this@RegisterActivity,
-                    "Registrazione completata!",
+                    if (isEditMode) "Profilo aggiornato!" else "Registrazione completata!",
                     Toast.LENGTH_SHORT
                 ).show()
 
-                // Vai alla Home
-                val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+                if (isEditMode) {
+                    finish()
+                } else {
+                    // Vai alla lista pazienti
+                    val intent = Intent(this@RegisterActivity, PazientiActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
     }

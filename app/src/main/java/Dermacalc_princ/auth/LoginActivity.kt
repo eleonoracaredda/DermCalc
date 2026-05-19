@@ -14,6 +14,7 @@ import Database.AppDatabase
 import Dermacalc_princ.pazienti.PazientiActivity
 import kotlinx.coroutines.launch
 import Utils.InputValidator
+import Utils.SessionManager
 
 // Classe LoginActivity: gestisce l'interfaccia di accesso per l'utente
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
         // Forza l'applicazione a non usare il tema scuro per mantenere l'estetica desiderata
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
+
+        val sessionManager = SessionManager(this)
 
         // Collegamento degli elementi dell'interfaccia grafica tramite ID
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
@@ -63,9 +66,12 @@ class LoginActivity : AppCompatActivity() {
                 val user = database.userDao().login(email, password)
 
                 if (user != null) {
+                    // Salva sessione
+                    sessionManager.saveDoctor(user.taxCode, user.firstName)
+
                     Toast.makeText(
                         this@LoginActivity,
-                        "Bentornato \${user.firstName}",
+                        "Bentornato ${user.firstName}",
                         Toast.LENGTH_SHORT
                     ).show()
                     startActivity(Intent(this@LoginActivity, PazientiActivity::class.java))
@@ -74,11 +80,12 @@ class LoginActivity : AppCompatActivity() {
                     etPassword.error = "Credenziali errate"
                 }
             }
-            // Listener per il testo "Registrati", avvia l'attività di registrazione
-            txtRegister.setOnClickListener {
-                val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
-            }
+        }
+
+        // Listener per il testo "Registrati", avvia l'attività di registrazione
+        txtRegister.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 }
