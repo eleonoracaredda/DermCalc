@@ -16,6 +16,7 @@ import Dermacalc_princ.auth.RegisterActivity
 import Dermacalc_princ.home.HomeActivity
 import Utils.SessionManager
 import kotlinx.coroutines.launch
+import Database.PazienteDao
 
 class PazientiActivity : AppCompatActivity() {
 
@@ -78,9 +79,16 @@ class PazientiActivity : AppCompatActivity() {
 
     private fun loadPazienti() {
         val doctorId = sessionManager.getDoctorId() ?: return
-        
+
         lifecycleScope.launch {
-            val pazientiList = database.pazienteDao().getByDottore(doctorId)
+            //ricerca avanzata
+            val query = "farmaco"   // puoi cambiarlo quando vuoi
+
+            val byTerapia = database.pazienteDao().searchByTerapia(query)
+            val byNome = database.pazienteDao().searchByNomeCognome(query)
+
+            val pazientiList = (byTerapia + byNome).distinctBy { it.id }
+
             val adapter = PazienteAdapter(
                 pazientiList,
                 onPazienteClick = { paziente ->

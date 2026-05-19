@@ -22,4 +22,12 @@ interface PazienteDao {
     // Cerca e restituisce un paziente specifico tramite il suo ID univoco
     @Query("SELECT * FROM pazienti WHERE id = :id")
     suspend fun getById(id: Int): Pazienti?
+
+    // Ricerca per terapia (Livello 2 — Punto 7)
+    @Query("SELECT * FROM pazienti WHERE terapia LIKE '%' || :farmaco || '%'")
+    suspend fun searchByTerapia(farmaco: String): List<Pazienti>
+
+    // Ricerca per nome o cognome (consigliata)
+    @Query("SELECT * FROM pazienti WHERE nome LIKE '%' || :query || '%' OR cognome LIKE '%' || :query || '%'")
+    suspend fun searchByNomeCognome(query: String): List<Pazienti>
 }
