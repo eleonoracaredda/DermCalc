@@ -131,7 +131,7 @@ class EasiActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculateEasi).setOnClickListener {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
-            salvaEasi(pazienteId, totalScore, severita) // ID paziente fittizio per il prototipo
+            salvaEasi(pazienteId, totalScore, severita, "") // note da aggiungere su XML
         }
     }
 
@@ -207,7 +207,7 @@ class EasiActivity : AppCompatActivity() {
     }
 
     // Funzione per il salvataggio asincrono nel database locale Room
-    private fun salvaEasi(idPaziente: Int, valore: Double, severita: String) {
+    private fun salvaEasi(idPaziente: Int, valore: Double, severita: String, note: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.insertMisurazione(
                 Misurazione(
@@ -215,7 +215,8 @@ class EasiActivity : AppCompatActivity() {
                     tipo = "EASI",
                     valore = valore,
                     severita = severita,
-                    data = Date()
+                    data = Date(),
+                    note = note
                 )
             )
             withContext(Dispatchers.Main) {

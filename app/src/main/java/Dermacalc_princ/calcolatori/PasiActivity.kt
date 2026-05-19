@@ -146,7 +146,7 @@ class PasiActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculatePasi).setOnClickListener {
             val totalScore = calculateTotalPasi()
             val severita = pasiCalculator.severity(totalScore)
-            salvaPasi(pazienteId, totalScore, severita) // ID paziente fissato a 1 per il prototipo
+            salvaPasi(pazienteId, totalScore, severita, "") // aggiungere note su XML
         }
     }
 
@@ -249,7 +249,7 @@ class PasiActivity : AppCompatActivity() {
      * @param valore Il punteggio PASI calcolato.
      * @param severita La categoria di gravità corrispondente al punteggio.
      */
-    private fun salvaPasi(idPaziente: Int, valore: Double, severita: String) {
+    private fun salvaPasi(idPaziente: Int, valore: Double, severita: String, note: String?) {
         // Avvia una coroutine nel dispatcher IO per le operazioni su DB
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -259,7 +259,8 @@ class PasiActivity : AppCompatActivity() {
                         tipo = "PASI",
                         valore = valore,
                         severita = severita,
-                        data = Date()
+                        data = Date(),
+                        note = note
                     )
                 )
                 // Ritorna sul thread principale per mostrare il feedback all'utente

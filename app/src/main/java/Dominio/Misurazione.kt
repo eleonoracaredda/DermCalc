@@ -25,5 +25,8 @@ data class Misurazione(
     val severita: String,
 
     // Data in cui è stata effettuata la misurazione
-    val data: Date
+    val data: Date,
+
+    //Note
+    val note: String? = null
 )
