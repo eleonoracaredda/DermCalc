@@ -15,6 +15,8 @@ import Dermacalc_princ.pazienti.PazientiActivity
 import kotlinx.coroutines.launch
 import Utils.InputValidator
 import Utils.SessionManager
+import Utils.hashPassword
+
 
 // Classe LoginActivity: gestisce l'interfaccia di accesso per l'utente
 class LoginActivity : AppCompatActivity() {
@@ -63,10 +65,9 @@ class LoginActivity : AppCompatActivity() {
             }
             // Login
             lifecycleScope.launch {
-                val user = database.userDao().login(email, password)
+                val user = database.userDao().getUserByEmail(email)
 
-                if (user != null) {
-                    // Salva sessione
+                if (user != null && user.password == hashPassword(password)) {
                     sessionManager.saveDoctor(user.taxCode, user.firstName)
 
                     Toast.makeText(
@@ -74,18 +75,20 @@ class LoginActivity : AppCompatActivity() {
                         "Bentornato ${user.firstName}",
                         Toast.LENGTH_SHORT
                     ).show()
+
                     startActivity(Intent(this@LoginActivity, PazientiActivity::class.java))
                     finish()
                 } else {
                     etPassword.error = "Credenziali errate"
                 }
+
             }
         }
 
-        // Listener per il testo "Registrati", avvia l'attività di registrazione
-        txtRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
+            // Listener per il testo "Registrati", avvia l'attività di registrazione
+            txtRegister.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
+            }
     }
 }

@@ -15,6 +15,8 @@ import Dominio.User
 import kotlinx.coroutines.launch
 import Utils.InputValidator
 import Utils.SessionManager
+import Utils.hashPassword
+
 
 // Classe RegisterActivity: gestisce la creazione di un nuovo account utente
 class RegisterActivity : AppCompatActivity() {
@@ -55,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
                     etLastName.setText(it.lastName)
                     etTaxCode.setText(it.taxCode)
                     etEmail.setText(it.email)
-                    etPassword.setText(it.password)
+                    etPassword.setText("")   // non mostrare l’hash
                 }
             }
         }
@@ -76,7 +78,8 @@ class RegisterActivity : AppCompatActivity() {
             val password = etPassword.text.toString().trim()
 
             // VALIDAZIONE COMPLETA
-            if (!InputValidator.isNotEmpty(firstName, lastName, taxCode, email, password)) {
+            //NON obbligare la password in modifica profilo
+            if (!isEditMode && !InputValidator.isNotEmpty(firstName, lastName, taxCode, email, password)) {
                 Toast.makeText(this, "Compila tutti i campi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -101,8 +104,15 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (!InputValidator.isPasswordStrong(password)) {
+            // Registrazione → password obbligatoria
+            if (!isEditMode && !InputValidator.isPasswordStrong(password)) {
                 etPassword.error = "La password deve contenere almeno 8 caratteri, numeri e lettere"
+                return@setOnClickListener
+            }
+
+            // Modifica profilo → password opzionale, ma se la cambia deve essere forte
+            if (isEditMode && password.isNotEmpty() && !InputValidator.isPasswordStrong(password)) {
+                etPassword.error = "La nuova password deve contenere almeno 8 caratteri"
                 return@setOnClickListener
             }
 
@@ -124,14 +134,22 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
 
-                // CREAZIONE O AGGIORNAMENTO UTENTE
+                // Se sono in modifica profilo e la password è vuota → mantieni quella vecchia
+                val finalPassword = if (isEditMode && password.isEmpty()) {
+                    database.userDao().getUserByTaxCode(taxCode)?.password ?: hashPassword(password)
+                } else {
+                    // Altrimenti hash della nuova password
+                    hashPassword(password)
+                }
+
                 val user = User(
                     taxCode = taxCode,
                     firstName = firstName,
                     lastName = lastName,
                     email = email,
-                    password = password
+                    password = finalPassword
                 )
+
 
                 database.userDao().insertUser(user)
 
