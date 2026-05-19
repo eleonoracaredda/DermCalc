@@ -7,23 +7,11 @@ import java.util.Date
 // Entità Room che rappresenta i dati anagrafici di un paziente
 @Entity(tableName = "pazienti")
 data class Pazienti(
-
-    // Identificatore univoco del paziente (generato automaticamente)
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)     // Identificatore univoco del paziente (generato automaticamente)
     val id: Int = 0,
-
-    // Nome del paziente
-    val nome: String,
-
-    //Codice fiscale
-    val codFiscale: String,
-    
-    // Cognome del paziente
-    val cognome: String,
-    
-    // Data di nascita del paziente
-    val dataNascita: Date,
-    
-    // Codice Fiscale del paziente per identificazione univoca
-    val codiceFiscale: String
+    val nome: String,           // Nome del paziente
+    val cognome: String,        // Cognome del paziente
+    val dataNascita: Date,      // Data di nascita del paziente
+    val codiceFiscale: String,  // Codice Fiscale del paziente per identificazione univoca
+    val dottoreId: String       // ID (taxCode) del dottore che ha aggiunto il paziente
 )

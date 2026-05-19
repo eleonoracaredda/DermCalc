@@ -17,7 +17,7 @@ import androidx.room.TypeConverters
         Misurazione::class
     ],
     // Aumenta questo numero SOLO se cambi la struttura delle tabelle (aggiungi colonne, etc.)
-    version = 4,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -38,11 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "dermcalc_database"
                 )
-                // Se aumenti la versione e non vuoi perdere i dati, devi usare .addMigrations()
-                // .fallbackToDestructiveMigration(false) impedisce la cancellazione automatica,
-                // ma farà crashare l'app se la versione non coincide e manca una migrazione.
-                // Questo è utile per accorgersi dell'errore durante lo sviluppo.
-                .fallbackToDestructiveMigration(false) 
+                .fallbackToDestructiveMigration()
                 .build()
 
                 INSTANCE = instance

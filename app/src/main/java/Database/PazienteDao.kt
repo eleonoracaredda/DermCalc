@@ -11,9 +11,13 @@ interface PazienteDao {
     @Insert
     suspend fun insert(p: Pazienti)
 
-    // Restituisce la lista completa di tutti i pazienti registrati
-    @Query("SELECT * FROM pazienti")
-    suspend fun getAll(): List<Pazienti>
+    // Aggiorna i dati di un paziente esistente
+    @Update
+    suspend fun update(p: Pazienti)
+
+    // Restituisce la lista dei pazienti associati a un determinato dottore
+    @Query("SELECT * FROM pazienti WHERE dottoreId = :dottoreId")
+    suspend fun getByDottore(dottoreId: String): List<Pazienti>
 
     // Cerca e restituisce un paziente specifico tramite il suo ID univoco
     @Query("SELECT * FROM pazienti WHERE id = :id")

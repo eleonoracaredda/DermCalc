@@ -12,6 +12,7 @@ import Dermacalc_princ.auth.LoginActivity
 import Dermacalc_princ.calcolatori.BmiActivity
 import Dermacalc_princ.calcolatori.EasiActivity
 import Dermacalc_princ.calcolatori.PasiActivity
+import Utils.SessionManager
 import kotlinx.coroutines.launch
 
 // Classe HomeActivity: Menu principale dell'app dove l'utente sceglie quale calcolatore utilizzare
@@ -22,6 +23,8 @@ class HomeActivity : AppCompatActivity() {
         
         // Carica il layout grafico della Home
         setContentView(R.layout.activity_home)
+
+        val sessionManager = SessionManager(this)
         
         // Riferimenti ai pulsanti presenti nel layout
         val btnLogout = findViewById<Button>(R.id.btnLogout)
@@ -59,6 +62,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Gestione del pulsante Logout per uscire dall'account
         btnLogout.setOnClickListener {
+            sessionManager.logout()
             val intent = Intent(this, LoginActivity::class.java)
             
             // FLAG_ACTIVITY_CLEAR_TASK assicura che lo stack delle attività venga svuotato,
