@@ -11,6 +11,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Lista Pazienti"
         android:textColor="#2D3142"
         android:textSize="24sp"
