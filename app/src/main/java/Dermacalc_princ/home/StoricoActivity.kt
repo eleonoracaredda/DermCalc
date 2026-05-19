@@ -38,7 +38,6 @@ class StoricoActivity : AppCompatActivity() {
             loadData()
         }
     }
-
     private fun loadData() {
         lifecycleScope.launch {
             // Utilizzo del Repository per recuperare i dati filtrati
