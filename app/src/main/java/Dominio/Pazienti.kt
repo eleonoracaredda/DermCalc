@@ -13,5 +13,8 @@ data class Pazienti(
     val cognome: String,        // Cognome del paziente
     val dataNascita: Date,      // Data di nascita del paziente
     val codiceFiscale: String,  // Codice Fiscale del paziente per identificazione univoca
-    val dottoreId: String       // ID (taxCode) del dottore che ha aggiunto il paziente
-)
+    val dottoreId: String,      // ID (taxCode) del dottore che ha aggiunto il paziente
+    val terapia: String? = null, // Terapia
+    val dataInizioTerapia: Date? = null, // Data inizio terapia
+
+    )
