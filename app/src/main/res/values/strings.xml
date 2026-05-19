@@ -48,6 +48,12 @@
     <string name="lista_pazienti">Lista pazienti</string>
     <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
     <string name="visualizza_storico">Visualizza storico</string>
+    <string name="storico_misurazioni">Storico Misurazioni</string>
+    <string name="grafico_bmi">Andamento BMI</string>
+    <string name="grafico_pasi">Andamento PASI</string>
+    <string name="grafico_easi">Andamento EASI</string>
+    <string name="nessun_dato">Nessun dato disponibile</string>
+    <string name="indietro">Indietro</string>
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>

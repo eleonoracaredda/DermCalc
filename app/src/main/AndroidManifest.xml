@@ -43,6 +43,10 @@
             android:exported="false" />
 
         <activity
+            android:name="Dermacalc_princ.home.StoricoActivity"
+            android:exported="false" />
+
+        <activity
             android:name="Dermacalc_princ.pazienti.PazientiActivity"
             android:exported="false" />
 

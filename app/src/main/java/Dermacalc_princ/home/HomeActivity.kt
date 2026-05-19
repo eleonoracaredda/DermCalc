@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         val btnBmi = findViewById<Button>(R.id.btnBmi)
         val btnPasi = findViewById<Button>(R.id.btnPasi)
         val btnEasi = findViewById<Button>(R.id.btnEasi)
+        val btnStorico = findViewById<Button>(R.id.btnStorico)
         val btnBackToList = findViewById<Button>(R.id.btnBackToList)
         val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
 
@@ -47,6 +48,13 @@ class HomeActivity : AppCompatActivity() {
         // Gestione del pulsante per tornare alla lista pazienti
         btnBackToList.setOnClickListener {
             finish() // Semplicemente chiude la HomeActivity per tornare alla lista (PazientiActivity)
+        }
+
+        // Gestione del pulsante Storico
+        btnStorico.setOnClickListener {
+            val intent = Intent(this, StoricoActivity::class.java)
+            intent.putExtra("PAZIENTE_ID", pazienteId)
+            startActivity(intent)
         }
 
         // Gestione del pulsante Logout per uscire dall'account
