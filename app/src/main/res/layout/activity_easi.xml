@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FB"
+    android:background="@color/backgroundColor"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,26 +14,22 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/TextAppearance.DermCalc.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/calcolatore_easi"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvBodyPartLabel"
+            style="@style/TextAppearance.DermCalc.Subheadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/seleziona_distretto"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#555555"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
@@ -51,24 +47,22 @@
 
         <TextView
             android:id="@+id/tvGravityLabel"
+            style="@style/TextAppearance.DermCalc.Subheadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:text="@string/gravit_dei_segni_clinici"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinnerBodyPart" />
 
         <!-- Eritema -->
         <TextView
             android:id="@+id/tvEritemaLabel"
+            style="@style/TextAppearance.DermCalc.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="@string/eritema"
-            android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvGravityLabel" />
 
@@ -85,14 +79,12 @@
 
         <TextView
             android:id="@+id/tvEritemaValue"
+            style="@style/TextAppearance.DermCalc.Value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#5B4DFF"
             app:layout_constraintBottom_toBottomOf="@id/sbEritema"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbEritema" />
@@ -100,11 +92,11 @@
         <!-- Edema -->
         <TextView
             android:id="@+id/tvEdemaLabel"
+            style="@style/TextAppearance.DermCalc.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/edema"
-            android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbEritema" />
 
@@ -121,14 +113,12 @@
 
         <TextView
             android:id="@+id/tvEdemaValue"
+            style="@style/TextAppearance.DermCalc.Value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#5B4DFF"
             app:layout_constraintBottom_toBottomOf="@id/sbEdema"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbEdema" />
@@ -136,11 +126,11 @@
         <!-- Escoriazioni -->
         <TextView
             android:id="@+id/tvEscoriazioniLabel"
+            style="@style/TextAppearance.DermCalc.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/escoriazioni"
-            android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbEdema" />
 
@@ -157,14 +147,12 @@
 
         <TextView
             android:id="@+id/tvEscoriazioniValue"
+            style="@style/TextAppearance.DermCalc.Value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#5B4DFF"
             app:layout_constraintBottom_toBottomOf="@id/sbEscoriazioni"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbEscoriazioni" />
@@ -172,11 +160,11 @@
         <!-- Lichenificazione -->
         <TextView
             android:id="@+id/tvLichenificazioneLabel"
+            style="@style/TextAppearance.DermCalc.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/lichenificazione"
-            android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbEscoriazioni" />
 
@@ -193,14 +181,12 @@
 
         <TextView
             android:id="@+id/tvLichenificazioneValue"
+            style="@style/TextAppearance.DermCalc.Value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#5B4DFF"
             app:layout_constraintBottom_toBottomOf="@id/sbLichenificazione"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbLichenificazione" />
@@ -208,11 +194,11 @@
         <!-- Area -->
         <TextView
             android:id="@+id/tvAreaLabel"
+            style="@style/TextAppearance.DermCalc.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/area"
-            android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbLichenificazione" />
 
@@ -229,63 +215,59 @@
 
         <TextView
             android:id="@+id/tvAreaValue"
+            style="@style/TextAppearance.DermCalc.Value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/area_0"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#5B4DFF"
             app:layout_constraintBottom_toBottomOf="@id/sbArea"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbArea" />
 
-        <EditText
-            android:id="@+id/etNotes"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNotes"
+            style="@style/Widget.DermCalc.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="@string/note_hint"
-            android:inputType="textMultiLine"
-            android:minHeight="48dp"
-            android:gravity="top"
-            android:autofillHints=""
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbArea" />
+            app:layout_constraintTop_toBottomOf="@id/sbArea">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:hint="@string/note_hint"
+                android:inputType="textMultiLine"
+                android:minHeight="80dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnCalculateEasi"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:backgroundTint="#5B4DFF"
             android:text="@string/calcola_e_salva"
-            android:textAllCaps="false"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etNotes"
-            tools:ignore="VisualLintButtonSize" />
+            app:layout_constraintTop_toBottomOf="@id/tilNotes" />
 
         <TextView
             android:id="@+id/tvResult"
+            style="@style/TextAppearance.DermCalc.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
             android:text="@string/risultato_label"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi"
-            app:layout_constraintVertical_bias="0.26" />
+            app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
