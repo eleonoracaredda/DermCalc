@@ -30,11 +30,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
             android:text="@string/nessun_paziente_selezionato"
             android:textColor="#5C6BC0"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPazienteDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:text=""
+            android:textColor="#78909C"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnBmi"

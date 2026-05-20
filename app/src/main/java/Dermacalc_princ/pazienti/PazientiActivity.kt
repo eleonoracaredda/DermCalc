@@ -17,12 +17,16 @@ import Dermacalc_princ.home.HomeActivity
 import Utils.SessionManager
 import kotlinx.coroutines.launch
 import Database.PazienteDao
+import android.text.Editable
+import android.text.TextWatcher
+import com.google.android.material.textfield.TextInputEditText
 
 // Activity principale per la gestione dell'elenco pazienti associati al medico loggato
 class PazientiActivity : AppCompatActivity() {
 
     private lateinit var rvPazienti: RecyclerView
     private lateinit var btnNuovoPaziente: Button
+    private lateinit var etSearch: TextInputEditText
     private lateinit var database: AppDatabase
     private lateinit var sessionManager: SessionManager
 
@@ -45,22 +49,34 @@ class PazientiActivity : AppCompatActivity() {
         tvDoctorName = findViewById(R.id.tvDoctorName)
         tvDoctorEmail = findViewById(R.id.tvDoctorEmail)
         btnEditDoctor = findViewById(R.id.btnEditDoctor)
+        etSearch = findViewById(R.id.etSearch)
 
+        // Configurazione del layout manager per la RecyclerView
         rvPazienti.layoutManager = LinearLayoutManager(this)
 
-        // Listener per aggiungere un nuovo paziente
+        // Listener per la ricerca in tempo reale: aggiorna la lista ad ogni carattere digitato
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                loadPazienti(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Listener per aggiungere un nuovo paziente: apre la CreatePazienteActivity
         btnNuovoPaziente.setOnClickListener {
             val intent = Intent(this, CreatePazienteActivity::class.java)
             startActivity(intent)
         }
 
-        // Listener per modificare il profilo del medico
+        // Listener per modificare il profilo del medico loggato
         btnEditDoctor.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            intent.putExtra("EDIT_MODE", true)
+            intent.putExtra("EDIT_MODE", true) // Passa un flag per indicare la modalità modifica
             startActivity(intent)
         }
 
+        // Caricamento iniziale dei dati
         loadDoctorProfile()
         loadPazienti()
     }
@@ -69,7 +85,7 @@ class PazientiActivity : AppCompatActivity() {
         super.onResume()
         // Ricarica i dati quando si torna all'activity (es. dopo aggiunta/modifica)
         loadDoctorProfile()
-        loadPazienti()
+        loadPazienti(etSearch.text.toString())
     }
 
     // Carica le informazioni del medico dalla sessione e dal database
@@ -84,19 +100,18 @@ class PazientiActivity : AppCompatActivity() {
         }
     }
 
-    // Carica la lista dei pazienti filtrata per il medico corrente
-    private fun loadPazienti() {
+    // Carica la lista dei pazienti filtrata per il medico corrente e per l'eventuale query di ricerca
+    private fun loadPazienti(query: String = "") {
         val doctorId = sessionManager.getDoctorId() ?: return
 
         lifecycleScope.launch {
-            // Logica di ricerca/filtro (attualmente con query d'esempio "farmaco")
-            val query = "farmaco" 
-
-            val byTerapia = database.pazienteDao().searchByTerapia(query)
-            val byNome = database.pazienteDao().searchByNomeCognome(query)
-
-            // Unione dei risultati evitando duplicati
-            val pazientiList = (byTerapia + byNome).distinctBy { it.id }
+            val pazientiList = if (query.isEmpty()) {
+                // Recupera tutti i pazienti associati al dottore loggato
+                database.pazienteDao().getByDottore(doctorId)
+            } else {
+                // Esegue la ricerca filtrata
+                database.pazienteDao().searchPazienti(doctorId, query)
+            }
 
             // Configurazione dell'adapter con le relative callback
             val adapter = PazienteAdapter(

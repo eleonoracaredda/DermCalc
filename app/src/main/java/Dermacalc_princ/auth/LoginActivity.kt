@@ -63,22 +63,26 @@ class LoginActivity : AppCompatActivity() {
                 etPassword.error = "La password deve contenere almeno 8 caratteri, numeri e lettere"
                 return@setOnClickListener
             }
-            // Login
+            // Login: verifica dell'utente nel database
             lifecycleScope.launch {
                 val user = database.userDao().getUserByEmail(email)
 
+                // Controllo se l'utente esiste e se la password inserita (hashata) corrisponde
                 if (user != null && user.password == hashPassword(password)) {
+                    // Salva le informazioni del medico nella sessione locale
                     sessionManager.saveDoctor(user.taxCode, user.firstName)
 
                     Toast.makeText(
                         this@LoginActivity,
-                        "Bentornato ${user.firstName}",
+                        "Bentornat* Dot. ${user.firstName}",
                         Toast.LENGTH_SHORT
                     ).show()
 
+                    // Naviga verso la lista pazienti e chiude la schermata di login
                     startActivity(Intent(this@LoginActivity, PazientiActivity::class.java))
                     finish()
                 } else {
+                    // Segnala errore se le credenziali non sono valide
                     etPassword.error = "Credenziali errate"
                 }
 

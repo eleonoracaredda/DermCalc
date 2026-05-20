@@ -34,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
         val btnStorico = findViewById<Button>(R.id.btnStorico)
         val btnBackToList = findViewById<Button>(R.id.btnBackToList)
         val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
+        val tvPazienteDetails = findViewById<TextView>(R.id.tvPazienteDetails)
 
         // Recupero ID paziente passato da PazientiActivity
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
@@ -44,6 +45,9 @@ class HomeActivity : AppCompatActivity() {
                 val paziente = database.pazienteDao().getById(pazienteId)
                 if (paziente != null) {
                     tvSelectedPaziente.text = "Paziente: ${paziente.nome} ${paziente.cognome}"
+                    val sessoEsteso = if (paziente.sesso == "M") "Maschio" else "Femmina"
+                    val dateFormat = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ITALY)
+                    tvPazienteDetails.text = "Sesso: $sessoEsteso | Data di nascita: ${dateFormat.format(paziente.dataNascita)}"
                 }
             }
         }
@@ -73,7 +77,9 @@ class HomeActivity : AppCompatActivity() {
             finish()
         }
 
-        //Passaggio ID alle activity
+        // Passaggio dell'ID paziente selezionato alle varie attività dei calcolatori
+        // Questo permette di salvare le misurazioni associandole correttamente al paziente.
+
         // Listener per avviare il calcolatore dell'Indice di Massa Corporea (BMI)
         btnBmi.setOnClickListener {
             val intent = Intent(this, BmiActivity::class.java)

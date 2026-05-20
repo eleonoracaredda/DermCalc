@@ -16,6 +16,7 @@ data class Pazienti(
     val dottoreId: String,      // ID (taxCode) del dottore che ha aggiunto il paziente
     val terapia: String? = null, // Terapia
     val dataInizioTerapia: Date? = null, // Data inizio terapia
+    val sesso: String = "M",      // Sesso del paziente (M/F)
     val consenso: Boolean = false,
     val comorbilita : String? =null,
     val caregiverNome: String? = null, //contatti di emergenza
