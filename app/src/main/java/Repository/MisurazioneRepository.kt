@@ -1,7 +1,7 @@
-package Repository
+package repository
 
-import Database.AppDatabase
-import Dominio.Misurazione
+import database.AppDatabase
+import dominio.Misurazione
 import java.util.Date
 
 class MisurazioneRepository(private val db: AppDatabase) {

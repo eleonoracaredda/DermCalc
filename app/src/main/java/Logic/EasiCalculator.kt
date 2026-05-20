@@ -1,4 +1,4 @@
-package Logic
+package logic
 
 // Classe per il calcolo dell'EASI (Eczema Area and Severity Index)
 class EasiCalculator {

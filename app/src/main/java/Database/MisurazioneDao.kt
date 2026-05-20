@@ -1,7 +1,7 @@
-package Database
+package database
 
 import androidx.room.*
-import Dominio.Misurazione
+import dominio.Misurazione
 
 // Interfaccia DAO per l'accesso ai dati delle misurazioni nel database
 @Dao
