@@ -16,17 +16,47 @@ import kotlinx.coroutines.launch
 import com.example.dermcalc_princ.utils.InputValidator
 import com.example.dermcalc_princ.utils.SessionManager
 import com.example.dermcalc_princ.utils.hashPassword
+import android.widget.AdapterView
+import android.widget.Spinner
+import java.util.Locale
+import android.view.View
+
 
 
 // Gestisce l'autenticazione del medico tramite Email e Password
 class LoginActivity : AppCompatActivity() {
 
+    // FUNZIONE PER CAMBIARE LINGUA ---
+    private fun setLocale(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+
+        val config = resources.configuration
+        config.setLocale(locale)
+
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        recreate()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Forza il tema chiaro per coerenza grafica (Dark Mode disabilitata)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
+
+        // COLLEGAMENTO SPINNER LINGUA
+        val spLanguage = findViewById<Spinner>(R.id.spLanguage)
+        spLanguage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                when (position) {
+                    0 -> setLocale("it")
+                    1 -> setLocale("en")
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
 
         // Gestore della sessione locale (SharedPreferences)
         val sessionManager = SessionManager(this)

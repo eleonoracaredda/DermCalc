@@ -30,6 +30,16 @@
                 android:src="@drawable/ic_medical_logo"
                 android:contentDescription="@string/app_name" />
 
+            <!--Spinner della lingua -->
+            <Spinner
+                android:id="@+id/spLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:entries="@array/languages"
+                android:spinnerMode="dropdown" />
+
             <!-- Titolo -->
             <TextView
                 android:id="@+id/txtWelcome"

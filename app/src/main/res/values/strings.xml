@@ -67,7 +67,7 @@
     <string name="calcolatore_pasi">Calcolatore PASI</string>
 
     <string name="indurimento_spessore_infiltrazione">Indurimento (spessore/infiltrazione)</string>
-    <string name="Desquamazione">Desquamazione</string>
+    <string name="desquamazione">Desquamazione</string>
 
     <string name="lista_pazienti">Lista pazienti</string>
     <string name="scheda_paziente">Scheda Paziente</string>
@@ -145,5 +145,11 @@
         <item>Tronco</item>
         <item>Arti inferiori</item>
     </string-array>
+
+    <string-array name="languages">
+        <item>Italiano</item>
+        <item>English</item>
+    </string-array>
+
 
 </resources>
