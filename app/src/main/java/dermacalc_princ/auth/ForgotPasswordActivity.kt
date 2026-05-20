@@ -3,7 +3,6 @@ package com.example.dermcalc_princ.auth
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +31,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val etNewPassword = findViewById<TextInputEditText>(R.id.etNewPassword)
         val btnVerify = findViewById<Button>(R.id.btnVerify)
         val btnResetPassword = findViewById<Button>(R.id.btnResetPassword)
-        val resetSection = findViewById<LinearLayout>(R.id.resetSection)
+        val resetSection = findViewById<View>(R.id.resetSection)
         val tvBackToLogin = findViewById<TextView>(R.id.tvBackToLogin)
 
         val database = AppDatabase.getDatabase(this)
