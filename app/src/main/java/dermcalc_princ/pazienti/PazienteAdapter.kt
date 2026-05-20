@@ -1,4 +1,4 @@
-package Dermacalc_princ.pazienti
+package dermcalc_princ.pazienti
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.Dermcalc_princ.R
-import Dominio.Pazienti
+import com.example.dermcalc_princ.R
+import dominio.Pazienti
 
 class PazienteAdapter(
     private val pazienti: List<Pazienti>,
@@ -19,6 +19,7 @@ class PazienteAdapter(
     class PazienteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvNome: TextView = view.findViewById(R.id.tvNomePaziente)
         val tvCodiceFiscale: TextView = view.findViewById(R.id.tvCodiceFiscale)
+        val tvInitials: TextView = view.findViewById(R.id.tvAvatarInitials)
         val btnEdit: ImageButton = view.findViewById(R.id.btnEditPaziente)
     }
 
@@ -35,6 +36,10 @@ class PazienteAdapter(
         // Imposta i dati del paziente nelle view
         holder.tvNome.text = "${paziente.nome} ${paziente.cognome}"
         holder.tvCodiceFiscale.text = paziente.codiceFiscale
+
+        // Imposta le iniziali nell'avatar
+        val initials = "${paziente.nome.take(1)}${paziente.cognome.take(1)}".uppercase()
+        holder.tvInitials.text = initials
         
         // Gestione del click sulla riga per visualizzare i dettagli
         holder.itemView.setOnClickListener {

@@ -1,4 +1,4 @@
-package Dermacalc_princ.pazienti
+package dermcalc_princ.pazienti
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,22 +10,25 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.Dermcalc_princ.R
-import Database.AppDatabase
-import Dermacalc_princ.auth.RegisterActivity
-import Dermacalc_princ.home.HomeActivity
-import Utils.SessionManager
+import com.example.dermcalc_princ.R
+import database.AppDatabase
+import dermcalc_princ.auth.RegisterActivity
+import dermcalc_princ.home.HomeActivity
+import utils.SessionManager
 import kotlinx.coroutines.launch
-import Database.PazienteDao
+import database.PazienteDao
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.widget.LinearLayout
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 
 // Activity principale per la gestione dell'elenco pazienti associati al medico loggato
 class PazientiActivity : AppCompatActivity() {
 
     private lateinit var rvPazienti: RecyclerView
-    private lateinit var btnNuovoPaziente: Button
+    private lateinit var btnNuovoPaziente: ExtendedFloatingActionButton
     private lateinit var etSearch: TextInputEditText
     private lateinit var database: AppDatabase
     private lateinit var sessionManager: SessionManager
@@ -112,6 +115,10 @@ class PazientiActivity : AppCompatActivity() {
                 // Esegue la ricerca filtrata
                 database.pazienteDao().searchPazienti(doctorId, query)
             }
+
+            // Mostra o nasconde lo stato vuoto
+            findViewById<LinearLayout>(R.id.llEmptyState).visibility = 
+                if (pazientiList.isEmpty()) View.VISIBLE else View.GONE
 
             // Configurazione dell'adapter con le relative callback
             val adapter = PazienteAdapter(

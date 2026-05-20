@@ -1,4 +1,4 @@
-package Dermacalc_princ.auth
+package dermcalc_princ.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,14 +8,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
-import com.example.Dermcalc_princ.R
+import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import Database.AppDatabase
-import Dermacalc_princ.pazienti.PazientiActivity
+import database.AppDatabase
+import dermcalc_princ.pazienti.PazientiActivity
 import kotlinx.coroutines.launch
-import Utils.InputValidator
-import Utils.SessionManager
-import Utils.hashPassword
+import utils.InputValidator
+import utils.SessionManager
+import utils.hashPassword
 
 
 // Gestisce l'autenticazione del medico tramite Email e Password

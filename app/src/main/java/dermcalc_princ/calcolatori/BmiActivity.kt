@@ -1,4 +1,4 @@
-package Dermacalc_princ.calcolatori
+package dermcalc_princ.calcolatori
 
 import android.os.Bundle
 import android.widget.Button
@@ -6,18 +6,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import Database.AppDatabase
-import Dominio.Misurazione
+import database.AppDatabase
+import dominio.Misurazione
 import java.util.Date
-import Logic.BmiCalculator
-import com.example.Dermcalc_princ.R
-import kotlinx.coroutines.CoroutineScope
+import logic.BmiCalculator
+import com.example.dermcalc_princ.R
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import Repository.MisurazioneRepository
-
-
+import repository.MisurazioneRepository
 class BmiActivity : AppCompatActivity() {
 
     private lateinit var db: AppDatabase
@@ -78,20 +76,20 @@ class BmiActivity : AppCompatActivity() {
     }
 
     private fun salvaBmi(idPaziente: Int, valore: Double, severita: String, note: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            repository.insertMisurazione(
-                Misurazione(
-                    pazienteId = idPaziente,
-                    tipo = "BMI",
-                    valore = valore,
-                    severita = severita,
-                    data = Date(),
-                    note = note
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.insertMisurazione(
+                    Misurazione(
+                        pazienteId = idPaziente,
+                        tipo = "BMI",
+                        valore = valore,
+                        severita = severita,
+                        data = Date(),
+                        note = note
+                    )
                 )
-            )
-            withContext(Dispatchers.Main) {
-                Toast.makeText(this@BmiActivity, "Salvato nel database", Toast.LENGTH_SHORT).show()
             }
+            Toast.makeText(this@BmiActivity, "Salvato nel database", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -1,8 +1,8 @@
-package Database
+package database
 
-import Dominio.Misurazione
-import Dominio.Pazienti
-import Dominio.User
+import dominio.Misurazione
+import dominio.Pazienti
+import dominio.User
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -32,24 +32,24 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         // Migrazione dalla versione 7 alla 8: aggiunta colonna sesso
         val MIGRATION_7_8 = object : Migration(7, 8) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN sesso TEXT NOT NULL DEFAULT 'M'") }
+            override fun migrate(db: SupportSQLiteDatabase) {
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN sesso TEXT NOT NULL DEFAULT 'M'") }
             }
         }
 
         // Gestione della migrazione dalla versione 6 alla 7: aggiunta tutti i campi mancanti
         val MIGRATION_6_7 = object : Migration(6, 7) {
-            override fun migrate(database: SupportSQLiteDatabase) {
+            override fun migrate(db: SupportSQLiteDatabase) {
                 // Usiamo runCatching per evitare crash se alcune colonne sono già state create parzialmente
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN caregiverNome TEXT") }
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN caregiverTelefono TEXT") }
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN terapia TEXT") }
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN dataInizioTerapia INTEGER") }
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN consenso INTEGER NOT NULL DEFAULT 0") }
-                runCatching { database.execSQL("ALTER TABLE pazienti ADD COLUMN comorbilita TEXT") }
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN caregiverNome TEXT") }
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN caregiverTelefono TEXT") }
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN terapia TEXT") }
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN dataInizioTerapia INTEGER") }
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN consenso INTEGER NOT NULL DEFAULT 0") }
+                runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN comorbilita TEXT") }
                 
                 // Aggiunta campo note alla tabella misurazioni (mancava!)
-                runCatching { database.execSQL("ALTER TABLE misurazioni ADD COLUMN note TEXT") }
+                runCatching { db.execSQL("ALTER TABLE misurazioni ADD COLUMN note TEXT") }
             }
         }
 
@@ -65,7 +65,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "dermcalc_database"
                 )
                     .addMigrations(MIGRATION_6_7, MIGRATION_7_8) // Registrazione delle migrazioni
-                    .fallbackToDestructiveMigration() // Evita crash bloccanti se la migrazione fallisce
+                    .fallbackToDestructiveMigration(true) // Evita crash bloccanti se la migrazione fallisce
                     .build()
 
                 INSTANCE = instance

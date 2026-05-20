@@ -1,14 +1,18 @@
-package Dermacalc_princ.home
+package dermcalc_princ.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
-import com.example.Dermcalc_princ.R
-import Database.AppDatabase
-import Dominio.Misurazione
-import Repository.MisurazioneRepository
+import com.example.dermcalc_princ.R
+import database.AppDatabase
+import dominio.Misurazione
+import repository.MisurazioneRepository
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -51,10 +55,41 @@ class StoricoActivity : AppCompatActivity() {
             val misurazioniPasi = repository.getStoricoPerTipo(pazienteId, "PASI")
             val misurazioniEasi = repository.getStoricoPerTipo(pazienteId, "EASI")
 
-            // Configurazione visiva dei tre grafici principali
-            setupChart(findViewById(R.id.chartBmi), misurazioniBmi, "BMI", Color.BLUE)
-            setupChart(findViewById(R.id.chartPasi), misurazioniPasi, "PASI", Color.RED)
-            setupChart(findViewById(R.id.chartEasi), misurazioniEasi, "EASI", Color.GREEN)
+            val hasData = misurazioniBmi.isNotEmpty() || misurazioniPasi.isNotEmpty() || misurazioniEasi.isNotEmpty()
+            
+            findViewById<NestedScrollView>(R.id.nsvContent).visibility = if (hasData) View.VISIBLE else View.GONE
+            findViewById<LinearLayout>(R.id.llEmptyState).visibility = if (hasData) View.GONE else View.VISIBLE
+
+            if (hasData) {
+                // Configurazione visiva dei tre grafici principali
+                setupChart(findViewById(R.id.chartBmi), misurazioniBmi, "BMI", Color.BLUE)
+                setupChart(findViewById(R.id.chartPasi), misurazioniPasi, "PASI", Color.RED)
+                setupChart(findViewById(R.id.chartEasi), misurazioniEasi, "EASI", Color.GREEN)
+
+                // Popolamento Card di Riepilogo
+                updateSummary(misurazioniBmi, R.id.tvLastBmi, R.id.tvDiffBmi)
+                updateSummary(misurazioniPasi, R.id.tvLastPasi, R.id.tvDiffPasi)
+                updateSummary(misurazioniEasi, R.id.tvLastEasi, R.id.tvDiffEasi)
+            }
+        }
+    }
+
+    private fun updateSummary(data: List<Misurazione>, tvLastId: Int, tvDiffId: Int) {
+        val tvLast = findViewById<TextView>(tvLastId)
+        val tvDiff = findViewById<TextView>(tvDiffId)
+
+        if (data.isNotEmpty()) {
+            val last = data.last()
+            tvLast.text = "%.1f".format(last.valore)
+
+            if (data.size > 1) {
+                val previous = data[data.size - 2]
+                val diff = last.valore - previous.valore
+                val diffPercent = (diff / previous.valore) * 100
+                
+                tvDiff.text = "%s%.1f%%".format(if (diff >= 0) "+" else "", diffPercent)
+                tvDiff.setTextColor(if (diff > 0) Color.RED else if (diff < 0) Color.parseColor("#4CAF50") else Color.GRAY)
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package Database
+package database
 
 import androidx.room.TypeConverter
 import java.util.Date

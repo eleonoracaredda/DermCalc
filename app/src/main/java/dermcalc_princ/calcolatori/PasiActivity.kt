@@ -1,4 +1,4 @@
-package Dermacalc_princ.calcolatori
+package dermcalc_princ.calcolatori
 
 import android.os.Bundle
 import android.view.View
@@ -10,17 +10,17 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import Database.AppDatabase
-import Dominio.DatiDistretto
-import Dominio.Misurazione
+import database.AppDatabase
+import dominio.DatiDistretto
+import dominio.Misurazione
 import java.util.Date
-import Logic.PasiCalculator
-import com.example.Dermcalc_princ.R
-import kotlinx.coroutines.CoroutineScope
+import logic.PasiCalculator
+import com.example.dermcalc_princ.R
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import Repository.MisurazioneRepository
+import repository.MisurazioneRepository
 
 
 /**
@@ -263,28 +263,26 @@ class PasiActivity : AppCompatActivity() {
      * @param severita La categoria di gravità corrispondente al punteggio.
      */
     private fun salvaPasi(idPaziente: Int, valore: Double, severita: String, note: String?) {
-        // Avvia una coroutine nel dispatcher IO per le operazioni su DB
-        CoroutineScope(Dispatchers.IO).launch {
+        // Avvia una coroutine nel lifecycleScope per gestire automaticamente il ciclo di vita
+        lifecycleScope.launch {
             try {
-                repository.insertMisurazione(
-                    Misurazione(
-                        pazienteId = idPaziente,
-                        tipo = "PASI",
-                        valore = valore,
-                        severita = severita,
-                        data = Date(),
-                        note = note
+                withContext(Dispatchers.IO) {
+                    repository.insertMisurazione(
+                        Misurazione(
+                            pazienteId = idPaziente,
+                            tipo = "PASI",
+                            valore = valore,
+                            severita = severita,
+                            data = Date(),
+                            note = note
+                        )
                     )
-                )
-                // Ritorna sul thread principale per mostrare il feedback all'utente
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@PasiActivity, "Punteggio PASI salvato!", Toast.LENGTH_SHORT).show()
                 }
+                // Feedback all'utente sul thread principale
+                Toast.makeText(this@PasiActivity, "Punteggio PASI salvato!", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 e.printStackTrace()
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@PasiActivity, "Errore durante il salvataggio", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this@PasiActivity, "Errore durante il salvataggio", Toast.LENGTH_SHORT).show()
             }
         }
     }

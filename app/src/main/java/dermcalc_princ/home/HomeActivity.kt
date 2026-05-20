@@ -1,4 +1,4 @@
-package Dermacalc_princ.home
+package dermcalc_princ.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.Dermcalc_princ.R
-import Database.AppDatabase
-import Dermacalc_princ.auth.LoginActivity
-import Dermacalc_princ.calcolatori.BmiActivity
-import Dermacalc_princ.calcolatori.EasiActivity
-import Dermacalc_princ.calcolatori.PasiActivity
-import Utils.SessionManager
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.dermcalc_princ.R
+import database.AppDatabase
+import dermcalc_princ.auth.LoginActivity
+import dermcalc_princ.calcolatori.BmiActivity
+import dermcalc_princ.calcolatori.EasiActivity
+import dermcalc_princ.calcolatori.PasiActivity
+import utils.SessionManager
 import kotlinx.coroutines.launch
 
 // Classe HomeActivity: Menu principale dell'app dove l'utente sceglie quale calcolatore utilizzare
@@ -26,15 +28,26 @@ class HomeActivity : AppCompatActivity() {
 
         val sessionManager = SessionManager(this)
         
-        // Riferimenti ai pulsanti presenti nel layout
+        // Riferimenti ai componenti presenti nel layout
         val btnLogout = findViewById<Button>(R.id.btnLogout)
-        val btnBmi = findViewById<Button>(R.id.btnBmi)
-        val btnPasi = findViewById<Button>(R.id.btnPasi)
-        val btnEasi = findViewById<Button>(R.id.btnEasi)
-        val btnStorico = findViewById<Button>(R.id.btnStorico)
+        val cardBmi = findViewById<MaterialCardView>(R.id.cardBmi)
+        val cardPasi = findViewById<MaterialCardView>(R.id.cardPasi)
+        val cardEasi = findViewById<MaterialCardView>(R.id.cardEasi)
+        val cardStorico = findViewById<MaterialCardView>(R.id.cardStorico)
         val btnBackToList = findViewById<Button>(R.id.btnBackToList)
         val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
         val tvPazienteDetails = findViewById<TextView>(R.id.tvPazienteDetails)
+        val tvDoctorHeaderName = findViewById<TextView>(R.id.tvDoctorHeaderName)
+        val fabAddPatient = findViewById<FloatingActionButton>(R.id.fabAddPatient)
+
+        // Mostra il nome del medico nell'intestazione
+        tvDoctorHeaderName.text = "Dott. ${sessionManager.getDoctorName() ?: ""}"
+
+        // Listener per aggiungere un nuovo paziente (shortcut dalla Home)
+        fabAddPatient.setOnClickListener {
+            val intent = Intent(this, dermcalc_princ.pazienti.CreatePazienteActivity::class.java)
+            startActivity(intent)
+        }
 
         // Recupero ID paziente passato da PazientiActivity
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
@@ -58,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Gestione del pulsante Storico
-        btnStorico.setOnClickListener {
+        cardStorico.setOnClickListener {
             val intent = Intent(this, StoricoActivity::class.java)
             intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
@@ -81,21 +94,21 @@ class HomeActivity : AppCompatActivity() {
         // Questo permette di salvare le misurazioni associandole correttamente al paziente.
 
         // Listener per avviare il calcolatore dell'Indice di Massa Corporea (BMI)
-        btnBmi.setOnClickListener {
+        cardBmi.setOnClickListener {
             val intent = Intent(this, BmiActivity::class.java)
             intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
         }
 
         // Listener per avviare il calcolatore PASI (Psoriasi)
-        btnPasi.setOnClickListener {
+        cardPasi.setOnClickListener {
             val intent = Intent(this, PasiActivity::class.java)
             intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
         }
 
         // Listener per avviare il calcolatore EASI (Eczema)
-        btnEasi.setOnClickListener {
+        cardEasi.setOnClickListener {
             val intent = Intent(this, EasiActivity::class.java)
             intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)

@@ -1,20 +1,20 @@
-package Dermacalc_princ.auth
+package dermcalc_princ.auth
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.Dermcalc_princ.R
+import com.example.dermcalc_princ.R
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
-import Database.AppDatabase
-import Dominio.User
+import database.AppDatabase
+import dominio.User
 import kotlinx.coroutines.launch
-import Utils.hashPassword
-import Utils.InputValidator
+import utils.hashPassword
+import utils.InputValidator
 
 // Gestisce il recupero della password smarrita tramite verifica del Codice Fiscale
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -32,7 +32,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val etNewPassword = findViewById<TextInputEditText>(R.id.etNewPassword)
         val btnVerify = findViewById<Button>(R.id.btnVerify)
         val btnResetPassword = findViewById<Button>(R.id.btnResetPassword)
-        val resetSection = findViewById<LinearLayout>(R.id.resetSection)
+        val resetSection = findViewById<MaterialCardView>(R.id.resetSection)
         val tvBackToLogin = findViewById<TextView>(R.id.tvBackToLogin)
 
         val database = AppDatabase.getDatabase(this)

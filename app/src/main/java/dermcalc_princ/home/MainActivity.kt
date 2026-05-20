@@ -1,6 +1,6 @@
-package Dermacalc_princ.home
+package dermcalc_princ.home
 
-import Dermacalc_princ.auth.LoginActivity
+import dermcalc_princ.auth.LoginActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

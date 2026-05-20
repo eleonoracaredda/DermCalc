@@ -1,4 +1,4 @@
-package Logic
+package logic
 
 // Classe per il calcolo dell'Indice di Massa Corporea (BMI)
 class BmiCalculator {

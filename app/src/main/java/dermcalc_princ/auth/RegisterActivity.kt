@@ -1,4 +1,4 @@
-package Dermacalc_princ.auth
+package dermcalc_princ.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,15 +7,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.Dermcalc_princ.R
+import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import Database.AppDatabase
-import Dermacalc_princ.pazienti.PazientiActivity
-import Dominio.User
+import database.AppDatabase
+import dermcalc_princ.pazienti.PazientiActivity
+import dominio.User
 import kotlinx.coroutines.launch
-import Utils.InputValidator
-import Utils.SessionManager
-import Utils.hashPassword
+import utils.InputValidator
+import utils.SessionManager
+import utils.hashPassword
 
 
 // Gestisce sia la registrazione di un nuovo medico che la modifica del profilo esistente
