@@ -1,14 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DermaCare</string>
+
+    <string name="app_name">prova grafica</string>
     <string name="calcolatore_easi">Calcolatore EASI</string>
-    <string name="seleziona_distretto">Seleziona Distretto Corporeo:</string>
+    <string name="seleziona_distretto">Seleziona Distretto Corporeo :</string>
     <string name="already_have_account">Hai già un account? Accedi</string>
     <string name="gravit_dei_segni_clinici">Gravità dei segni clinici</string>
+
     <string name="eritema">Eritema (rossore)</string>
     <string name="edema">Edema / Papulazione (gonfiore)</string>
     <string name="escoriazioni">Escoriazioni (lesioni da grattamento)</string>
     <string name="lichenificazione">Lichenificazione (ispessimento della cute)</string>
     <string name="area">Area interessata (% di superficie)</string>
+
     <string name="desc_zero">Assente (0)</string>
     <string name="desc_uno">Lieve (1)</string>
     <string name="desc_due">Moderato (2)</string>
@@ -16,58 +20,130 @@
     <string name="desc_quattro">Molto Grave (4)</string>
 
     <string name="area_0">0% (0)</string>
-    <string name="area_1">1–9% (1)</string>
-    <string name="area_2">10–29% (2)</string>
-    <string name="area_3">30–49% (3)</string>
-    <string name="area_4">50–69% (4)</string>
-    <string name="area_5">70–89% (5)</string>
-    <string name="area_6">90–100% (6)</string>
+    <string name="area_1">1-9% (1)</string>
+    <string name="area_2">10-29% (2)</string>
+    <string name="area_3">30-49% (3)</string>
+    <string name="area_4">50-69% (4)</string>
+    <string name="area_5">70-89% (5)</string>
+    <string name="area_6">90-100% (6)</string>
+
+    <string name="distretto_testa">Testa</string>
+    <string name="distretto_testa_collo">Testa e collo</string>
+    <string name="distretto_tronco">Tronco</string>
+    <string name="distretto_arti_superiori">Arti superiori</string>
+    <string name="distretto_arti_inferiori">Arti inferiori</string>
+
+    <string name="valore_0">0</string>
+    <string name="valore_1">1</string>
+    <string name="valore_2">2</string>
+    <string name="valore_3">3</string>
+    <string name="valore_4">4</string>
 
     <string name="calcola_e_salva">Calcola e Salva</string>
     <string name="note_hint">Aggiungi note (opzionale)</string>
+
     <string name="risultato_label">Punteggio Regione: %1$.1f\nTOTALE EASI: %2$.1f (%3$s)</string>
     <string name="risultato_pasi_label">Punteggio Regione: %1$.1f\nTOTALE PASI: %2$.1f (%3$s)</string>
+
     <string name="calcolatore_bmi">Calcolatore BMI</string>
     <string name="peso_kg">Peso (kg)</string>
     <string name="altezza_cm">Altezza (cm)</string>
     <string name="calcola_e_salva1">Calcola e Salva</string>
-    <string name="risultato">Risultato: —</string>
+    <string name="risultato">Risultato: -</string>
+    <string name="risultato_bmi_label">Risultato BMI: %1$.2f (%2$s)</string>
+
     <string name="codice_fiscale">Codice Fiscale</string>
     <string name="cognome">Cognome</string>
     <string name="email">Email</string>
     <string name="nome">Nome</string>
     <string name="password">Password</string>
     <string name="registrati">Registrati</string>
+
     <string name="menu_principale">Menu Principale</string>
     <string name="calcolatore_bmi1">Calcolatore BMI</string>
     <string name="calcolatore_easi1">Calcolatore EASI</string>
     <string name="log_out">Log out</string>
     <string name="calcolatore_pasi1">Calcolatore PASI</string>
     <string name="calcolatore_pasi">Calcolatore PASI</string>
-    <string name="indurimento_spessore_infiltrazione">Indurimento(spessore/infiltrazione)</string>
+
+    <string name="indurimento_spessore_infiltrazione">Indurimento (spessore/infiltrazione)</string>
     <string name="Desquamazione">Desquamazione</string>
+
     <string name="lista_pazienti">Lista pazienti</string>
     <string name="scheda_paziente">Scheda Paziente</string>
     <string name="terapia_attuale">Terapia Attuale</string>
     <string name="comorbilita">Comorbilità</string>
+
     <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
     <string name="visualizza_storico">Visualizza storico</string>
+
+    <string name="welcome_back">Benvenuto,</string>
+    <string name="welcome_login">Bentornato</string>
+    <string name="login_subtitle">Accedi al tuo account medico</string>
+    <string name="login_button">Accedi</string>
+
+    <string name="forgot_password">Password dimenticata?</string>
+    <string name="no_account_register">Non hai un account? Registrati</string>
+
+    <string name="registration_title">Registrazione</string>
+    <string name="registration_subtitle">Crea un nuovo profilo professionale</string>
+
+    <string name="paziente_selezionato">Paziente Selezionato</string>
+    <string name="strumenti_e_calcolatori">Strumenti e Calcolatori</string>
+
+    <string name="aggiungi_paziente">Aggiungi Paziente</string>
+    <string name="nuovo_paziente">Nuovo Paziente</string>
+    <string name="cerca_paziente">Cerca paziente...</string>
+
+    <string name="nessun_paziente_trovato">Nessun paziente trovato</string>
+    <string name="incoraggiamento_pazienti">Inizia aggiungendo il tuo primo paziente\ncon il tasto qui sotto.</string>
+
+    <string name="storico_vuoto">Storico vuoto</string>
+    <string name="incoraggiamento_storico">Non ci sono ancora misurazioni per questo paziente.\nEsegui il primo calcolo per vedere i grafici.</string>
+
     <string name="storico_misurazioni">Storico Misurazioni</string>
     <string name="grafico_bmi">Andamento BMI</string>
     <string name="grafico_pasi">Andamento PASI</string>
     <string name="grafico_easi">Andamento EASI</string>
     <string name="nessun_dato">Nessun dato disponibile</string>
     <string name="indietro">Indietro</string>
+
+    <string name="dati_anagrafici">Dati Anagrafici</string>
+    <string name="informazioni_cliniche">Informazioni Cliniche</string>
+    <string name="caregiver_emergenza">Caregiver / Emergenza</string>
+    <string name="nome_caregiver">Nome Caregiver</string>
+    <string name="consenso_trattamento">Consenso al trattamento dati personali</string>
+
+    <string name="data_nascita_hint">Data di Nascita * (dd/mm/yyyy)</string>
+    <string name="sesso_label">Sesso *</string>
+    <string name="maschio">Maschio</string>
+    <string name="femmina">Femmina</string>
+
+    <string name="salva_paziente">Salva Paziente</string>
+    <string name="data_inizio_terapia_hint">Data Inizio Terapia (dd/mm/yyyy)</string>
+    <string name="telefono_caregiver">Telefono Caregiver</string>
+
+    <string name="risultato_caps">RISULTATO</string>
+
+    <string name="recupero_password">Recupero Password</string>
+    <string name="forgot_subtitle">Inserisci i tuoi dati per reimpostare la password</string>
+    <string name="verifica_dati">Verifica Dati</string>
+    <string name="nuova_password">Nuova Password</string>
+    <string name="reimposta_password">Reimposta Password</string>
+    <string name="torna_al_login">Torna al Login</string>
+
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>
         <item>Tronco</item>
         <item>Arti superiori</item>
         <item>Arti inferiori</item>
     </string-array>
+
     <string-array name="body_parts_pasi">
         <item>Testa</item>
         <item>Arti superiori</item>
         <item>Tronco</item>
         <item>Arti inferiori</item>
     </string-array>
+
 </resources>
