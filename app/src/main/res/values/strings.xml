@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">prova grafica</string>
+    <string name="app_name">DermaCalc</string>
     <string name="calcolatore_easi">Calcolatore EASI</string>
     <string name="seleziona_distretto">Seleziona Distretto Corporeo :</string>
     <string name="already_have_account">Hai già un account? Accedi</string>
