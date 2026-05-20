@@ -18,6 +18,7 @@ import Utils.SessionManager
 import kotlinx.coroutines.launch
 import Database.PazienteDao
 
+// Activity principale per la gestione dell'elenco pazienti associati al medico loggato
 class PazientiActivity : AppCompatActivity() {
 
     private lateinit var rvPazienti: RecyclerView
@@ -25,7 +26,7 @@ class PazientiActivity : AppCompatActivity() {
     private lateinit var database: AppDatabase
     private lateinit var sessionManager: SessionManager
 
-    // Elementi profilo dottore
+    // Elementi del profilo del dottore visualizzati nell'intestazione
     private lateinit var tvDoctorName: TextView
     private lateinit var tvDoctorEmail: TextView
     private lateinit var btnEditDoctor: ImageButton
@@ -34,22 +35,26 @@ class PazientiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pazienti)
 
+        // Inizializzazione database e sessione
         database = AppDatabase.getDatabase(this)
         sessionManager = SessionManager(this)
+        
+        // Riferimenti alle View
         rvPazienti = findViewById(R.id.rvPazienti)
         btnNuovoPaziente = findViewById(R.id.btnNuovoPaziente)
-
         tvDoctorName = findViewById(R.id.tvDoctorName)
         tvDoctorEmail = findViewById(R.id.tvDoctorEmail)
         btnEditDoctor = findViewById(R.id.btnEditDoctor)
 
         rvPazienti.layoutManager = LinearLayoutManager(this)
 
+        // Listener per aggiungere un nuovo paziente
         btnNuovoPaziente.setOnClickListener {
             val intent = Intent(this, CreatePazienteActivity::class.java)
             startActivity(intent)
         }
 
+        // Listener per modificare il profilo del medico
         btnEditDoctor.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             intent.putExtra("EDIT_MODE", true)
@@ -62,10 +67,12 @@ class PazientiActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Ricarica i dati quando si torna all'activity (es. dopo aggiunta/modifica)
         loadDoctorProfile()
         loadPazienti()
     }
 
+    // Carica le informazioni del medico dalla sessione e dal database
     private fun loadDoctorProfile() {
         val doctorId = sessionManager.getDoctorId() ?: return
         lifecycleScope.launch {
@@ -77,28 +84,31 @@ class PazientiActivity : AppCompatActivity() {
         }
     }
 
+    // Carica la lista dei pazienti filtrata per il medico corrente
     private fun loadPazienti() {
         val doctorId = sessionManager.getDoctorId() ?: return
 
         lifecycleScope.launch {
-            //ricerca avanzata
-            val query = "farmaco"   // puoi cambiarlo quando vuoi
+            // Logica di ricerca/filtro (attualmente con query d'esempio "farmaco")
+            val query = "farmaco" 
 
             val byTerapia = database.pazienteDao().searchByTerapia(query)
             val byNome = database.pazienteDao().searchByNomeCognome(query)
 
+            // Unione dei risultati evitando duplicati
             val pazientiList = (byTerapia + byNome).distinctBy { it.id }
 
+            // Configurazione dell'adapter con le relative callback
             val adapter = PazienteAdapter(
                 pazientiList,
                 onPazienteClick = { paziente ->
-                    // Quando un paziente viene selezionato, apri HomeActivity
+                    // Navigazione alla Home del paziente selezionato
                     val intent = Intent(this@PazientiActivity, HomeActivity::class.java)
                     intent.putExtra("PAZIENTE_ID", paziente.id)
                     startActivity(intent)
                 },
                 onEditClick = { paziente ->
-                    // Quando si clicca su modifica, apri CreatePazienteActivity in modalità edit
+                    // Navigazione alla modifica dei dati del paziente
                     val intent = Intent(this@PazientiActivity, CreatePazienteActivity::class.java)
                     intent.putExtra("PAZIENTE_ID", paziente.id)
                     startActivity(intent)

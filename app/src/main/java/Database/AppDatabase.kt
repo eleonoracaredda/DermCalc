@@ -30,15 +30,18 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun misurazioneDao(): MisurazioneDao
 
     companion object {
+        // Gestione della migrazione dalla versione 6 alla 7: aggiunta campi per il caregiver
         val MIGRATION_6_7 = object : Migration(6, 7) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE pazienti ADD COLUMN caregiverNome TEXT")
                 database.execSQL("ALTER TABLE pazienti ADD COLUMN caregiverTelefono TEXT")
             }
         }
+
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
+        // Pattern Singleton per garantire un'unica istanza del database in tutta l'app
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -46,7 +49,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "dermcalc_database"
                 )
-                    .addMigrations(MIGRATION_6_7)
+                    .addMigrations(MIGRATION_6_7) // Registrazione delle migrazioni
                     .build()
 
                 INSTANCE = instance
