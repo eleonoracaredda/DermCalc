@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,6 +14,7 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
 
+        <!-- Titolo -->
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextAppearance.DermCalc.Headline"
@@ -19,10 +22,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/calcolatore_pasi"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Seleziona distretto -->
         <TextView
             android:id="@+id/tvBodyPartLabel"
             style="@style/TextAppearance.DermCalc.Subheadline"
@@ -41,10 +45,11 @@
             android:background="@android:drawable/btn_dropdown"
             android:entries="@array/body_parts_pasi"
             android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvBodyPartLabel" />
 
+        <!-- Gravità -->
         <TextView
             android:id="@+id/tvGravityLabel"
             style="@style/TextAppearance.DermCalc.Subheadline"
@@ -73,8 +78,8 @@
             android:layout_marginTop="8dp"
             android:max="4"
             android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvEritemaValue"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvEritemaValue"
             app:layout_constraintTop_toBottomOf="@id/tvEritemaLabel" />
 
         <TextView
@@ -85,9 +90,9 @@
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
+            app:layout_constraintTop_toTopOf="@id/sbEritema"
             app:layout_constraintBottom_toBottomOf="@id/sbEritema"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbEritema" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Indurimento -->
         <TextView
@@ -107,8 +112,8 @@
             android:layout_marginTop="8dp"
             android:max="4"
             android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvIndurimentoValue"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvIndurimentoValue"
             app:layout_constraintTop_toBottomOf="@id/tvIndurimentoLabel" />
 
         <TextView
@@ -119,9 +124,9 @@
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
+            app:layout_constraintTop_toTopOf="@id/sbIndurimento"
             app:layout_constraintBottom_toBottomOf="@id/sbIndurimento"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbIndurimento" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Desquamazione -->
         <TextView
@@ -141,8 +146,8 @@
             android:layout_marginTop="8dp"
             android:max="4"
             android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvDesquamazioneValue"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvDesquamazioneValue"
             app:layout_constraintTop_toBottomOf="@id/tvDesquamazioneLabel" />
 
         <TextView
@@ -153,9 +158,9 @@
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/desc_zero"
+            app:layout_constraintTop_toTopOf="@id/sbDesquamazione"
             app:layout_constraintBottom_toBottomOf="@id/sbDesquamazione"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbDesquamazione" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Area -->
         <TextView
@@ -175,8 +180,8 @@
             android:layout_marginTop="8dp"
             android:max="6"
             android:progress="0"
-            app:layout_constraintEnd_toStartOf="@+id/tvAreaValue"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvAreaValue"
             app:layout_constraintTop_toBottomOf="@id/tvAreaLabel" />
 
         <TextView
@@ -187,18 +192,19 @@
             android:minWidth="80dp"
             android:gravity="end"
             android:text="@string/area_0"
+            app:layout_constraintTop_toTopOf="@id/sbArea"
             app:layout_constraintBottom_toBottomOf="@id/sbArea"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sbArea" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Note -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilNotes"
             style="@style/Widget.DermCalc.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sbArea">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -211,29 +217,48 @@
                 android:minHeight="80dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Bottone -->
         <Button
             android:id="@+id/btnCalculatePasi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/calcola_e_salva"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilNotes" />
 
-        <TextView
-            android:id="@+id/tvResult"
-            style="@style/TextAppearance.DermCalc.Headline"
-            android:layout_width="wrap_content"
+        <!-- Risultato -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPasiResult"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/risultato_pasi_label"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnCalculatePasi" />
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/primaryLightColor"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toBottomOf="@id/btnCalculatePasi"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/tvResult"
+                    style="@style/TextAppearance.DermCalc.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/risultato_pasi_label"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
