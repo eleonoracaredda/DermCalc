@@ -1,7 +1,7 @@
-package repository
+package com.example.dermcalc_princ.repository
 
-import database.AppDatabase
-import dominio.Misurazione
+import com.example.dermcalc_princ.database.AppDatabase
+import com.example.dermcalc_princ.dominio.Misurazione
 import java.util.Date
 
 class MisurazioneRepository(private val db: AppDatabase) {

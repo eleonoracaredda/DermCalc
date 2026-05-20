@@ -1,4 +1,4 @@
-package dermacalc_princ.home
+package com.example.dermcalc_princ.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
-import database.AppDatabase
-import dermacalc_princ.auth.LoginActivity
-import dermacalc_princ.calcolatori.BmiActivity
-import dermacalc_princ.calcolatori.EasiActivity
-import dermacalc_princ.calcolatori.PasiActivity
-import dermacalc_princ.pazienti.CreatePazienteActivity
-import utils.SessionManager
+import com.example.dermcalc_princ.database.AppDatabase
+import com.example.dermcalc_princ.auth.LoginActivity
+import com.example.dermcalc_princ.calcolatori.BmiActivity
+import com.example.dermcalc_princ.calcolatori.EasiActivity
+import com.example.dermcalc_princ.calcolatori.PasiActivity
+import com.example.dermcalc_princ.pazienti.CreatePazienteActivity
+import com.example.dermcalc_princ.utils.SessionManager
 import kotlinx.coroutines.launch
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton

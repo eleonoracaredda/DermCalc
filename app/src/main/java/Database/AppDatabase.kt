@@ -1,8 +1,5 @@
-package database
+package com.example.dermcalc_princ.database
 
-import dominio.Misurazione
-import dominio.Pazienti
-import dominio.User
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -14,9 +11,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 // Definizione del database principale dell'applicazione tramite Room
 @Database(
     entities = [
-        User::class,
-        Pazienti::class,
-        Misurazione::class
+        com.example.dermcalc_princ.dominio.User::class,
+        com.example.dermcalc_princ.dominio.Pazienti::class,
+        com.example.dermcalc_princ.dominio.Misurazione::class
     ],
     // Aumenta questo numero SOLO se cambi la struttura delle tabelle (aggiungi colonne, etc.)
     version = 8, //aumentato da 7 a 8

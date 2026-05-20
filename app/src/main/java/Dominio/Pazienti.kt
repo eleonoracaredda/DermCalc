@@ -1,4 +1,4 @@
-package dominio
+package com.example.dermcalc_princ.dominio
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package database
+package com.example.dermcalc_princ.database
 
 import androidx.room.TypeConverter
 import java.util.Date

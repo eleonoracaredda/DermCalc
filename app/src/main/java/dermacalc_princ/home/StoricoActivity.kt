@@ -1,4 +1,4 @@
-package dermacalc_princ.home
+package com.example.dermcalc_princ.home
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
-import database.AppDatabase
-import dominio.Misurazione
-import repository.MisurazioneRepository
+import com.example.dermcalc_princ.database.AppDatabase
+import com.example.dermcalc_princ.dominio.Misurazione
+import com.example.dermcalc_princ.repository.MisurazioneRepository
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData

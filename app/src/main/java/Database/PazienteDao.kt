@@ -1,7 +1,7 @@
-package database
+package com.example.dermcalc_princ.database
 
 import androidx.room.*
-import dominio.Pazienti
+import com.example.dermcalc_princ.dominio.Pazienti
 
 // Interfaccia DAO per la gestione dei dati anagrafici dei pazienti
 @Dao

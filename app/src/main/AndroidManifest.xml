@@ -10,7 +10,7 @@
         android:theme="@style/Theme.DermCalc">
 
         <activity
-            android:name="dermacalc_princ.home.MainActivity"
+            android:name=".home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,43 +19,43 @@
         </activity>
 
         <activity
-            android:name="dermacalc_princ.auth.LoginActivity"
+            android:name=".auth.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.home.HomeActivity"
+            android:name=".home.HomeActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.auth.RegisterActivity"
+            android:name=".auth.RegisterActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.auth.ForgotPasswordActivity"
+            android:name=".auth.ForgotPasswordActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.calcolatori.BmiActivity"
+            android:name=".calcolatori.BmiActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.calcolatori.EasiActivity"
+            android:name=".calcolatori.EasiActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.calcolatori.PasiActivity"
+            android:name=".calcolatori.PasiActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.home.StoricoActivity"
+            android:name=".home.StoricoActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.pazienti.PazientiActivity"
+            android:name=".pazienti.PazientiActivity"
             android:exported="false" />
 
         <activity
-            android:name="dermacalc_princ.pazienti.CreatePazienteActivity"
+            android:name=".pazienti.CreatePazienteActivity"
             android:exported="false" />
 
     </application>

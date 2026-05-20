@@ -1,4 +1,4 @@
-package dermacalc_princ.pazienti
+package com.example.dermcalc_princ.pazienti
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import database.AppDatabase
-import dominio.Pazienti
-import utils.SessionManager
+import com.example.dermcalc_princ.database.AppDatabase
+import com.example.dermcalc_princ.dominio.Pazienti
+import com.example.dermcalc_princ.utils.SessionManager
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*

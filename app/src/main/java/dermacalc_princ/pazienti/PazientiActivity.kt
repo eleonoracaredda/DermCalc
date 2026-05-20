@@ -1,4 +1,4 @@
-package dermacalc_princ.pazienti
+package com.example.dermcalc_princ.pazienti
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import database.AppDatabase
-import dermacalc_princ.auth.RegisterActivity
-import dermacalc_princ.home.HomeActivity
-import utils.SessionManager
+import com.example.dermcalc_princ.database.AppDatabase
+import com.example.dermcalc_princ.auth.RegisterActivity
+import com.example.dermcalc_princ.home.HomeActivity
+import com.example.dermcalc_princ.utils.SessionManager
 import kotlinx.coroutines.launch
-import database.PazienteDao
+import com.example.dermcalc_princ.database.PazienteDao
 import android.text.Editable
 import android.text.TextWatcher
 import com.google.android.material.textfield.TextInputEditText

@@ -1,10 +1,10 @@
-package database
+package com.example.dermcalc_princ.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import dominio.User
+import com.example.dermcalc_princ.dominio.User
 
 // Interfaccia DAO per la gestione degli utenti (autenticazione e registrazione)
 @Dao

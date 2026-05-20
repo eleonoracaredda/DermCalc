@@ -1,4 +1,4 @@
-package dominio
+package com.example.dermcalc_princ.dominio
 
 // Rappresenta i dati clinici relativi a un singolo distretto corporeo per il calcolo del PASI
 data class DatiDistretto(

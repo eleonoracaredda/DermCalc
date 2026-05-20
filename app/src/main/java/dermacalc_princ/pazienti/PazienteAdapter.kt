@@ -1,4 +1,4 @@
-package dermacalc_princ.pazienti
+package com.example.dermcalc_princ.pazienti
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import dominio.Pazienti
+import com.example.dermcalc_princ.dominio.Pazienti
 
 class PazienteAdapter(
     private val pazienti: List<Pazienti>,

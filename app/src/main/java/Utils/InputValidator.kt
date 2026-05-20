@@ -1,4 +1,4 @@
-package utils
+package com.example.dermcalc_princ.utils
 
 import android.util.Patterns
 
