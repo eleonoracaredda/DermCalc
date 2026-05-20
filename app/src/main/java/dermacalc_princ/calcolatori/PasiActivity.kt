@@ -1,25 +1,26 @@
-package Dermacalc_princ.calcolatori
+package com.example.dermcalc_princ.calcolatori
 
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import Database.AppDatabase
-import Dominio.DatiDistretto
-import Dominio.Misurazione
+import com.example.dermcalc_princ.database.AppDatabase
+import com.example.dermcalc_princ.dominio.DatiDistretto
+import com.example.dermcalc_princ.dominio.Misurazione
 import java.util.Date
-import Logic.PasiCalculator
-import com.example.Dermcalc_princ.R
+import com.example.dermcalc_princ.logic.PasiCalculator
+import com.example.dermcalc_princ.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import Repository.MisurazioneRepository
+import com.example.dermcalc_princ.repository.MisurazioneRepository
 
 
 /**
@@ -69,6 +70,7 @@ class PasiActivity : AppCompatActivity() {
     private lateinit var tvDesquamazioneVal: TextView
     private lateinit var tvAreaVal: TextView
     private lateinit var tvTotalResult: TextView
+    private lateinit var etNotes: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,8 +91,17 @@ class PasiActivity : AppCompatActivity() {
         initViews()
         setupListeners(pazienteId)
         
+        // Abilita il pulsante "Indietro" nella barra superiore
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.calcolatore_pasi)
+
         // Aggiorna l'interfaccia iniziale per mostrare i valori di default
         updateTotalUI()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     /**
@@ -107,6 +118,7 @@ class PasiActivity : AppCompatActivity() {
         tvDesquamazioneVal = findViewById(R.id.tvDesquamazioneValue)
         tvAreaVal = findViewById(R.id.tvAreaValue)
         tvTotalResult = findViewById(R.id.tvResult)
+        etNotes = findViewById<EditText>(R.id.etNotes)
     }
 
     /**
@@ -146,7 +158,8 @@ class PasiActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculatePasi).setOnClickListener {
             val totalScore = calculateTotalPasi()
             val severita = pasiCalculator.severity(totalScore)
-            salvaPasi(pazienteId, totalScore, severita, "") // aggiungere note su XML
+            val note = etNotes.text.toString()
+            salvaPasi(pazienteId, totalScore, severita, note)
         }
     }
 

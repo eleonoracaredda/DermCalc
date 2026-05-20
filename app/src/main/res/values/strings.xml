@@ -24,6 +24,7 @@
     <string name="area_6">90–100% (6)</string>
 
     <string name="calcola_e_salva">Calcola e Salva</string>
+    <string name="note_hint">Aggiungi note (opzionale)</string>
     <string name="risultato_label">Punteggio Regione: %1$.1f\nTOTALE EASI: %2$.1f (%3$s)</string>
     <string name="risultato_pasi_label">Punteggio Regione: %1$.1f\nTOTALE PASI: %2$.1f (%3$s)</string>
     <string name="calcolatore_bmi">Calcolatore BMI</string>
@@ -46,6 +47,9 @@
     <string name="indurimento_spessore_infiltrazione">Indurimento(spessore/infiltrazione)</string>
     <string name="Desquamazione">Desquamazione</string>
     <string name="lista_pazienti">Lista pazienti</string>
+    <string name="scheda_paziente">Scheda Paziente</string>
+    <string name="terapia_attuale">Terapia Attuale</string>
+    <string name="comorbilita">Comorbilità</string>
     <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
     <string name="visualizza_storico">Visualizza storico</string>
     <string name="storico_misurazioni">Storico Misurazioni</string>

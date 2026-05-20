@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FB"
+    android:background="@color/backgroundColor"
     tools:context="Dermacalc_princ.auth.RegisterActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,130 +21,110 @@
 
             <TextView
                 android:id="@+id/tvRegisterTitle"
+                style="@style/TextAppearance.DermCalc.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registrazione"
-                android:textColor="#111111"
-                android:textSize="32sp"
-                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
+                android:layout_marginBottom="8dp"
+                android:text="Registrazione"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/tvRegisterSubtitle"
+                style="@style/TextAppearance.DermCalc.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginBottom="32dp"
-                tools:ignore="HardcodedText" />
+                android:text="Crea un nuovo account medico"
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFirstName"
+                style="@style/Widget.DermCalc.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nome"
                 android:layout_marginBottom="12dp"
-                app:boxBackgroundMode="filled"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp">
+                android:hint="@string/nome">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:textColorHint="#616161"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLastName"
+                style="@style/Widget.DermCalc.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/cognome"
                 android:layout_marginBottom="12dp"
-                app:boxBackgroundMode="filled"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp">
+                android:hint="@string/cognome">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:textColorHint="#616161"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTaxCode"
+                style="@style/Widget.DermCalc.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/codice_fiscale"
                 android:layout_marginBottom="12dp"
-                app:boxBackgroundMode="filled"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp">
+                android:hint="@string/codice_fiscale">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTaxCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapCharacters"
-                    android:textColorHint="#616161"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    android:inputType="textCapCharacters" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.DermCalc.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
                 android:layout_marginBottom="12dp"
-                app:boxBackgroundMode="filled"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp">
+                android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="#616161"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.DermCalc.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
                 android:layout_marginBottom="24dp"
-                app:endIconMode="password_toggle"
-                app:boxBackgroundMode="filled"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp">
+                android:hint="@string/password"
+                app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:backgroundTint="#5B4DFF"
-                android:text="@string/registrati"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                tools:ignore="VisualLintButtonSize" />
+                android:layout_height="wrap_content"
+                android:text="@string/registrati" />
 
             <TextView
                 android:id="@+id/tvLogin"
+                style="@style/TextAppearance.DermCalc.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -153,7 +134,6 @@
                 android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="@string/already_have_account"
-                android:textColor="#5B4DFF"
                 android:textSize="14sp" />
 
         </LinearLayout>

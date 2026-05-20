@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.Dermcalc_princ'
+    namespace 'com.example.dermcalc_princ'
     compileSdk 34
 
     defaultConfig {

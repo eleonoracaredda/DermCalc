@@ -1,93 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FB"
-    android:padding="24dp">
+    android:background="@color/backgroundColor"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tvCreateTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nuovo Paziente"
-        android:textColor="#2D3142"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNome"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="Nome"
-        app:layout_constraintTop_toBottomOf="@id/tvCreateTitle">
+        android:padding="24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/tvCreateTitle"
+            style="@style/TextAppearance.DermCalc.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scheda_paziente"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCognome"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Cognome"
-        app:layout_constraintTop_toBottomOf="@id/tilNome">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCognome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCodiceFiscale"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Codice Fiscale"
-        app:layout_constraintTop_toBottomOf="@id/tilCognome">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCodiceFiscale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilDataNascita"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Data di Nascita (dd/mm/yyyy)"
-        app:layout_constraintTop_toBottomOf="@id/tilCodiceFiscale">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDataNascita"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNome"
+            style="@style/Widget.DermCalc.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="24dp"
+            android:hint="Nome *"
+            app:layout_constraintTop_toBottomOf="@id/tvCreateTitle">
 
-    <Button
-        android:id="@+id/btnSalvaPaziente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#4A90E2"
-        android:padding="12dp"
-        android:text="Salva Paziente"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tilDataNascita" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCognome"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Cognome *"
+            app:layout_constraintTop_toBottomOf="@id/tilNome">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCognome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCodiceFiscale"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Codice Fiscale *"
+            app:layout_constraintTop_toBottomOf="@id/tilCognome">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCodiceFiscale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDataNascita"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Data di Nascita * (dd/mm/yyyy)"
+            app:layout_constraintTop_toBottomOf="@id/tilCodiceFiscale">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDataNascita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvSessoLabel"
+            style="@style/TextAppearance.DermCalc.Subheadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Sesso *"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilDataNascita" />
+
+        <RadioGroup
+            android:id="@+id/rgSesso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvSessoLabel">
+
+            <RadioButton
+                android:id="@+id/rbMaschio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Maschio" />
+
+            <RadioButton
+                android:id="@+id/rbFemmina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Femmina" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTerapia"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/terapia_attuale"
+            app:layout_constraintTop_toBottomOf="@id/rgSesso">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTerapia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilComorbilita"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/comorbilita"
+            app:layout_constraintTop_toBottomOf="@id/tilTerapia">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etComorbilita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDataInizioTerapia"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Data Inizio Terapia (dd/mm/yyyy)"
+            app:layout_constraintTop_toBottomOf="@id/tilComorbilita">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDataInizioTerapia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCaregiverNome"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Nome Caregiver (contatto emergenza)"
+            app:layout_constraintTop_toBottomOf="@id/tilDataInizioTerapia">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCaregiverNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCaregiverTelefono"
+            style="@style/Widget.DermCalc.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Telefono Caregiver"
+            app:layout_constraintTop_toBottomOf="@id/tilCaregiverNome">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCaregiverTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/swConsenso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Consenso al trattamento dati"
+            android:textColor="@color/textPrimary"
+            app:layout_constraintTop_toBottomOf="@id/tilCaregiverTelefono" />
+
+        <Button
+            android:id="@+id/btnSalvaPaziente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:text="Salva Paziente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/swConsenso" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

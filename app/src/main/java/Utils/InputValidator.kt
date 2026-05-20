@@ -1,28 +1,31 @@
-package Utils
+package com.example.dermcalc_princ.utils
 
+import android.util.Patterns
+
+// Utility per la validazione formale degli input utente nelle diverse schermate
 object InputValidator {
 
-    // Email valida
+    // Verifica se l'indirizzo email inserito segue il formato standard (es. nome@dominio.it)
     fun isEmailValid(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    // Password valida (minimo 8 caratteri)
+    // Requisiti minimi di sicurezza per la password: deve avere almeno 8 caratteri
     fun isPasswordStrong(password: String): Boolean {
         return password.length >= 8
     }
 
-    // Nome e cognome non vuoti
+    // Assicura che i nomi inseriti (paziente o medico) non siano stringhe vuote o solo spazi
     fun isNameValid(name: String): Boolean {
         return name.isNotBlank()
     }
 
-    // Codice fiscale valido (16 caratteri)
+    // Verifica la lunghezza del Codice Fiscale (deve essere esattamente di 16 caratteri)
     fun isCodiceFiscaleValid(cf: String): Boolean {
         return cf.length == 16
     }
 
-    // Controllo campi vuoti
+    // Funzione helper che verifica se tutti i campi passati come argomenti sono popolati
     fun isNotEmpty(vararg fields: String): Boolean {
         return fields.all { it.isNotBlank() }
     }

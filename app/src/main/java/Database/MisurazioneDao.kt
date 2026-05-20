@@ -1,7 +1,7 @@
-package Database
+package com.example.dermcalc_princ.database
 
 import androidx.room.*
-import Dominio.Misurazione
+import com.example.dermcalc_princ.dominio.Misurazione
 
 // Interfaccia DAO per l'accesso ai dati delle misurazioni nel database
 @Dao
