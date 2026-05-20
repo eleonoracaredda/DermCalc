@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+// Visualizza graficamente l'andamento temporale degli indici clinici (BMI, PASI, EASI) per un paziente specifico
 class StoricoActivity : AppCompatActivity() {
 
     private lateinit var repository: MisurazioneRepository
@@ -27,12 +28,12 @@ class StoricoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_storico)
 
+        // Inizializzazione repository per l'accesso ai dati delle misurazioni
         val db = AppDatabase.getDatabase(this)
         repository = MisurazioneRepository(db)
+        
+        // Recupero dell'ID paziente passato tramite Intent
         pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.storico_misurazioni)
 
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener { finish() }
@@ -41,13 +42,16 @@ class StoricoActivity : AppCompatActivity() {
             loadData()
         }
     }
+    
+    // Carica le misurazioni dal database e popola i grafici
     private fun loadData() {
         lifecycleScope.launch {
-            // Utilizzo del Repository per recuperare i dati filtrati
+            // Recupero dati filtrati per tipologia di calcolatore
             val misurazioniBmi = repository.getStoricoPerTipo(pazienteId, "BMI")
             val misurazioniPasi = repository.getStoricoPerTipo(pazienteId, "PASI")
             val misurazioniEasi = repository.getStoricoPerTipo(pazienteId, "EASI")
 
+            // Configurazione visiva dei tre grafici principali
             setupChart(findViewById(R.id.chartBmi), misurazioniBmi, "BMI", Color.BLUE)
             setupChart(findViewById(R.id.chartPasi), misurazioniPasi, "PASI", Color.RED)
             setupChart(findViewById(R.id.chartEasi), misurazioniEasi, "EASI", Color.GREEN)
@@ -59,6 +63,7 @@ class StoricoActivity : AppCompatActivity() {
         return true
     }
 
+    // Configura e disegna un grafico a linee (MPAndroidChart) con i dati forniti
     private fun setupChart(chart: LineChart, data: List<Misurazione>, label: String, color: Int) {
         if (data.isEmpty()) {
             chart.setNoDataText(getString(R.string.nessun_dato))
@@ -66,24 +71,27 @@ class StoricoActivity : AppCompatActivity() {
             return
         }
 
+        // Conversione delle misurazioni in "Entry" del grafico (Index vs Valore)
         val entries = data.mapIndexed { index, misurazione ->
             Entry(index.toFloat(), misurazione.valore.toFloat())
         }
 
-        val dataSet = LineDataSet(entries, label)
-        dataSet.color = color
-        dataSet.setCircleColor(color)
-        dataSet.lineWidth = 2f
-        dataSet.circleRadius = 4f
-        dataSet.setDrawCircleHole(false)
-        dataSet.valueTextSize = 10f
-        dataSet.setDrawFilled(true)
-        dataSet.fillColor = color
-        dataSet.fillAlpha = 50
+        // Configurazione del set di dati (estetica della linea, punti, colori)
+        val dataSet = LineDataSet(entries, label).apply {
+            this.color = color
+            setCircleColor(color)
+            lineWidth = 2f
+            circleRadius = 4f
+            setDrawCircleHole(false)
+            valueTextSize = 10f
+            setDrawFilled(true)
+            fillColor = color
+            fillAlpha = 50
+        }
 
-        val lineData = LineData(dataSet)
-        chart.data = lineData
+        chart.data = LineData(dataSet)
 
+        // Formattazione asse X per mostrare le date (Giorno/Mese) invece di indici numerici
         val xAxis = chart.xAxis
         xAxis.valueFormatter = object : ValueFormatter() {
             private val mFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
@@ -101,7 +109,7 @@ class StoricoActivity : AppCompatActivity() {
 
         chart.description.isEnabled = false
         chart.legend.isEnabled = true
-        chart.animateX(1000)
-        chart.invalidate()
+        chart.animateX(1000) // Animazione all'apertura
+        chart.invalidate() // Forza il ridisegno
     }
 }

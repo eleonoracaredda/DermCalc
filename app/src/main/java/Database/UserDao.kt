@@ -21,4 +21,8 @@ interface UserDao {
     // controllo / ricerca email già registrata
     @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
     suspend fun getUserByEmail(email: String): User?
+
+    // Aggiorna un utente esistente (per reset password)
+    @androidx.room.Update
+    suspend fun updateUser(user: User)
 }

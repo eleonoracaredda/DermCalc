@@ -31,6 +31,10 @@
             android:exported="false" />
 
         <activity
+            android:name="Dermacalc_princ.auth.ForgotPasswordActivity"
+            android:exported="false" />
+
+        <activity
             android:name="Dermacalc_princ.calcolatori.BmiActivity"
             android:exported="false" />
 
