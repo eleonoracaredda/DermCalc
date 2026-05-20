@@ -194,18 +194,32 @@
             app:layout_constraintBottom_toBottomOf="@id/sbArea"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/sbArea" />
+
+        <EditText
+            android:id="@+id/etNotes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/note_hint"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            android:gravity="top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sbArea" />
+
         <Button
             android:id="@+id/btnCalculatePasi"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="#5B4DFF"
             android:text="@string/calcola_e_salva"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbArea"
+            app:layout_constraintTop_toBottomOf="@id/etNotes"
             tools:ignore="VisualLintButtonSize" />
 
         <TextView
@@ -214,10 +228,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/risultato_label"
+            android:text="@string/risultato_pasi_label"
             android:textColor="#333333"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

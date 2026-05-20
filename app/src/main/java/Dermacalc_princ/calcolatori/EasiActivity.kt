@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
@@ -57,6 +58,7 @@ class EasiActivity : AppCompatActivity() {
     private lateinit var tvLichenificazioneVal: TextView
     private lateinit var tvAreaVal: TextView
     private lateinit var tvTotalResult: TextView
+    private lateinit var etNotes: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,8 +79,17 @@ class EasiActivity : AppCompatActivity() {
         initViews()
         setupListeners(pazienteId)
         
+        // Abilita il pulsante "Indietro" nella barra superiore
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.calcolatore_easi)
+
         // Aggiorna l'interfaccia con i valori iniziali (tutti a zero)
         updateTotalUI()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     // Inizializza i riferimenti agli elementi del layout
@@ -95,6 +106,7 @@ class EasiActivity : AppCompatActivity() {
         tvLichenificazioneVal = findViewById(R.id.tvLichenificazioneValue)
         tvAreaVal = findViewById(R.id.tvAreaValue)
         tvTotalResult = findViewById(R.id.tvResult)
+        etNotes = findViewById<EditText>(R.id.etNotes)
     }
 
     // Configura i listener per gestire le interazioni dell'utente
@@ -131,7 +143,8 @@ class EasiActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculateEasi).setOnClickListener {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
-            salvaEasi(pazienteId, totalScore, severita, "") // note da aggiungere su XML
+            val note = etNotes.text.toString()
+            salvaEasi(pazienteId, totalScore, severita, note)
         }
     }
 

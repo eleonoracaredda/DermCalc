@@ -31,6 +31,9 @@ class StoricoActivity : AppCompatActivity() {
         repository = MisurazioneRepository(db)
         pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.storico_misurazioni)
+
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener { finish() }
 
@@ -49,6 +52,11 @@ class StoricoActivity : AppCompatActivity() {
             setupChart(findViewById(R.id.chartPasi), misurazioniPasi, "PASI", Color.RED)
             setupChart(findViewById(R.id.chartEasi), misurazioniEasi, "EASI", Color.GREEN)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun setupChart(chart: LineChart, data: List<Misurazione>, label: String, color: Int) {

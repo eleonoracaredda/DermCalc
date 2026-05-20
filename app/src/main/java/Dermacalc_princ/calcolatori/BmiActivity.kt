@@ -43,12 +43,18 @@ class BmiActivity : AppCompatActivity() {
 
         val etWeight = findViewById<EditText>(R.id.etWeight)
         val etHeight = findViewById<EditText>(R.id.etHeight)
+        val etNotes = findViewById<EditText>(R.id.etNotes)
         val btnCalculate = findViewById<Button>(R.id.btnCalculateBmi)
         val tvResult = findViewById<TextView>(R.id.tvResult)
+
+        // Abilita il pulsante "Indietro" nella barra superiore
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.calcolatore_bmi)
 
         btnCalculate.setOnClickListener {
             val weightStr = etWeight.text.toString()
             val heightStr = etHeight.text.toString()
+            val note = etNotes.text.toString()
 
             if (weightStr.isNotEmpty() && heightStr.isNotEmpty()) {
                 val weight = weightStr.toDouble()
@@ -59,11 +65,16 @@ class BmiActivity : AppCompatActivity() {
 
                 tvResult.text = "Risultato: %.2f (%s)".format(bmi, severity)
 
-                salvaBmi(pazienteId, bmi, severity, "") // Aggiungere le note nel file XML
+                salvaBmi(pazienteId, bmi, severity, note)
             } else {
                 Toast.makeText(this, "Inserisci tutti i valori", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun salvaBmi(idPaziente: Int, valore: Double, severita: String, note: String) {

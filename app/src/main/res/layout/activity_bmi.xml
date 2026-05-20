@@ -45,6 +45,18 @@
         tools:layout_editor_absoluteX="16dp"
         tools:ignore="VisualLintTextFieldSize" />
 
+    <EditText
+        android:id="@+id/etNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/note_hint"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:gravity="top"
+        android:autofillHints=""
+        app:layout_constraintTop_toBottomOf="@id/etHeight" />
+
     <Button
         android:id="@+id/btnCalculateBmi"
         android:layout_width="match_parent"
@@ -52,7 +64,7 @@
         android:text="@string/calcola_e_salva1"
         android:backgroundTint="#5B4DFF"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/etHeight"
+        app:layout_constraintTop_toBottomOf="@id/etNotes"
         tools:ignore="VisualLintButtonSize" />
 
     <TextView

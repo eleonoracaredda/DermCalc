@@ -33,6 +33,8 @@ class CreatePazienteActivity : AppCompatActivity() {
         val etCognome = findViewById<TextInputEditText>(R.id.etCognome)
         val etCodiceFiscale = findViewById<TextInputEditText>(R.id.etCodiceFiscale)
         val etDataNascita = findViewById<TextInputEditText>(R.id.etDataNascita)
+        val etTerapia = findViewById<TextInputEditText>(R.id.etTerapia)
+        val etComorbilita = findViewById<TextInputEditText>(R.id.etComorbilita)
         val btnSalva = findViewById<Button>(R.id.btnSalvaPaziente)
 
         val database = AppDatabase.getDatabase(this)
@@ -49,6 +51,8 @@ class CreatePazienteActivity : AppCompatActivity() {
                     etCognome.setText(it.cognome)
                     etCodiceFiscale.setText(it.codiceFiscale)
                     etDataNascita.setText(SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(it.dataNascita))
+                    etTerapia.setText(it.terapia ?: "")
+                    etComorbilita.setText(it.comorbilita ?: "")
                     btnSalva.text = "Aggiorna Paziente"
                 }
             }
@@ -59,6 +63,8 @@ class CreatePazienteActivity : AppCompatActivity() {
             val cognome = etCognome.text.toString().trim()
             val codiceFiscale = etCodiceFiscale.text.toString().trim()
             val dataNascitaStr = etDataNascita.text.toString().trim()
+            val terapia = etTerapia.text.toString().trim()
+            val comorbilita = etComorbilita.text.toString().trim()
 
             if (nome.isNotEmpty() && cognome.isNotEmpty() && codiceFiscale.isNotEmpty() && dataNascitaStr.isNotEmpty()) {
                 val date = try {
@@ -76,10 +82,10 @@ class CreatePazienteActivity : AppCompatActivity() {
                                 cognome = cognome,
                                 codiceFiscale = codiceFiscale,
                                 dataNascita = date,
-                                terapia = pazienteEsistente!!.terapia, // per ora invariato
+                                terapia = terapia,
+                                comorbilita = comorbilita,
                                 dataInizioTerapia = pazienteEsistente!!.dataInizioTerapia,
                                 consenso = pazienteEsistente!!.consenso,      // mantieni il valore già salvato
-                                comorbilita = pazienteEsistente!!.comorbilita,
                                 caregiverNome = pazienteEsistente!!.caregiverNome,
                                 caregiverTelefono = pazienteEsistente!!.caregiverTelefono
                             )
@@ -93,10 +99,10 @@ class CreatePazienteActivity : AppCompatActivity() {
                                 codiceFiscale = codiceFiscale,
                                 dataNascita = date,
                                 dottoreId = doctorId,
-                                terapia = null,
+                                terapia = terapia,
                                 dataInizioTerapia = null,
                                 consenso = false,          // per ora sempre false
-                                comorbilita = null,
+                                comorbilita = comorbilita,
                                 caregiverNome = null,
                                 caregiverTelefono = null
                             )
