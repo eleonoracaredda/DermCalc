@@ -76,6 +76,10 @@
 
     <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
     <string name="visualizza_storico">Visualizza storico</string>
+    <string name="desc_bmi">Indice Massa Corporea</string>
+    <string name="desc_pasi">Severity Index Psoriasi</string>
+    <string name="desc_easi">Severity Area Eczema</string>
+    <string name="desc_storico">Grafici e Andamento</string>
 
     <string name="welcome_back">Benvenuto,</string>
     <string name="welcome_login">Bentornato</string>
@@ -92,6 +96,7 @@
     <string name="strumenti_e_calcolatori">Strumenti e Calcolatori</string>
 
     <string name="aggiungi_paziente">Aggiungi Paziente</string>
+    <string name="modifica_paziente">Modifica Paziente</string>
     <string name="nuovo_paziente">Nuovo Paziente</string>
     <string name="cerca_paziente">Cerca paziente...</string>
 

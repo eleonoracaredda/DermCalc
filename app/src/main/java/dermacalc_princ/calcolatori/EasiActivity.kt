@@ -1,12 +1,9 @@
 package com.example.dermcalc_princ.calcolatori
 
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,12 +17,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.dermcalc_princ.repository.MisurazioneRepository
-
-
 import com.example.dermcalc_princ.utils.LocaleHelper
 import android.content.Context
+import com.google.android.material.chip.ChipGroup
 
-// Classe EasiActivity: gestisce il calcolo complesso dell'indice EASI per la dermatite atopica
 class EasiActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
@@ -36,7 +31,6 @@ class EasiActivity : AppCompatActivity() {
     private lateinit var repository: MisurazioneRepository
     private val easiCalculator = EasiCalculator()
 
-    // Classe interna per mantenere lo stato dei dati per ciascuna delle 4 regioni corporee
     private data class RegionData(
         var eritema: Int = 0,
         var edema: Int = 0,
@@ -44,15 +38,12 @@ class EasiActivity : AppCompatActivity() {
         var lichenificazione: Int = 0,
         var area: Int = 0
     ) {
-        // Calcola la somma dei quattro segni clinici per la regione
         fun signsSum() = eritema + edema + escoriazioni + lichenificazione
     }
 
-    // Array che contiene i dati delle 4 regioni: Testa, Tronco, Arti Superiori, Arti Inferiori
     private val regions = Array(4) { RegionData() }
     private var currentRegionIndex = 0
 
-    // Componenti della UI (SeekBar per i valori e TextView per le etichette)
     private lateinit var sbEritema: SeekBar
     private lateinit var sbEdema: SeekBar
     private lateinit var sbEscoriazioni: SeekBar
@@ -64,33 +55,32 @@ class EasiActivity : AppCompatActivity() {
     private lateinit var tvEscoriazioniVal: TextView
     private lateinit var tvLichenificazioneVal: TextView
     private lateinit var tvAreaVal: TextView
-    private lateinit var tvTotalResult: TextView
+    private lateinit var tvTotalScore: TextView
+    private lateinit var tvCurrentRegionScore: TextView
+    private lateinit var progressBar: com.google.android.material.progressindicator.LinearProgressIndicator
+    private lateinit var tvProgressDetails: TextView
     private lateinit var etNotes: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easi)
 
-        // Inizializzazione database
         db = AppDatabase.getDatabase(this)
         repository = MisurazioneRepository(db)
 
-        // Recupero ID paziente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         if (pazienteId == -1) {
             Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
-        // Collegamento viste e setup dei listener
+        
         initViews()
         setupListeners(pazienteId)
         
-        // Abilita il pulsante "Indietro" nella barra superiore
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.calcolatore_easi)
 
-        // Aggiorna l'interfaccia con i valori iniziali (tutti a zero)
         updateTotalUI()
     }
 
@@ -99,7 +89,6 @@ class EasiActivity : AppCompatActivity() {
         return true
     }
 
-    // Inizializza i riferimenti agli elementi del layout
     private fun initViews() {
         sbEritema = findViewById(R.id.sbEritema)
         sbEdema = findViewById(R.id.sbEdema)
@@ -112,25 +101,31 @@ class EasiActivity : AppCompatActivity() {
         tvEscoriazioniVal = findViewById(R.id.tvEscoriazioniValue)
         tvLichenificazioneVal = findViewById(R.id.tvLichenificazioneValue)
         tvAreaVal = findViewById(R.id.tvAreaValue)
-        tvTotalResult = findViewById(R.id.tvResult)
-        etNotes = findViewById<EditText>(R.id.etNotes)
+        tvTotalScore = findViewById(R.id.tvTotalScore)
+        tvCurrentRegionScore = findViewById(R.id.tvCurrentRegionScore)
+        progressBar = findViewById(R.id.progressEvaluation)
+        tvProgressDetails = findViewById(R.id.tvProgressDetails)
+        etNotes = findViewById(R.id.etNotes)
     }
 
-    // Configura i listener per gestire le interazioni dell'utente
     private fun setupListeners(pazienteId: Int) {
-        val spinnerBodyPart = findViewById<Spinner>(R.id.spinnerBodyPart)
+        val chipGroup = findViewById<ChipGroup>(R.id.chipGroupBodyPart)
         
-        // Gestisce il cambio della regione corporea tramite lo Spinner
-        spinnerBodyPart.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                currentRegionIndex = position
-                // Carica i dati salvati per la nuova regione selezionata nelle SeekBar
-                loadRegionData(regions[position])
+        // Imposta il primo chip come selezionato di default
+        chipGroup.check(R.id.chipHead)
+
+        chipGroup.setOnCheckedChangeListener { _, checkedId ->
+            currentRegionIndex = when(checkedId) {
+                R.id.chipHead -> 0
+                R.id.chipTrunk -> 1
+                R.id.chipArms -> 2
+                R.id.chipLegs -> 3
+                else -> 0
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            loadRegionData(regions[currentRegionIndex])
+            updateTotalUI()
         }
 
-        // Listener per tutte le SeekBar: ogni volta che l'utente sposta un cursore, i dati vengono salvati e il totale aggiornato
         val seekBars = listOf(sbEritema, sbEdema, sbEscoriazioni, sbLichenificazione, sbArea)
         seekBars.forEach { sb ->
             sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -146,16 +141,18 @@ class EasiActivity : AppCompatActivity() {
             })
         }
 
-        // Gestione del pulsante di salvataggio finale
         findViewById<Button>(R.id.btnCalculateEasi).setOnClickListener {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
             val note = etNotes.text.toString()
             salvaEasi(pazienteId, totalScore, severita, note)
         }
+
+        findViewById<Button>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
     }
 
-    // Salva i valori attuali delle SeekBar nell'array delle regioni
     private fun saveCurrentRegionData() {
         val data = regions[currentRegionIndex]
         data.eritema = sbEritema.progress
@@ -165,7 +162,6 @@ class EasiActivity : AppCompatActivity() {
         data.area = sbArea.progress
     }
 
-    // Imposta il progresso delle SeekBar in base ai dati della regione selezionata
     private fun loadRegionData(data: RegionData) {
         sbEritema.progress = data.eritema
         sbEdema.progress = data.edema
@@ -175,7 +171,6 @@ class EasiActivity : AppCompatActivity() {
         updateLabels()
     }
 
-    // Aggiorna le scritte descrittive sotto ogni cursore
     private fun updateLabels() {
         tvEritemaVal.text = getSignDesc(sbEritema.progress)
         tvEdemaVal.text = getSignDesc(sbEdema.progress)
@@ -184,7 +179,6 @@ class EasiActivity : AppCompatActivity() {
         tvAreaVal.text = getAreaDesc(sbArea.progress)
     }
 
-    // Converte il valore numerico del segno in descrizione testuale
     private fun getSignDesc(progress: Int) = when(progress) {
         0 -> getString(R.string.desc_zero)
         1 -> getString(R.string.desc_uno)
@@ -193,7 +187,6 @@ class EasiActivity : AppCompatActivity() {
         else -> progress.toString()
     }
 
-    // Converte il valore numerico dell'area in descrizione percentuale
     private fun getAreaDesc(progress: Int) = when(progress) {
         0 -> getString(R.string.area_0)
         1 -> getString(R.string.area_1)
@@ -205,7 +198,6 @@ class EasiActivity : AppCompatActivity() {
         else -> progress.toString()
     }
 
-    // Esegue la somma dei punteggi ponderati di tutte le 4 regioni
     private fun calculateTotalEasi(): Double {
         var total = 0.0
         regions.forEachIndexed { index, data ->
@@ -214,19 +206,25 @@ class EasiActivity : AppCompatActivity() {
         return total
     }
 
-    // Aggiorna la visualizzazione del punteggio parziale e totale nella UI
     private fun updateTotalUI() {
         val total = calculateTotalEasi()
+        val currentRegionData = regions[currentRegionIndex]
         val regionScore = easiCalculator.calculateRegionScore(
-            regions[currentRegionIndex].signsSum(),
-            regions[currentRegionIndex].area,
+            currentRegionData.signsSum(),
+            currentRegionData.area,
             currentRegionIndex
         )
 
-        tvTotalResult.text = getString(R.string.risultato_label, regionScore, total, easiCalculator.severity(total))
+        // Aggiorna punteggi
+        tvTotalScore.text = "%.1f".format(total)
+        tvCurrentRegionScore.text = "Regione: %.1f".format(regionScore)
+
+        // Calcola regioni completate (area > 0)
+        val completedRegions = regions.count { it.area > 0 }
+        progressBar.progress = completedRegions
+        tvProgressDetails.text = "$completedRegions di 4 regioni completate"
     }
 
-    // Funzione per il salvataggio asincrono nel database locale Room
     private fun salvaEasi(idPaziente: Int, valore: Double, severita: String, note: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.insertMisurazione(

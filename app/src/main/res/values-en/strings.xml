@@ -75,6 +75,10 @@
 
     <string name="nessun_paziente_selezionato">No patient selected</string>
     <string name="visualizza_storico">View History</string>
+    <string name="desc_bmi">Body Mass Index</string>
+    <string name="desc_pasi">Psoriasis Severity Index</string>
+    <string name="desc_easi">Eczema Severity Area</string>
+    <string name="desc_storico">Charts and Trends</string>
 
     <string name="welcome_back">Welcome,</string>
     <string name="welcome_login">Welcome back</string>
@@ -91,6 +95,7 @@
     <string name="strumenti_e_calcolatori">Tools and Calculators</string>
 
     <string name="aggiungi_paziente">Add Patient</string>
+    <string name="modifica_paziente">Edit Patient</string>
     <string name="nuovo_paziente">New Patient</string>
     <string name="cerca_paziente">Search patient...</string>
 
