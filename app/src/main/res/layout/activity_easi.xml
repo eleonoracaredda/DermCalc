@@ -1,298 +1,416 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    android:fillViewport="true">
+    android:background="@color/backgroundColor">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- Titolo -->
-        <TextView
-            android:id="@+id/tvTitle"
-            style="@style/TextAppearance.DermCalc.Headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/calcolatore_easi"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Seleziona distretto -->
-        <TextView
-            android:id="@+id/tvBodyPartLabel"
-            style="@style/TextAppearance.DermCalc.Subheadline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/seleziona_distretto"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
-        <Spinner
-            android:id="@+id/spinnerBodyPart"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:entries="@array/body_parts_easi"
-            android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBodyPartLabel" />
-
-        <!-- Gravità -->
-        <TextView
-            android:id="@+id/tvGravityLabel"
-            style="@style/TextAppearance.DermCalc.Subheadline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/gravit_dei_segni_clinici"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerBodyPart" />
-
-        <!-- Eritema -->
-        <TextView
-            android:id="@+id/tvEritemaLabel"
-            style="@style/TextAppearance.DermCalc.Label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/eritema"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvGravityLabel" />
-
-        <SeekBar
-            android:id="@+id/sbEritema"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:max="3"
-            android:progress="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvEritemaValue"
-            app:layout_constraintTop_toBottomOf="@id/tvEritemaLabel" />
-
-        <TextView
-            android:id="@+id/tvEritemaValue"
-            style="@style/TextAppearance.DermCalc.Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:gravity="end"
-            android:text="@string/desc_zero"
-            app:layout_constraintTop_toTopOf="@id/sbEritema"
-            app:layout_constraintBottom_toBottomOf="@id/sbEritema"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Edema -->
-        <TextView
-            android:id="@+id/tvEdemaLabel"
-            style="@style/TextAppearance.DermCalc.Label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/edema"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbEritema" />
-
-        <SeekBar
-            android:id="@+id/sbEdema"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:max="3"
-            android:progress="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvEdemaValue"
-            app:layout_constraintTop_toBottomOf="@id/tvEdemaLabel" />
-
-        <TextView
-            android:id="@+id/tvEdemaValue"
-            style="@style/TextAppearance.DermCalc.Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:gravity="end"
-            android:text="@string/desc_zero"
-            app:layout_constraintTop_toTopOf="@id/sbEdema"
-            app:layout_constraintBottom_toBottomOf="@id/sbEdema"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Escoriazioni -->
-        <TextView
-            android:id="@+id/tvEscoriazioniLabel"
-            style="@style/TextAppearance.DermCalc.Label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/escoriazioni"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbEdema" />
-
-        <SeekBar
-            android:id="@+id/sbEscoriazioni"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:max="3"
-            android:progress="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvEscoriazioniValue"
-            app:layout_constraintTop_toBottomOf="@id/tvEscoriazioniLabel" />
-
-        <TextView
-            android:id="@+id/tvEscoriazioniValue"
-            style="@style/TextAppearance.DermCalc.Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:gravity="end"
-            android:text="@string/desc_zero"
-            app:layout_constraintTop_toTopOf="@id/sbEscoriazioni"
-            app:layout_constraintBottom_toBottomOf="@id/sbEscoriazioni"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Lichenificazione -->
-        <TextView
-            android:id="@+id/tvLichenificazioneLabel"
-            style="@style/TextAppearance.DermCalc.Label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lichenificazione"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbEscoriazioni" />
-
-        <SeekBar
-            android:id="@+id/sbLichenificazione"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:max="3"
-            android:progress="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvLichenificazioneValue"
-            app:layout_constraintTop_toBottomOf="@id/tvLichenificazioneLabel" />
-
-        <TextView
-            android:id="@+id/tvLichenificazioneValue"
-            style="@style/TextAppearance.DermCalc.Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:gravity="end"
-            android:text="@string/desc_zero"
-            app:layout_constraintTop_toTopOf="@id/sbLichenificazione"
-            app:layout_constraintBottom_toBottomOf="@id/sbLichenificazione"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Area -->
-        <TextView
-            android:id="@+id/tvAreaLabel"
-            style="@style/TextAppearance.DermCalc.Label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/area"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbLichenificazione" />
-
-        <SeekBar
-            android:id="@+id/sbArea"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:max="6"
-            android:progress="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvAreaValue"
-            app:layout_constraintTop_toBottomOf="@id/tvAreaLabel" />
-
-        <TextView
-            android:id="@+id/tvAreaValue"
-            style="@style/TextAppearance.DermCalc.Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:gravity="end"
-            android:text="@string/area_0"
-            app:layout_constraintTop_toTopOf="@id/sbArea"
-            app:layout_constraintBottom_toBottomOf="@id/sbArea"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Note -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilNotes"
-            style="@style/Widget.DermCalc.EditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sbArea">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top"
-                android:hint="@string/note_hint"
-                android:inputType="textMultiLine"
-                android:minHeight="80dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Bottone -->
-        <Button
-            android:id="@+id/btnCalculateEasi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/calcola_e_salva"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilNotes" />
-
-        <!-- Risultato -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardEasiResult"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:strokeColor="@color/primaryLightColor"
-            app:strokeWidth="1dp"
-            app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <!-- Header colorato -->
+            <View
+                android:id="@+id/headerView"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/primaryColor"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/TextAppearance.DermCalc.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/calcolatore_easi"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Card Selezione Distretto -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBodyPart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="-40dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:layout_constraintTop_toBottomOf="@id/headerView">
 
-                <TextView
-                    android:id="@+id/tvResult"
-                    style="@style/TextAppearance.DermCalc.Headline"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/risultato_label"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/seleziona_distretto"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryColor" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupBodyPart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipHead"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/distretto_testa_collo" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTrunk"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/distretto_tronco" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipArms"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/distretto_arti_superiori" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipLegs"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/distretto_arti_inferiori" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card Gravità -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardGravity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:layout_constraintTop_toBottomOf="@id/cardBodyPart">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Subheadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gravit_dei_segni_clinici"
+                        android:textSize="16sp" />
+
+                    <!-- Eritema -->
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/eritema" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <SeekBar
+                            android:id="@+id/sbEritema"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="3" />
+                        <TextView
+                            android:id="@+id/tvEritemaValue"
+                            style="@style/TextAppearance.DermCalc.Value"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/desc_zero" />
+                    </LinearLayout>
+
+                    <!-- Edema -->
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/edema" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <SeekBar
+                            android:id="@+id/sbEdema"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="3" />
+                        <TextView
+                            android:id="@+id/tvEdemaValue"
+                            style="@style/TextAppearance.DermCalc.Value"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/desc_zero" />
+                    </LinearLayout>
+
+                    <!-- Escoriazioni -->
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/escoriazioni" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <SeekBar
+                            android:id="@+id/sbEscoriazioni"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="3" />
+                        <TextView
+                            android:id="@+id/tvEscoriazioniValue"
+                            style="@style/TextAppearance.DermCalc.Value"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/desc_zero" />
+                    </LinearLayout>
+
+                    <!-- Lichenificazione -->
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/lichenificazione" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <SeekBar
+                            android:id="@+id/sbLichenificazione"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="3" />
+                        <TextView
+                            android:id="@+id/tvLichenificazioneValue"
+                            style="@style/TextAppearance.DermCalc.Value"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/desc_zero" />
+                    </LinearLayout>
+
+                    <!-- Area -->
+                    <TextView
+                        style="@style/TextAppearance.DermCalc.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/area"
+                        android:textColor="@color/primaryDarkColor"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <SeekBar
+                            android:id="@+id/sbArea"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="6" />
+                        <TextView
+                            android:id="@+id/tvAreaValue"
+                            style="@style/TextAppearance.DermCalc.Value"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/area_0" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Note -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNotes"
+                style="@style/Widget.DermCalc.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/cardGravity">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="@string/note_hint"
+                    android:inputType="textMultiLine"
+                    android:minHeight="60dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Bottone Calcola -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCalculateEasi"
+                style="@style/Widget.DermCalc.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/calcola_e_salva"
+                app:layout_constraintTop_toBottomOf="@id/tilNotes" />
+
+            <!-- Risultato Progressivo -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardEasiResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AVANZAMENTO VALUTAZIONE"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressEvaluation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:trackThickness="8dp"
+                        app:trackCornerRadius="4dp"
+                        android:max="4"
+                        android:progress="1"
+                        app:indicatorColor="@color/secondaryColor" />
+
+                    <TextView
+                        android:id="@+id/tvProgressDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="1 di 4 regioni completate"
+                        android:textSize="12sp"
+                        android:textColor="@color/textSecondary" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TOTALE EASI"
+                                android:textSize="12sp"
+                                android:textColor="@color/primaryColor"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvTotalScore"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.0"
+                                android:textSize="32sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/textPrimary" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvCurrentRegionScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_launcher_background"
+                            android:backgroundTint="@color/backgroundColor"
+                            android:padding="8dp"
+                            android:text="Regione: 0.0"
+                            android:textSize="13sp"
+                            android:textColor="@color/textSecondary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="40dp"
+                android:text="@string/indietro"
+                app:layout_constraintTop_toBottomOf="@id/cardEasiResult"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

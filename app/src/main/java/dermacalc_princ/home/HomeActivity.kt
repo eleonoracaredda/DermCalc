@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
         // Riferimenti ad altri elementi UI
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnBackToList = findViewById<Button>(R.id.btnBackToList)
-        val fabAddPatient = findViewById<FloatingActionButton>(R.id.fabAddPatient)
+        val fabEditPatient = findViewById<FloatingActionButton>(R.id.fabEditPatient)
         val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
         val tvPazienteDetails = findViewById<TextView>(R.id.tvPazienteDetails)
 
@@ -72,10 +72,13 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Floating Action Button per aggiungere un nuovo paziente
-        fabAddPatient.setOnClickListener {
-            val intent = Intent(this, CreatePazienteActivity::class.java)
-            startActivity(intent)
+        // Floating Action Button per modificare il paziente selezionato
+        fabEditPatient.setOnClickListener {
+            if (pazienteId != -1) {
+                val intent = Intent(this, CreatePazienteActivity::class.java)
+                intent.putExtra("PAZIENTE_ID", pazienteId)
+                startActivity(intent)
+            }
         }
 
         // Torna alla lista pazienti

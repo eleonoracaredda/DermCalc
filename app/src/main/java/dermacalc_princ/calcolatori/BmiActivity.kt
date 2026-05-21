@@ -16,11 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.dermcalc_princ.repository.MisurazioneRepository
-
-
 import com.example.dermcalc_princ.utils.LocaleHelper
 import android.content.Context
-
 
 class BmiActivity : AppCompatActivity() {
 
@@ -29,7 +26,6 @@ class BmiActivity : AppCompatActivity() {
     }
 
     private lateinit var db: AppDatabase
-    // VARIABILE REPOSITORY
     private lateinit var repository: MisurazioneRepository
     private val bmiCalculator = BmiCalculator()
 
@@ -38,10 +34,8 @@ class BmiActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bmi)
 
         db = AppDatabase.getDatabase(this)
-        // INIZIALIZZAZIONE REPOSITORY
         repository = MisurazioneRepository(db)
 
-        // Recupero ID paziente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         if (pazienteId == -1) {
             Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
@@ -53,11 +47,16 @@ class BmiActivity : AppCompatActivity() {
         val etHeight = findViewById<EditText>(R.id.etHeight)
         val etNotes = findViewById<EditText>(R.id.etNotes)
         val btnCalculate = findViewById<Button>(R.id.btnCalculateBmi)
-        val tvResult = findViewById<TextView>(R.id.tvResult)
+        val tvResultValue = findViewById<TextView>(R.id.tvResultValue)
+        val tvSeverityLabel = findViewById<TextView>(R.id.tvSeverityLabel)
+        val btnBack = findViewById<Button>(R.id.btnBack)
 
-        // Abilita il pulsante "Indietro" nella barra superiore
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.calcolatore_bmi)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         btnCalculate.setOnClickListener {
             val weightStr = etWeight.text.toString()
@@ -71,7 +70,9 @@ class BmiActivity : AppCompatActivity() {
                 val bmi = bmiCalculator.calculate(weight, height)
                 val severity = bmiCalculator.getSeverity(bmi)
 
-                tvResult.text = "Risultato: %.2f (%s)".format(bmi, severity)
+                // Aggiornamento UI con i nuovi componenti
+                tvResultValue.text = "%.1f".format(bmi)
+                tvSeverityLabel.text = severity
 
                 salvaBmi(pazienteId, bmi, severity, note)
             } else {
