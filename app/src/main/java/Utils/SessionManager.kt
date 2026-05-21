@@ -12,6 +12,17 @@ class SessionManager(context: Context) {
     companion object {
         private const val KEY_DOCTOR_ID = "doctor_id"
         private const val KEY_DOCTOR_NAME = "doctor_name"
+        private const val KEY_LANGUAGE = "selected_language"
+    }
+    
+    // Salva la lingua selezionata
+    fun saveLanguage(lang: String) {
+        prefs.edit().putString(KEY_LANGUAGE, lang).apply()
+    }
+
+    // Recupera la lingua salvata (default "it")
+    fun getLanguage(): String {
+        return prefs.getString(KEY_LANGUAGE, "it") ?: "it"
     }
     
     // Salva i dati del medico quando effettua il login o si registra

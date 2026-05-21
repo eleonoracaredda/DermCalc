@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DermaCalc</string>
+    <string name="calcolatore_easi">EASI Calculator</string>
+    <string name="seleziona_distretto">Select Body Region:</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    <string name="gravit_dei_segni_clinici">Severity of clinical signs</string>
+
+    <string name="eritema">Erythema (redness)</string>
+    <string name="edema">Edema / Papulation (swelling)</string>
+    <string name="escoriazioni">Excoriations (scratch marks)</string>
+    <string name="lichenificazione">Lichenification (skin thickening)</string>
+    <string name="area">Area affected (% of surface)</string>
+
+    <string name="desc_zero">Absent (0)</string>
+    <string name="desc_uno">Mild (1)</string>
+    <string name="desc_due">Moderate (2)</string>
+    <string name="desc_tre">Severe (3)</string>
+    <string name="desc_quattro">Very Severe (4)</string>
+
+    <string name="area_0">0% (0)</string>
+    <string name="area_1">1-9% (1)</string>
+    <string name="area_2">10-29% (2)</string>
+    <string name="area_3">30-49% (3)</string>
+    <string name="area_4">50-69% (4)</string>
+    <string name="area_5">70-89% (5)</string>
+    <string name="area_6">90-100% (6)</string>
+
+    <string name="distretto_testa">Head</string>
+    <string name="distretto_testa_collo">Head and neck</string>
+    <string name="distretto_tronco">Trunk</string>
+    <string name="distretto_arti_superiori">Upper limbs</string>
+    <string name="distretto_arti_inferiori">Lower limbs</string>
+
+    <string name="valore_0">0</string>
+    <string name="valore_1">1</string>
+    <string name="valore_2">2</string>
+    <string name="valore_3">3</string>
+    <string name="valore_4">4</string>
+
+    <string name="calcola_e_salva">Calculate and Save</string>
+    <string name="note_hint">Add notes (optional)</string>
+
+    <string name="risultato_label">Region Score: %1$.1f\nTOTAL EASI: %2$.1f (%3$s)</string>
+    <string name="risultato_pasi_label">Region Score: %1$.1f\nTOTAL PASI: %2$.1f (%3$s)</string>
+
+    <string name="calcolatore_bmi">BMI Calculator</string>
+    <string name="peso_kg">Weight (kg)</string>
+    <string name="altezza_cm">Height (cm)</string>
+    <string name="calcola_e_salva1">Calculate and Save</string>
+    <string name="risultato">Result: -</string>
+    <string name="risultato_bmi_label">BMI Result: %1$.2f (%2$s)</string>
+
+    <string name="codice_fiscale">Tax Code</string>
+    <string name="cognome">Last Name</string>
+    <string name="email">Email</string>
+    <string name="nome">First Name</string>
+    <string name="password">Password</string>
+    <string name="registrati">Register</string>
+
+    <string name="menu_principale">Main Menu</string>
+    <string name="calcolatore_bmi1">BMI Calculator</string>
+    <string name="calcolatore_easi1">EASI Calculator</string>
+    <string name="log_out">Logout</string>
+    <string name="calcolatore_pasi1">PASI Calculator</string>
+    <string name="calcolatore_pasi">PASI Calculator</string>
+
+    <string name="indurimento_spessore_infiltrazione">Induration (thickness/infiltration)</string>
+    <string name="desquamazione">Desquamation</string>
+
+    <string name="lista_pazienti">Patient List</string>
+    <string name="scheda_paziente">Patient Profile</string>
+    <string name="terapia_attuale">Current Therapy</string>
+    <string name="comorbilita">Comorbidities</string>
+
+    <string name="nessun_paziente_selezionato">No patient selected</string>
+    <string name="visualizza_storico">View History</string>
+
+    <string name="welcome_back">Welcome,</string>
+    <string name="welcome_login">Welcome back</string>
+    <string name="login_subtitle">Log in to your medical account</string>
+    <string name="login_button">Login</string>
+
+    <string name="forgot_password">Forgot password?</string>
+    <string name="no_account_register">Don\'t have an account? Register</string>
+
+    <string name="registration_title">Registration</string>
+    <string name="registration_subtitle">Create a new professional profile</string>
+
+    <string name="paziente_selezionato">Selected Patient</string>
+    <string name="strumenti_e_calcolatori">Tools and Calculators</string>
+
+    <string name="aggiungi_paziente">Add Patient</string>
+    <string name="nuovo_paziente">New Patient</string>
+    <string name="cerca_paziente">Search patient...</string>
+
+    <string name="nessun_paziente_trovato">No patient found</string>
+    <string name="incoraggiamento_pazienti">Start by adding your first patient\nusing the button below.</string>
+
+    <string name="storico_vuoto">Empty History</string>
+    <string name="incoraggiamento_storico">There are no measurements for this patient yet.\nPerform the first calculation to see the charts.</string>
+
+    <string name="storico_misurazioni">Measurement History</string>
+    <string name="grafico_bmi">BMI Trend</string>
+    <string name="grafico_pasi">PASI Trend</string>
+    <string name="grafico_easi">EASI Trend</string>
+    <string name="nessun_dato">No data available</string>
+    <string name="indietro">Back</string>
+
+    <string name="dati_anagrafici">Personal Data</string>
+    <string name="informazioni_cliniche">Clinical Information</string>
+    <string name="caregiver_emergenza">Caregiver / Emergency</string>
+    <string name="nome_caregiver">Caregiver Name</string>
+    <string name="consenso_trattamento">Consent to personal data processing</string>
+
+    <string name="data_nascita_hint">Date of Birth * (dd/mm/yyyy)</string>
+    <string name="sesso_label">Sex *</string>
+    <string name="maschio">Male</string>
+    <string name="femmina">Female</string>
+
+    <string name="salva_paziente">Save Patient</string>
+    <string name="data_inizio_terapia_hint">Therapy Start Date (dd/mm/yyyy)</string>
+    <string name="telefono_caregiver">Caregiver Phone</string>
+
+    <string name="risultato_caps">RESULT</string>
+
+    <string name="recupero_password">Password Recovery</string>
+    <string name="forgot_subtitle">Enter your details to reset your password</string>
+    <string name="verifica_dati">Verify Data</string>
+    <string name="nuova_password">New Password</string>
+    <string name="reimposta_password">Reset Password</string>
+    <string name="torna_al_login">Back to Login</string>
+
+    <string-array name="body_parts_easi">
+        <item>Head and neck</item>
+        <item>Trunk</item>
+        <item>Upper limbs</item>
+        <item>Lower limbs</item>
+    </string-array>
+
+    <string-array name="body_parts_pasi">
+        <item>Head</item>
+        <item>Upper limbs</item>
+        <item>Trunk</item>
+        <item>Lower limbs</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>Italiano</item>
+        <item>English</item>
+    </string-array>
+</resources>

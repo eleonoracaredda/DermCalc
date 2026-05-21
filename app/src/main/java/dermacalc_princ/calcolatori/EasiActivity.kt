@@ -22,8 +22,15 @@ import kotlinx.coroutines.withContext
 import com.example.dermcalc_princ.repository.MisurazioneRepository
 
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
 // Classe EasiActivity: gestisce il calcolo complesso dell'indice EASI per la dermatite atopica
 class EasiActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     private lateinit var db: AppDatabase
     private lateinit var repository: MisurazioneRepository

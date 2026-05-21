@@ -22,8 +22,15 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
 // Visualizza graficamente l'andamento temporale degli indici clinici (BMI, PASI, EASI) per un paziente specifico
 class StoricoActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     private lateinit var repository: MisurazioneRepository
     private var pazienteId: Int = -1

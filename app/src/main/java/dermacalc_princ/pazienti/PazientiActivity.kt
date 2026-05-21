@@ -21,8 +21,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.google.android.material.textfield.TextInputEditText
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
 // Activity principale per la gestione dell'elenco pazienti associati al medico loggato
 class PazientiActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     private lateinit var rvPazienti: RecyclerView
     private lateinit var btnNuovoPaziente: Button

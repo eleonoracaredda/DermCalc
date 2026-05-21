@@ -17,9 +17,15 @@ import com.example.dermcalc_princ.utils.SessionManager
 import kotlinx.coroutines.launch
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
 
 // Classe HomeActivity: Dashboard principale dell'app per il paziente selezionato
 class HomeActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

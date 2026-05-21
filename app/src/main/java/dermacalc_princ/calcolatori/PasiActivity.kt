@@ -23,11 +23,18 @@ import kotlinx.coroutines.withContext
 import com.example.dermcalc_princ.repository.MisurazioneRepository
 
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
 /**
  * Classe PasiActivity: gestisce l'interfaccia utente per il calcolo del PASI (Psoriasis Area and Severity Index).
  * Permette l'inserimento dei parametri clinici per 4 diverse regioni corporee e il salvataggio del risultato nel database.
  */
 class PasiActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
     private lateinit var db: AppDatabase
     private lateinit var repository: MisurazioneRepository
     private val pasiCalculator = PasiCalculator()

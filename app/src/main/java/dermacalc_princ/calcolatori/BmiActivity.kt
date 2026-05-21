@@ -18,7 +18,15 @@ import kotlinx.coroutines.withContext
 import com.example.dermcalc_princ.repository.MisurazioneRepository
 
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
+
 class BmiActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     private lateinit var db: AppDatabase
     // VARIABILE REPOSITORY

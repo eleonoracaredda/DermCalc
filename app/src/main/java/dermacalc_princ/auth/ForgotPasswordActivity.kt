@@ -15,8 +15,15 @@ import kotlinx.coroutines.launch
 import com.example.dermcalc_princ.utils.hashPassword
 import com.example.dermcalc_princ.utils.InputValidator
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
 // Gestisce il recupero della password smarrita tramite verifica del Codice Fiscale
 class ForgotPasswordActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     // Memorizza l'utente una volta verificata l'identità
     private var verifiedUser: User? = null

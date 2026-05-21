@@ -18,8 +18,15 @@ import com.example.dermcalc_princ.utils.SessionManager
 import com.example.dermcalc_princ.utils.hashPassword
 
 
+import com.example.dermcalc_princ.utils.LocaleHelper
+import android.content.Context
+
 // Gestisce sia la registrazione di un nuovo medico che la modifica del profilo esistente
 class RegisterActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
