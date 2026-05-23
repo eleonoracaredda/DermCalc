@@ -32,6 +32,14 @@ class EditMisurazioneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_misurazione)
 
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         // Recupero ID della misurazione
         misurazioneId = intent.getIntExtra("MISURAZIONE_ID", -1)
 
@@ -72,7 +80,11 @@ class EditMisurazioneActivity : AppCompatActivity() {
                 val nuoveNote = etNote.text.toString()
 
                 if (nuovoValore == null) {
-                    Toast.makeText(this@EditMisurazioneActivity, "Valore non valido", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@EditMisurazioneActivity,
+                        "Valore non valido",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@launch
                 }
 
@@ -83,23 +95,39 @@ class EditMisurazioneActivity : AppCompatActivity() {
                 )
 
                 repository.update(aggiornata)
-                Toast.makeText(this@EditMisurazioneActivity, "Modifiche salvate", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@EditMisurazioneActivity,
+                    "Modifiche salvate",
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
 
-        // Eliminazione misurazione
+        // Eliminazione misurazione con conferma
         btnElimina.setOnClickListener {
-            lifecycleScope.launch {
-                repository.delete(misurazione)
-                Toast.makeText(this@EditMisurazioneActivity, "Misurazione eliminata", Toast.LENGTH_SHORT).show()
-                finish()
-            }
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Conferma eliminazione")
+                .setMessage("Sei sicura di voler eliminare questa misurazione?")
+                .setPositiveButton("Elimina") { _, _ ->
+                    lifecycleScope.launch {
+                        repository.delete(misurazione)
+                        Toast.makeText(
+                            this@EditMisurazioneActivity,
+                            "Misurazione eliminata",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+                }
+                .setNegativeButton("Annulla", null)
+                .show()
         }
 
-        // Torna indietro
-        btnIndietro.setOnClickListener {
-            finish()
-        }
+            // Torna indietro
+            btnIndietro.setOnClickListener {
+                finish()
+            }
+
     }
 }
