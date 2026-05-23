@@ -1,7 +1,7 @@
-package com.example.dermcalc_princ.database
+package Database
 
 import androidx.room.*
-import com.example.dermcalc_princ.dominio.Misurazione
+import Dominio.Misurazione
 
 // Interfaccia DAO per l'accesso ai dati delle misurazioni nel database
 @Dao
@@ -35,4 +35,13 @@ interface MisurazioneDao {
         LIMIT :limit
     """)
     suspend fun getUltime(id: Int, tipo: String, limit: Int): List<Misurazione>
+
+    @Query("SELECT * FROM misurazioni WHERE id = :id")
+    suspend fun getById(id: Int): Misurazione?
+
+    @Update
+    suspend fun update(misurazione: Misurazione)
+
+    @Delete
+    suspend fun delete(misurazione: Misurazione)
 }

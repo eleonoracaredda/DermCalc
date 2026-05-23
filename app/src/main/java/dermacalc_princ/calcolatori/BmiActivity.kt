@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.calcolatori
+package dermacalc_princ.calcolatori
 
 import android.os.Bundle
 import android.widget.Button
@@ -6,17 +6,17 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.dominio.Misurazione
+import Database.AppDatabase
+import Dominio.Misurazione
 import java.util.Date
-import com.example.dermcalc_princ.logic.BmiCalculator
+import Logic.BmiCalculator
 import com.example.dermcalc_princ.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.example.dermcalc_princ.repository.MisurazioneRepository
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Repository.MisurazioneRepository
+import Utils.LocaleHelper
 import android.content.Context
 
 class BmiActivity : AppCompatActivity() {

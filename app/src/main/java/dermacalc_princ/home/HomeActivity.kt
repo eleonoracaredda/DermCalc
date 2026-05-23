@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.home
+package dermacalc_princ.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,18 +7,22 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.auth.LoginActivity
-import com.example.dermcalc_princ.calcolatori.BmiActivity
-import com.example.dermcalc_princ.calcolatori.EasiActivity
-import com.example.dermcalc_princ.calcolatori.PasiActivity
-import com.example.dermcalc_princ.pazienti.CreatePazienteActivity
-import com.example.dermcalc_princ.utils.SessionManager
+import Database.AppDatabase
+import dermacalc_princ.auth.LoginActivity
+import dermacalc_princ.calcolatori.BmiActivity
+import dermacalc_princ.calcolatori.EasiActivity
+import dermacalc_princ.calcolatori.PasiActivity
+import dermacalc_princ.pazienti.CreatePazienteActivity
+import Utils.SessionManager
 import kotlinx.coroutines.launch
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Utils.LocaleHelper
 import android.content.Context
+import dermacalc_princ.misurazioni.MisurazioniListActivity
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 
 // Classe HomeActivity: Dashboard principale dell'app per il paziente selezionato
 class HomeActivity : AppCompatActivity() {
@@ -66,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
                 if (paziente != null) {
                     tvSelectedPaziente.text = "${paziente.nome} ${paziente.cognome}"
                     val sessoEsteso = if (paziente.sesso == "M") "Maschio" else "Femmina"
-                    val dateFormat = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ITALY)
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
                     tvPazienteDetails.text = "Sesso: $sessoEsteso | Data di nascita: ${dateFormat.format(paziente.dataNascita)}"
                 }
             }
@@ -115,7 +119,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         cardStorico.setOnClickListener {
-            val intent = Intent(this, StoricoActivity::class.java)
+            val intent = Intent(this, MisurazioniListActivity::class.java)
             intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
         }

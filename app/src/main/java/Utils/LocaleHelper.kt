@@ -1,11 +1,11 @@
-package com.example.dermcalc_princ.utils
+package Utils
 
 import android.content.Context
 import android.content.res.Configuration
 import java.util.Locale
 
 
-// Utility per gestire il cambio lingua dinamico nell'applicazione.
+// Utility +per gestire il cambio lingua dinamico nell'applicazione.
 object LocaleHelper {
 
     // Applica la lingua salvata al contesto dell'Activity.

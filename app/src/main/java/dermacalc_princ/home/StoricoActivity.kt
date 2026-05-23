@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.home
+package dermacalc_princ.home
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.dominio.Misurazione
-import com.example.dermcalc_princ.repository.MisurazioneRepository
+import Database.AppDatabase
+import Dominio.Misurazione
+import Repository.MisurazioneRepository
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -22,8 +22,9 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Utils.LocaleHelper
 import android.content.Context
+import com.github.mikephil.charting.components.XAxis
 
 // Visualizza graficamente l'andamento temporale degli indici clinici (BMI, PASI, EASI) per un paziente specifico
 class StoricoActivity : AppCompatActivity() {
@@ -182,7 +183,7 @@ class StoricoActivity : AppCompatActivity() {
                 }
             }
         }
-        xAxis.position = com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.granularity = 1f
         xAxis.setDrawGridLines(false)
 

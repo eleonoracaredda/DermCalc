@@ -73,6 +73,8 @@
     <string name="scheda_paziente">Scheda Paziente</string>
     <string name="terapia_attuale">Terapia Attuale</string>
     <string name="comorbilita">Comorbilità</string>
+    <string name="modifica_paziente">Modifica paziente</string>
+
 
     <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
     <string name="visualizza_storico">Visualizza storico</string>

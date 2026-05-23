@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.utils
+package Utils
 
 import android.content.Context
 import android.content.SharedPreferences

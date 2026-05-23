@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.auth
+package dermacalc_princ.auth
 
 import android.os.Bundle
 import android.view.View
@@ -9,13 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.dominio.User
+import Database.AppDatabase
+import Dominio.User
 import kotlinx.coroutines.launch
-import com.example.dermcalc_princ.utils.hashPassword
-import com.example.dermcalc_princ.utils.InputValidator
+import Utils.hashPassword
+import Utils.InputValidator
 
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Utils.LocaleHelper
 import android.content.Context
 
 // Gestisce il recupero della password smarrita tramite verifica del Codice Fiscale

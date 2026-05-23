@@ -1,12 +1,24 @@
-package com.example.dermcalc_princ.repository
+package Repository
 
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.dominio.Misurazione
+import Database.AppDatabase
+import Dominio.Misurazione
 import java.util.Date
 
 class MisurazioneRepository(private val db: AppDatabase) {
     suspend fun insertMisurazione(misurazione: Misurazione) {
         db.misurazioneDao().insert(misurazione)
+    }
+
+    suspend fun getById(id: Int): Misurazione? {
+        return db.misurazioneDao().getById(id)
+    }
+
+    suspend fun update(misurazione: Misurazione) {
+        db.misurazioneDao().update(misurazione)
+    }
+
+    suspend fun delete(misurazione: Misurazione) {
+        db.misurazioneDao().delete(misurazione)
     }
 
     // Storico completo del paziente

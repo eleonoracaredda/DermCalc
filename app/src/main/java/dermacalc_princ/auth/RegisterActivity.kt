@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.auth
+package dermacalc_princ.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,17 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.pazienti.PazientiActivity
-import com.example.dermcalc_princ.dominio.User
+import Database.AppDatabase
+import dermacalc_princ.pazienti.PazientiActivity
+import Dominio.User
 import kotlinx.coroutines.launch
-import com.example.dermcalc_princ.utils.InputValidator
-import com.example.dermcalc_princ.utils.SessionManager
-import com.example.dermcalc_princ.utils.hashPassword
+import Utils.InputValidator
+import Utils.SessionManager
+import Utils.hashPassword
 
 
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Utils.LocaleHelper
 import android.content.Context
+import android.view.View
 
 // Gestisce sia la registrazione di un nuovo medico che la modifica del profilo esistente
 class RegisterActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
         if (isEditMode && currentDoctorId != null) {
             tvTitle.text = "Modifica Profilo"
             btnRegister.text = "Aggiorna Profilo"
-            tvLogin.visibility = android.view.View.GONE
+            tvLogin.visibility = View.GONE
             etTaxCode.isEnabled = false // Il Codice Fiscale è chiave primaria e non può essere cambiato
 
             // Caricamento dati attuali dal DB
