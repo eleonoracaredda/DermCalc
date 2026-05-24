@@ -60,6 +60,7 @@ class PasiActivity : AppCompatActivity() {
     private lateinit var tvAreaVal: TextView
     private lateinit var tvTotalScore: TextView
     private lateinit var tvCurrentRegionScore: TextView
+    private lateinit var tvSeverityLabel: TextView
     private lateinit var progressBar: LinearProgressIndicator
     private lateinit var tvProgressDetails: TextView
     private lateinit var etNotes: EditText
@@ -103,6 +104,7 @@ class PasiActivity : AppCompatActivity() {
         tvDesquamazioneVal = findViewById(R.id.tvDesquamazioneValue)
         tvAreaVal = findViewById(R.id.tvAreaValue)
         tvTotalScore = findViewById(R.id.tvTotalScore)
+        tvSeverityLabel = findViewById(R.id.tvSeverityLabel)
         tvCurrentRegionScore = findViewById(R.id.tvCurrentRegionScore)
         progressBar = findViewById(R.id.progressEvaluation)
         tvProgressDetails = findViewById(R.id.tvProgressDetails)
@@ -226,12 +228,34 @@ class PasiActivity : AppCompatActivity() {
 
         // Aggiorna punteggi
         tvTotalScore.text = "%.1f".format(total)
-        tvCurrentRegionScore.text = "Regione: %.1f".format(currentRegionScore)
+        tvCurrentRegionScore.text = getString(R.string.regione_score_default).replace("0.0", "%.1f".format(currentRegionScore))
+
+        // Aggiorna Severità visiva
+        if (total > 0) {
+            val severity = pasiCalculator.severity(total)
+            tvSeverityLabel.text = severity
+            tvSeverityLabel.visibility = android.view.View.VISIBLE
+            
+            val color = when {
+                severity.contains("Lieve", ignoreCase = true) -> android.graphics.Color.parseColor("#81C784")
+                severity.contains("Moderata", ignoreCase = true) -> android.graphics.Color.parseColor("#FFB74D")
+                severity.contains("Severa", ignoreCase = true) -> android.graphics.Color.parseColor("#E57373")
+                else -> android.graphics.Color.LTGRAY
+            }
+            tvSeverityLabel.backgroundTintList = android.content.res.ColorStateList.valueOf(color)
+            if (severity.contains("Lieve", ignoreCase = true)) {
+                tvSeverityLabel.setTextColor(android.graphics.Color.BLACK)
+            } else {
+                tvSeverityLabel.setTextColor(android.graphics.Color.WHITE)
+            }
+        } else {
+            tvSeverityLabel.visibility = android.view.View.GONE
+        }
 
         // Calcola regioni completate (area > 0)
         val completedRegions = regions.count { it.area > 0 }
         progressBar.progress = completedRegions
-        tvProgressDetails.text = "$completedRegions di 4 regioni completate"
+        tvProgressDetails.text = getString(R.string.regioni_completate_default).replace("0", completedRegions.toString())
     }
 
     private fun salvaPasi(idPaziente: Int, valore: Double, severita: String, note: String?, datiInput: String) {

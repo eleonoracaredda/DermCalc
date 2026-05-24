@@ -31,7 +31,7 @@ class PazientiActivity : AppCompatActivity() {
     }
 
     private lateinit var rvPazienti: RecyclerView
-    private lateinit var btnNuovoPaziente: Button
+    private lateinit var btnNuovoPaziente: com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
     private lateinit var etSearch: TextInputEditText
     private lateinit var llEmptyState: View
     private lateinit var database: AppDatabase

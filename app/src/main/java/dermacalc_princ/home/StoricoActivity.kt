@@ -93,9 +93,9 @@ class StoricoActivity : AppCompatActivity() {
                 updateSummary(misurazioniPasi, tvLastPasi, tvDiffPasi)
                 updateSummary(misurazioniEasi, tvLastEasi, tvDiffEasi)
 
-                setupChart(findViewById(R.id.chartBmi), misurazioniBmi, "BMI", ContextCompat.getColor(this@StoricoActivity, R.color.primaryColor))
-                setupChart(findViewById(R.id.chartPasi), misurazioniPasi, "PASI", ContextCompat.getColor(this@StoricoActivity, R.color.secondaryColor))
-                setupChart(findViewById(R.id.chartEasi), misurazioniEasi, "EASI", ContextCompat.getColor(this@StoricoActivity, R.color.primaryDarkColor))
+                setupChart(findViewById(R.id.chartBmi), misurazioniBmi, "BMI", ContextCompat.getColor(this@StoricoActivity, R.color.primary), 0)
+                setupChart(findViewById(R.id.chartPasi), misurazioniPasi, "PASI", ContextCompat.getColor(this@StoricoActivity, R.color.secondary), 300)
+                setupChart(findViewById(R.id.chartEasi), misurazioniEasi, "EASI", ContextCompat.getColor(this@StoricoActivity, R.color.tertiary), 600)
             } else {
                 nsvContent.visibility = View.GONE
                 llEmptyState.visibility = View.VISIBLE
@@ -135,7 +135,7 @@ class StoricoActivity : AppCompatActivity() {
     }
 
     // Configura e disegna un grafico a linee (MPAndroidChart) con i dati forniti
-    private fun setupChart(chart: LineChart, data: List<Misurazione>, label: String, color: Int) {
+    private fun setupChart(chart: LineChart, data: List<Misurazione>, label: String, color: Int, delay: Int = 0) {
         if (data.isEmpty()) {
             chart.setNoDataText(getString(R.string.nessun_dato))
             chart.invalidate()
@@ -196,7 +196,14 @@ class StoricoActivity : AppCompatActivity() {
 
         chart.description.isEnabled = false
         chart.legend.isEnabled = true
-        chart.animateX(800)
+        
+        if (delay > 0) {
+            chart.postDelayed({
+                chart.animateY(1000)
+            }, delay.toLong())
+        } else {
+            chart.animateY(1000)
+        }
         chart.invalidate()
     }
 }

@@ -39,8 +39,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
                 <LinearLayout
@@ -182,8 +184,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/cvSummary">
 
                 <LinearLayout
@@ -212,8 +216,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/cvBmiChart">
 
                 <LinearLayout
@@ -243,8 +249,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="100dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/cvPasiChart"
                 app:layout_constraintBottom_toBottomOf="parent">
 
@@ -274,37 +282,48 @@
     <!-- EMPTY STATE -->
     <LinearLayout
         android:id="@+id/llEmptyState"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:padding="40dp"
         android:orientation="vertical"
         android:visibility="gone">
 
-        <ImageView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/ic_history"
-            app:tint="@color/primaryLightColor"
-            android:alpha="0.4" />
+            app:cardCornerRadius="60dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/surfaceVariant">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_history"
+                app:tint="@color/primary"
+                android:alpha="0.6" />
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/storico_vuoto"
-            android:textColor="@color/textPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/onSurface"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="@string/incoraggiamento_storico"
-            android:textColor="@color/textSecondary"
-            android:textSize="14sp" />
+            android:textColor="@color/onSurfaceVariant"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp" />
     </LinearLayout>
 
     <!-- BOTTONE INDIETRO -->

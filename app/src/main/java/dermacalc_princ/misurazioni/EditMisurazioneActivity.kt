@@ -152,6 +152,7 @@ class EditMisurazioneActivity : AppCompatActivity() {
     }
 
     private fun setupDatiInput() {
+        android.transition.TransitionManager.beginDelayedTransition(containerDatiInput)
         containerDatiInput.removeAllViews()
         dynamicInputs.clear()
         val dati = misurazione.datiInput ?: return

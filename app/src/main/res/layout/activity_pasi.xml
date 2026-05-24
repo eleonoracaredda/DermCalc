@@ -29,7 +29,7 @@
                 style="@style/TextAppearance.DermCalc.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="56dp"
                 android:text="@string/calcolatore_pasi"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -45,8 +45,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="-40dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/headerView">
 
                 <LinearLayout
@@ -109,8 +111,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/cardBodyPart">
 
                 <LinearLayout
@@ -280,10 +284,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp"
-                app:strokeColor="@color/primaryLightColor"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/btnCalculatePasi">
 
                 <LinearLayout
@@ -295,7 +299,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="AVANZAMENTO VALUTAZIONE"
+                        android:text="@string/avanzamento_valutazione"
                         android:textColor="@color/textSecondary"
                         android:textSize="11sp"
                         android:textStyle="bold"
@@ -317,7 +321,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="1 di 4 regioni completate"
+                        android:text="@string/regioni_completate_default"
                         android:textSize="12sp"
                         android:textColor="@color/textSecondary" />
 
@@ -342,18 +346,35 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="TOTALE PASI"
+                                android:text="@string/totale_pasi_caps"
                                 android:textSize="12sp"
                                 android:textColor="@color/primaryColor"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/tvTotalScore"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0.0"
+                                android:text="@string/default_score"
                                 android:textSize="32sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary" />
+
+                            <TextView
+                                android:id="@+id/tvSeverityLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="2dp"
+                                android:background="@drawable/bg_severity_badge"
+                                android:text="@string/severita"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:visibility="gone"
+                                tools:visibility="visible"
+                                tools:backgroundTint="@color/gravity_2"/>
                         </LinearLayout>
 
                         <TextView
@@ -363,7 +384,7 @@
                             android:background="@drawable/ic_launcher_background"
                             android:backgroundTint="@color/backgroundColor"
                             android:padding="8dp"
-                            android:text="Regione: 0.0"
+                            android:text="@string/regione_score_default"
                             android:textSize="13sp"
                             android:textColor="@color/textSecondary" />
                     </LinearLayout>

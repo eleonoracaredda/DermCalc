@@ -29,7 +29,7 @@
                 style="@style/TextAppearance.DermCalc.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="56dp"
                 android:text="@string/calcolatore_easi"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -45,8 +45,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="-40dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/headerView">
 
                 <LinearLayout
@@ -109,8 +111,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/cardBodyPart">
 
                 <LinearLayout
@@ -307,11 +311,13 @@
                 android:id="@+id/cardEasiResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp"
-                app:strokeColor="@color/primaryLightColor"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceVariant"
                 app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi">
 
                 <LinearLayout
@@ -382,6 +388,22 @@
                                 android:textSize="32sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary" />
+
+                            <TextView
+                                android:id="@+id/tvSeverityLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="2dp"
+                                android:background="@drawable/bg_severity_badge"
+                                android:text="@string/severita"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:visibility="gone"
+                                tools:visibility="visible"
+                                tools:backgroundTint="@color/gravity_2"/>
                         </LinearLayout>
 
                         <TextView

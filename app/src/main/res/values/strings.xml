@@ -152,6 +152,15 @@
     <string name="email_non_valida">Email non valida</string>
     <string name="password_debole">La password deve contenere almeno 8 caratteri, numeri e lettere</string>
     <string name="nuova_password_debole">La nuova password deve contenere almeno 8 caratteri</string>
+    <string name="severita">Severità</string>
+    <string name="avanzamento_valutazione">AVANZAMENTO VALUTAZIONE</string>
+    <string name="regioni_completate_default">0 di 4 regioni completate</string>
+    <string name="totale_pasi_caps">TOTALE PASI</string>
+    <string name="regione_score_default">Regione: 0.0</string>
+    <string name="default_score">0.0</string>
+    <string name="dottore_default">Dott. Nome Cognome</string>
+    <string name="email_default">email@example.com</string>
+    <string name="modifica_profilo_desc">Modifica Profilo</string>
     <string name="email_gia_registrata">Email già registrata</string>
     <string name="codice_fiscale_gia_registrato">Codice fiscale già registrato</string>
     <string name="profilo_aggiornato">Profilo aggiornato!</string>

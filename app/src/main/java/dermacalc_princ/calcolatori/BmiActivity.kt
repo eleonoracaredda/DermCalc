@@ -1,8 +1,14 @@
 package dermacalc_princ.calcolatori
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +23,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import Repository.MisurazioneRepository
 import Utils.LocaleHelper
-import android.content.Context
 
 class BmiActivity : AppCompatActivity() {
 
@@ -28,6 +33,11 @@ class BmiActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
     private lateinit var repository: MisurazioneRepository
     private val bmiCalculator = BmiCalculator()
+
+    private lateinit var tvResultValue: TextView
+    private lateinit var tvSeverityLabel: TextView
+    private lateinit var ivGaugeIndicator: ImageView
+    private lateinit var gaugeContainer: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +57,10 @@ class BmiActivity : AppCompatActivity() {
         val etHeight = findViewById<EditText>(R.id.etHeight)
         val etNotes = findViewById<EditText>(R.id.etNotes)
         val btnCalculate = findViewById<Button>(R.id.btnCalculateBmi)
-        val tvResultValue = findViewById<TextView>(R.id.tvResultValue)
-        val tvSeverityLabel = findViewById<TextView>(R.id.tvSeverityLabel)
+        tvResultValue = findViewById(R.id.tvResultValue)
+        tvSeverityLabel = findViewById(R.id.tvSeverityLabel)
+        ivGaugeIndicator = findViewById(R.id.ivGaugeIndicator)
+        gaugeContainer = findViewById(R.id.gaugeContainer)
         val btnBack = findViewById<Button>(R.id.btnBack)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -70,13 +82,46 @@ class BmiActivity : AppCompatActivity() {
                 val bmi = bmiCalculator.calculate(weight, height)
                 val severity = bmiCalculator.getSeverity(bmi)
 
-                // Aggiornamento UI con i nuovi componenti
-                tvResultValue.text = "%.1f".format(bmi)
+                // Aggiornamento UI
+                tvResultValue.text = String.format("%.1f", bmi)
                 tvSeverityLabel.text = severity
+                tvSeverityLabel.visibility = View.VISIBLE
+                
+                updateSeverityUI(bmi, severity)
 
                 salvaBmi(pazienteId, bmi, severity, note, weight, height)
             } else {
-                Toast.makeText(this, "Inserisci tutti i valori", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.compila_tutti_i_campi), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun updateSeverityUI(bmi: Double, severity: String) {
+        val color = when (severity) {
+            "Sottopeso" -> Color.parseColor("#4FC3F7")
+            "Normopeso" -> Color.parseColor("#81C784")
+            "Sovrappeso" -> Color.parseColor("#FFF176")
+            "Obesità" -> Color.parseColor("#E57373")
+            else -> Color.LTGRAY
+        }
+        
+        tvSeverityLabel.backgroundTintList = ColorStateList.valueOf(color)
+        if (severity == "Sovrappeso") {
+            tvSeverityLabel.setTextColor(Color.BLACK)
+        } else {
+            tvSeverityLabel.setTextColor(Color.WHITE)
+        }
+
+        ivGaugeIndicator.visibility = View.VISIBLE
+        ivGaugeIndicator.imageTintList = ColorStateList.valueOf(color)
+
+        gaugeContainer.post {
+            val width = gaugeContainer.width.toFloat()
+            if (width > 0) {
+                val clampedBmi = bmi.coerceIn(0.0, 40.0)
+                val ratio = clampedBmi.toFloat() / 40f
+                val translationX = (ratio * width) - (ivGaugeIndicator.width / 2f)
+                ivGaugeIndicator.animate().translationX(translationX).setDuration(600).start()
             }
         }
     }
@@ -100,7 +145,7 @@ class BmiActivity : AppCompatActivity() {
                 )
             )
             withContext(Dispatchers.Main) {
-                Toast.makeText(this@BmiActivity, "Salvato nel database", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@BmiActivity, "Punteggio salvato!", Toast.LENGTH_SHORT).show()
             }
         }
     }

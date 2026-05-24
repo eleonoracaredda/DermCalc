@@ -40,7 +40,11 @@
 
     <!-- Compatibility Aliases (To avoid breaking existing references) -->
     <color name="primaryColor">@color/primary</color>
+    <color name="primaryLightColor">#5E8BCF</color>
+    <color name="primaryDarkColor">#00356F</color>
     <color name="secondaryColor">@color/secondary</color>
+    <color name="secondaryLightColor">#82E9DE</color>
+    <color name="secondaryDarkColor">#00867D</color>
     <color name="backgroundColor">@color/background</color>
     <color name="surfaceColor">@color/surface</color>
     <color name="textPrimary">@color/onSurface</color>

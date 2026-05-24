@@ -1,6 +1,10 @@
 package dermacalc_princ.calcolatori
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
@@ -18,7 +22,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import Repository.MisurazioneRepository
 import Utils.LocaleHelper
-import android.content.Context
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
@@ -57,6 +60,7 @@ class EasiActivity : AppCompatActivity() {
     private lateinit var tvLichenificazioneVal: TextView
     private lateinit var tvAreaVal: TextView
     private lateinit var tvTotalScore: TextView
+    private lateinit var tvSeverityLabel: TextView
     private lateinit var tvCurrentRegionScore: TextView
     private lateinit var progressBar: LinearProgressIndicator
     private lateinit var tvProgressDetails: TextView
@@ -103,6 +107,7 @@ class EasiActivity : AppCompatActivity() {
         tvLichenificazioneVal = findViewById(R.id.tvLichenificazioneValue)
         tvAreaVal = findViewById(R.id.tvAreaValue)
         tvTotalScore = findViewById(R.id.tvTotalScore)
+        tvSeverityLabel = findViewById(R.id.tvSeverityLabel)
         tvCurrentRegionScore = findViewById(R.id.tvCurrentRegionScore)
         progressBar = findViewById(R.id.progressEvaluation)
         tvProgressDetails = findViewById(R.id.tvProgressDetails)
@@ -111,8 +116,6 @@ class EasiActivity : AppCompatActivity() {
 
     private fun setupListeners(pazienteId: Int) {
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroupBodyPart)
-        
-        // Imposta il primo chip come selezionato di default
         chipGroup.check(R.id.chipHead)
 
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -222,13 +225,36 @@ class EasiActivity : AppCompatActivity() {
         )
 
         // Aggiorna punteggi
-        tvTotalScore.text = "%.1f".format(total)
-        tvCurrentRegionScore.text = "Regione: %.1f".format(regionScore)
+        tvTotalScore.text = String.format("%.1f", total)
+        tvCurrentRegionScore.text = getString(R.string.regione_score_default).replace("0.0", String.format("%.1f", regionScore))
+
+        // Aggiorna Severità visiva
+        if (total > 0) {
+            val severity = easiCalculator.severity(total)
+            tvSeverityLabel.text = severity
+            tvSeverityLabel.visibility = View.VISIBLE
+            
+            val color = when (severity) {
+                "Assente", "Eczema chiarito" -> Color.parseColor("#81C784")
+                "Dermatite Lieve" -> Color.parseColor("#FFF176")
+                "Dermatite Moderata" -> Color.parseColor("#FFB74D")
+                "Dermatite Severa" -> Color.parseColor("#E57373")
+                else -> Color.LTGRAY
+            }
+            tvSeverityLabel.backgroundTintList = ColorStateList.valueOf(color)
+            if (severity == "Dermatite Lieve") {
+                tvSeverityLabel.setTextColor(Color.BLACK)
+            } else {
+                tvSeverityLabel.setTextColor(Color.WHITE)
+            }
+        } else {
+            tvSeverityLabel.visibility = View.GONE
+        }
 
         // Calcola regioni completate (area > 0)
         val completedRegions = regions.count { it.area > 0 }
         progressBar.progress = completedRegions
-        tvProgressDetails.text = "$completedRegions di 4 regioni completate"
+        tvProgressDetails.text = getString(R.string.regioni_completate_default).replace("0", completedRegions.toString())
     }
 
     private fun salvaEasi(idPaziente: Int, valore: Double, severita: String, note: String?, datiInput: String) {
@@ -245,7 +271,7 @@ class EasiActivity : AppCompatActivity() {
                 )
             )
             withContext(Dispatchers.Main) {
-                Toast.makeText(this@EasiActivity, "Punteggio Totale salvato!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@EasiActivity, "Punteggio salvato!", Toast.LENGTH_SHORT).show()
             }
         }
     }
