@@ -23,8 +23,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
@@ -64,8 +64,8 @@ class EditMisurazioneActivity : AppCompatActivity() {
 
         // Riferimenti UI
         val tvTipo = findViewById<TextView>(R.id.tvTipo)
-        etValore = findViewById<EditText>(R.id.etValore)
-        etSeverita = findViewById<EditText>(R.id.etSeverita)
+        etValore = findViewById(R.id.etValore)
+        etSeverita = findViewById(R.id.etSeverita)
         val etNote = findViewById<EditText>(R.id.etNote)
         val tvData = findViewById<TextView>(R.id.tvData)
         containerDatiInput = findViewById(R.id.containerDatiInput)
@@ -87,6 +87,7 @@ class EditMisurazioneActivity : AppCompatActivity() {
             val df = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
             tvData.text = df.format(misurazione.data)
 
+            updateSeverityStyle(misurazione.severita)
             setupDatiInput()
         }
 
@@ -187,8 +188,11 @@ class EditMisurazioneActivity : AppCompatActivity() {
                 val h = tilHeight.editText?.text.toString().toDoubleOrNull() ?: 0.0
                 if (h > 0) {
                     val bmi = bmiCalculator.calculate(w, h)
-                    etValore.setText("%.1f".format(bmi).replace(",", "."))
-                    etSeverita.setText(bmiCalculator.getSeverity(bmi))
+                    val bmiStr = "%.1f".format(bmi).replace(",", ".")
+                    etValore.setText(bmiStr)
+                    val sev = bmiCalculator.getSeverity(bmi)
+                    etSeverita.setText(sev)
+                    updateSeverityStyle(sev)
                 }
             }
         }
@@ -204,44 +208,8 @@ class EditMisurazioneActivity : AppCompatActivity() {
 
         regionsDati.forEachIndexed { index, regionDati ->
             if (index >= regionLabels.size) return@forEachIndexed
-
-            val tvLabel = TextView(this).apply {
-                text = regionLabels[index]
-                setPadding(0, 16, 0, 8)
-                setTextColor(ContextCompat.getColor(this@EditMisurazioneActivity, R.color.primaryColor))
-                setTypeface(null, Typeface.BOLD)
-            }
-            containerDatiInput.addView(tvLabel)
-
-            val row = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-            }
-
             val parts = regionDati.split(",")
-            val regionInputs = mutableListOf<EditText>()
-
-            fieldLabels.forEachIndexed { i, label ->
-                val til = TextInputLayout(this, null, com.google.android.material.R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox).apply {
-                    hint = label
-                    val lp = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-                    if (i < fieldLabels.size - 1) lp.marginEnd = 4
-                    layoutParams = lp
-                }
-                val et = TextInputEditText(til.context).apply {
-                    inputType = android.text.InputType.TYPE_CLASS_NUMBER
-                    setText(parts.getOrNull(i) ?: "0")
-                    textSize = 12f
-                    setPadding(4, 4, 4, 4)
-                }
-                til.addView(et)
-                row.addView(til)
-                regionInputs.add(et)
-            }
-            containerDatiInput.addView(row)
+            val regionInputs = createRegionCard(regionLabels[index], fieldLabels, parts)
             dynamicInputs.add(regionInputs)
         }
 
@@ -258,8 +226,10 @@ class EditMisurazioneActivity : AppCompatActivity() {
                         total += easiCalculator.calculateRegionScore(er + ed + es + li, area, index)
                     }
                     etValore.setText("%.1f".format(total).replace(",", "."))
-                    etSeverita.setText(easiCalculator.severity(total))
-                } catch (e: Exception) {}
+                    val sev = easiCalculator.severity(total)
+                    etSeverita.setText(sev)
+                    updateSeverityStyle(sev)
+                } catch (_: Exception) {}
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -274,44 +244,8 @@ class EditMisurazioneActivity : AppCompatActivity() {
 
         regionsDati.forEachIndexed { index, regionDati ->
             if (index >= regionLabels.size) return@forEachIndexed
-
-            val tvLabel = TextView(this).apply {
-                text = regionLabels[index]
-                setPadding(0, 16, 0, 8)
-                setTextColor(ContextCompat.getColor(this@EditMisurazioneActivity, R.color.primaryColor))
-                setTypeface(null, Typeface.BOLD)
-            }
-            containerDatiInput.addView(tvLabel)
-
-            val row = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-            }
-
             val parts = regionDati.split(",")
-            val regionInputs = mutableListOf<EditText>()
-
-            fieldLabels.forEachIndexed { i, label ->
-                val til = TextInputLayout(this, null, com.google.android.material.R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox).apply {
-                    hint = label
-                    val lp = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-                    if (i < fieldLabels.size - 1) lp.marginEnd = 4
-                    layoutParams = lp
-                }
-                val et = TextInputEditText(til.context).apply {
-                    inputType = android.text.InputType.TYPE_CLASS_NUMBER
-                    setText(parts.getOrNull(i) ?: "0")
-                    textSize = 12f
-                    setPadding(4, 4, 4, 4)
-                }
-                til.addView(et)
-                row.addView(til)
-                regionInputs.add(et)
-            }
-            containerDatiInput.addView(row)
+            val regionInputs = createRegionCard(regionLabels[index], fieldLabels, parts)
             dynamicInputs.add(regionInputs)
         }
 
@@ -336,9 +270,11 @@ class EditMisurazioneActivity : AppCompatActivity() {
                     if (datiDistretti.size >= 4) {
                         val total = pasiCalculator.calculate(datiDistretti[0], datiDistretti[1], datiDistretti[2], datiDistretti[3])
                         etValore.setText("%.1f".format(total).replace(",", "."))
-                        etSeverita.setText(pasiCalculator.severity(total))
+                        val sev = pasiCalculator.severity(total)
+                        etSeverita.setText(sev)
+                        updateSeverityStyle(sev)
                     }
-                } catch (e: Exception) {}
+                } catch (_: Exception) {}
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -346,8 +282,69 @@ class EditMisurazioneActivity : AppCompatActivity() {
         dynamicInputs.flatten().forEach { it.addTextChangedListener(watcher) }
     }
 
+    private fun createRegionCard(title: String, fieldLabels: List<String>, values: List<String>): List<EditText> {
+        val card = MaterialCardView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { setMargins(0, 0, 0, 16) }
+            cardElevation = 0f
+            radius = 12f
+            strokeWidth = 2
+            strokeColor = ContextCompat.getColor(this@EditMisurazioneActivity, R.color.backgroundColor)
+            setCardBackgroundColor(ContextCompat.getColor(this@EditMisurazioneActivity, R.color.white))
+        }
+
+        val innerContent = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(16, 12, 16, 12)
+        }
+
+        val tvLabel = TextView(this).apply {
+            text = title
+            setTextColor(ContextCompat.getColor(this@EditMisurazioneActivity, R.color.primaryColor))
+            setTypeface(null, Typeface.BOLD)
+            textSize = 14f
+            setPadding(4, 0, 0, 8)
+        }
+        innerContent.addView(tvLabel)
+
+        val row = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+        }
+
+        val regionInputs = mutableListOf<EditText>()
+
+        fieldLabels.forEachIndexed { i, label ->
+            val til = TextInputLayout(this, null, R.style.Widget_DermCalc_EditText).apply {
+                hint = label
+                val lp = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                if (i < fieldLabels.size - 1) lp.marginEnd = 4
+                layoutParams = lp
+            }
+            val et = TextInputEditText(til.context).apply {
+                inputType = android.text.InputType.TYPE_CLASS_NUMBER
+                setText(values.getOrNull(i) ?: "0")
+                textSize = 13f
+                setPadding(4, 8, 4, 8)
+                gravity = Gravity.CENTER
+            }
+            til.addView(et)
+            row.addView(til)
+            regionInputs.add(et)
+        }
+        innerContent.addView(row)
+        card.addView(innerContent)
+        containerDatiInput.addView(card)
+        return regionInputs
+    }
+
     private fun creaTextInputLayout(label: String, initialValue: String): TextInputLayout {
-        val til = TextInputLayout(this, null, com.google.android.material.R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox)
+        val til = TextInputLayout(this, null, R.style.Widget_DermCalc_EditText)
         val lp = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -378,5 +375,29 @@ class EditMisurazioneActivity : AppCompatActivity() {
             }
             else -> misurazione.datiInput
         }
+    }
+
+    private fun updateSeverityStyle(severity: String) {
+        val colorRes = when {
+            severity.contains("Assente", ignoreCase = true) ||
+                    severity.contains("Chiarito", ignoreCase = true) ||
+                    severity.contains("Sottopeso", ignoreCase = true) -> R.color.secondaryColor
+
+            severity.contains("Lieve", ignoreCase = true) ||
+                    severity.contains("Normopeso", ignoreCase = true) -> R.color.primaryColor
+
+            severity.contains("Moderata", ignoreCase = true) ||
+                    severity.contains("Sovrappeso", ignoreCase = true) -> android.R.color.holo_orange_dark
+
+            severity.contains("Grave", ignoreCase = true) ||
+                    severity.contains("Obesità", ignoreCase = true) -> R.color.error
+
+            else -> R.color.textPrimary
+        }
+        val color = ContextCompat.getColor(this, colorRes)
+        etSeverita.setTextColor(color)
+        findViewById<TextInputLayout>(R.id.tilSeverita).setBoxStrokeColorStateList(
+            android.content.res.ColorStateList.valueOf(color)
+        )
     }
 }
