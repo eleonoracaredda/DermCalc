@@ -35,7 +35,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="GT" />
+                tools:text="NP" />
         </FrameLayout>
 
         <!-- Testi -->
@@ -58,7 +58,7 @@
                 android:textColor="@color/textPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Gaia T." />
+                tools:text="Nuovo Paziente." />
 
             <TextView
                 android:id="@+id/tvCodiceFiscale"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="2dp"
                 android:textColor="@color/textSecondary"
                 android:textSize="13sp"
-                tools:text="RSSMRA80A01H501U" />
+                tools:text="Cod Fiscale" />
         </LinearLayout>
 
         <!-- Pulsante Modifica -->

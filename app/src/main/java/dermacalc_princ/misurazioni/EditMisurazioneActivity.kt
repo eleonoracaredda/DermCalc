@@ -32,14 +32,6 @@ class EditMisurazioneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_misurazione)
 
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        toolbar.setNavigationOnClickListener {
-            finish()
-        }
-
         // Recupero ID della misurazione
         misurazioneId = intent.getIntExtra("MISURAZIONE_ID", -1)
 
@@ -124,10 +116,9 @@ class EditMisurazioneActivity : AppCompatActivity() {
                 .show()
         }
 
-            // Torna indietro
-            btnIndietro.setOnClickListener {
-                finish()
-            }
-
+        // Torna indietro
+        btnIndietro.setOnClickListener {
+            finish()
+        }
     }
 }

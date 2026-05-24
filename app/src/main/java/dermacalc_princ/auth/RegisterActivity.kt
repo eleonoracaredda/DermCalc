@@ -51,8 +51,8 @@ class RegisterActivity : AppCompatActivity() {
         val currentDoctorId = sessionManager.getDoctorId()
 
         if (isEditMode && currentDoctorId != null) {
-            tvTitle.text = "Modifica Profilo"
-            btnRegister.text = "Aggiorna Profilo"
+            tvTitle.text = getString(R.string.modifica_profilo)
+            btnRegister.text = getString(R.string.aggiorna_profilo)
             tvLogin.visibility = View.GONE
             etTaxCode.isEnabled = false // Il Codice Fiscale è chiave primaria e non può essere cambiato
 
@@ -82,39 +82,39 @@ class RegisterActivity : AppCompatActivity() {
 
             // Validazioni granulari per garantire la qualità dei dati
             if (!isEditMode && !InputValidator.isNotEmpty(firstName, lastName, taxCode, email, password)) {
-                Toast.makeText(this, "Compila tutti i campi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.compila_tutti_i_campi), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (!InputValidator.isNameValid(firstName)) {
-                etFirstName.error = "Nome non valido"
+                etFirstName.error = getString(R.string.nome_non_valido)
                 return@setOnClickListener
             }
 
             if (!InputValidator.isNameValid(lastName)) {
-                etLastName.error = "Cognome non valido"
+                etLastName.error = getString(R.string.cognome_non_valido)
                 return@setOnClickListener
             }
 
             if (!InputValidator.isCodiceFiscaleValid(taxCode)) {
-                etTaxCode.error = "Codice fiscale non valido"
+                etTaxCode.error = getString(R.string.codice_fiscale_non_valido)
                 return@setOnClickListener
             }
 
             if (!InputValidator.isEmailValid(email)) {
-                etEmail.error = "Email non valida"
+                etEmail.error = getString(R.string.email_non_valida)
                 return@setOnClickListener
             }
 
             // Password obbligatoria solo in registrazione
             if (!isEditMode && !InputValidator.isPasswordStrong(password)) {
-                etPassword.error = "La password deve contenere almeno 8 caratteri, numeri e lettere"
+                etPassword.error = getString(R.string.password_debole)
                 return@setOnClickListener
             }
 
             // In modifica profilo, la password è opzionale (si cambia solo se inserita)
             if (isEditMode && password.isNotEmpty() && !InputValidator.isPasswordStrong(password)) {
-                etPassword.error = "La nuova password deve contenere almeno 8 caratteri"
+                etPassword.error = getString(R.string.nuova_password_debole)
                 return@setOnClickListener
             }
 
@@ -122,11 +122,11 @@ class RegisterActivity : AppCompatActivity() {
                 // Controlli di unicità eseguiti solo durante la nuova registrazione
                 if (!isEditMode) {
                     if (database.userDao().getUserByEmail(email) != null) {
-                        etEmail.error = "Email già registrata"
+                        etEmail.error = getString(R.string.email_gia_registrata)
                         return@launch
                     }
                     if (database.userDao().getUserByTaxCode(taxCode) != null) {
-                        etTaxCode.error = "Codice fiscale già registrato"
+                        etTaxCode.error = getString(R.string.codice_fiscale_gia_registrato)
                         return@launch
                     }
                 }
@@ -144,7 +144,7 @@ class RegisterActivity : AppCompatActivity() {
                 // Aggiornamento sessione e feedback
                 sessionManager.saveDoctor(taxCode, firstName)
                 Toast.makeText(this@RegisterActivity, 
-                    if (isEditMode) "Profilo aggiornato!" else "Registrazione completata!", 
+                    if (isEditMode) getString(R.string.profilo_aggiornato) else getString(R.string.registrazione_completata),
                     Toast.LENGTH_SHORT).show()
 
                 if (isEditMode) {

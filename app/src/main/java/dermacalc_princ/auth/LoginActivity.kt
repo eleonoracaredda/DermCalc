@@ -81,14 +81,14 @@ class LoginActivity : AppCompatActivity() {
 
             // Validazione input prima di interrogare il DB
             if (!InputValidator.isNotEmpty(email, password)) {
-                Toast.makeText(this, "Inserisci email e password", Toast.LENGTH_SHORT).show()
-                etEmail.error = "Campo obbligatorio"
+                Toast.makeText(this, getString(R.string.inserisci_email_password), Toast.LENGTH_SHORT).show()
+                etEmail.error = getString(R.string.campo_obbligatorio)
                 return@setOnClickListener
             }
 
             if (!InputValidator.isEmailValid(email)) {
-                Toast.makeText(this, "Formato email non valido", Toast.LENGTH_SHORT).show()
-                etEmail.error = "Formato email non valido"
+                Toast.makeText(this, getString(R.string.formato_email_non_valido), Toast.LENGTH_SHORT).show()
+                etEmail.error = getString(R.string.formato_email_non_valido)
                 return@setOnClickListener
             }
 
@@ -103,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         this@LoginActivity,
-                        "Bentornat* Dott. ${user.firstName}",
+                        getString(R.string.bentornato_dott, user.firstName),
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -111,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this@LoginActivity, PazientiActivity::class.java))
                     finish()
                 } else {
-                    etPassword.error = "Credenziali errate"
+                    etPassword.error = getString(R.string.credenziali_errate)
                 }
             }
         }

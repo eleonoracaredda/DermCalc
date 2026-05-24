@@ -73,15 +73,18 @@
     <string name="scheda_paziente">Scheda Paziente</string>
     <string name="terapia_attuale">Terapia Attuale</string>
     <string name="comorbilita">Comorbilità</string>
-    <string name="modifica_paziente">Modifica paziente</string>
+
 
 
     <string name="nessun_paziente_selezionato">Nessun paziente selezionato</string>
-    <string name="visualizza_storico">Visualizza storico</string>
+    <string name="visualizza_storico">Andamento Clinico</string>
     <string name="desc_bmi">Indice Massa Corporea</string>
     <string name="desc_pasi">Severity Index Psoriasi</string>
     <string name="desc_easi">Severity Area Eczema</string>
-    <string name="desc_storico">Grafici e Andamento</string>
+    <string name="desc_storico">Grafici e Analisi Dati</string>
+
+    <string name="lista_misurazioni">Elenco Misurazioni</string>
+    <string name="desc_lista_misurazioni">Vedi tutti i calcoli salvati</string>
 
     <string name="welcome_back">Benvenuto,</string>
     <string name="welcome_login">Bentornato</string>
@@ -138,6 +141,32 @@
     <string name="nuova_password">Nuova Password</string>
     <string name="reimposta_password">Reimposta Password</string>
     <string name="torna_al_login">Torna al Login</string>
+    <string name="storico">Storico</string>
+
+    <string name="modifica_profilo">Modifica Profilo</string>
+    <string name="aggiorna_profilo">Aggiorna Profilo</string>
+    <string name="compila_tutti_i_campi">Compila tutti i campi</string>
+    <string name="nome_non_valido">Nome non valido</string>
+    <string name="cognome_non_valido">Cognome non valido</string>
+    <string name="codice_fiscale_non_valido">Codice fiscale non valido</string>
+    <string name="email_non_valida">Email non valida</string>
+    <string name="password_debole">La password deve contenere almeno 8 caratteri, numeri e lettere</string>
+    <string name="nuova_password_debole">La nuova password deve contenere almeno 8 caratteri</string>
+    <string name="email_gia_registrata">Email già registrata</string>
+    <string name="codice_fiscale_gia_registrato">Codice fiscale già registrato</string>
+    <string name="profilo_aggiornato">Profilo aggiornato!</string>
+    <string name="registrazione_completata">Registrazione completata!</string>
+
+    <string name="inserisci_email_password">Inserisci email e password</string>
+    <string name="campo_obbligatorio">Campo obbligatorio</string>
+    <string name="formato_email_non_valido">Formato email non valido</string>
+    <string name="bentornato_dott">Bentornato Dott. %1$s</string>
+    <string name="credenziali_errate">Credenziali errate</string>
+
+    <string name="inserisci_tutti_i_dati">Inserisci tutti i dati</string>
+    <string name="dati_verificati">Dati verificati</string>
+    <string name="dati_non_corrispondenti">Dati non corrispondenti</string>
+    <string name="password_reimpostata">Password reimpostata con successo</string>
 
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>

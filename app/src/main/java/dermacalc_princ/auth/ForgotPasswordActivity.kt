@@ -49,7 +49,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
             val taxCode = etTaxCode.text.toString().trim()
 
             if (email.isEmpty() || taxCode.isEmpty()) {
-                Toast.makeText(this, "Inserisci tutti i dati", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.inserisci_tutti_i_dati), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -63,9 +63,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     btnVerify.visibility = View.GONE
                     etEmail.isEnabled = false
                     etTaxCode.isEnabled = false
-                    Toast.makeText(this@ForgotPasswordActivity, "Dati verificati", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ForgotPasswordActivity, getString(R.string.dati_verificati), Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@ForgotPasswordActivity, "Dati non corrispondenti", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ForgotPasswordActivity, getString(R.string.dati_non_corrispondenti), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -76,7 +76,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
             // Verifica che la nuova password rispetti i criteri di sicurezza
             if (!InputValidator.isPasswordStrong(newPassword)) {
-                etNewPassword.error = "La password deve contenere almeno 8 caratteri, numeri e lettere"
+                etNewPassword.error = getString(R.string.password_debole)
                 return@setOnClickListener
             }
 
@@ -85,7 +85,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     // Crea una copia dell'utente con la nuova password hashata
                     val updatedUser = user.copy(password = hashPassword(newPassword))
                     database.userDao().updateUser(updatedUser)
-                    Toast.makeText(this@ForgotPasswordActivity, "Password reimpostata con successo", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ForgotPasswordActivity, getString(R.string.password_reimpostata), Toast.LENGTH_SHORT).show()
                     finish() // Torna alla schermata di login
                 }
             }

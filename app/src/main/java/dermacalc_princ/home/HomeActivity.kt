@@ -51,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
         val cardPasi = findViewById<MaterialCardView>(R.id.cardPasi)
         val cardEasi = findViewById<MaterialCardView>(R.id.cardEasi)
         val cardStorico = findViewById<MaterialCardView>(R.id.cardStorico)
+        val cardMisurazioniList = findViewById<MaterialCardView>(R.id.cardMisurazioniList)
         
         // Riferimenti ad altri elementi UI
         val btnLogout = findViewById<Button>(R.id.btnLogout)
@@ -119,6 +120,12 @@ class HomeActivity : AppCompatActivity() {
         }
 
         cardStorico.setOnClickListener {
+            val intent = Intent(this, StoricoActivity::class.java)
+            intent.putExtra("PAZIENTE_ID", pazienteId)
+            startActivity(intent)
+        }
+
+        cardMisurazioniList.setOnClickListener {
             val intent = Intent(this, MisurazioniListActivity::class.java)
             intent.putExtra("PAZIENTE_ID", pazienteId)
             startActivity(intent)
