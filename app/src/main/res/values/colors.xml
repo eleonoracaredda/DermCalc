@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Material 3 Primary Colors (Blue Medical) -->
+    <color name="primary">#2C5E9E</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryContainer">#D6E3FF</color>
+    <color name="onPrimaryContainer">#001B3E</color>
 
-    <!-- Primary Medical Colors -->
-    <color name="primaryColor">#2C5E9E</color>
-    <color name="primaryLightColor">#5E8BCF</color>
-    <color name="primaryDarkColor">#00356F</color>
+    <!-- Material 3 Secondary Colors (Teal/Aqua) -->
+    <color name="secondary">#4DB6AC</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="secondaryContainer">#CEE9E6</color>
+    <color name="onSecondaryContainer">#00201D</color>
 
-    <!-- Secondary Colors -->
-    <color name="secondaryColor">#4DB6AC</color>
-    <color name="secondaryLightColor">#82E9DE</color>
-    <color name="secondaryDarkColor">#00867D</color>
+    <!-- Material 3 Tertiary Colors -->
+    <color name="tertiary">#715573</color>
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="tertiaryContainer">#FCD7FB</color>
+    <color name="onTertiaryContainer">#29132D</color>
 
-    <!-- UI Backgrounds and Surfaces -->
-    <color name="backgroundColor">#F8FAFC</color>
-    <color name="surfaceColor">#FFFFFF</color>
+    <!-- Background and Surface -->
+    <color name="background">#F8FAFC</color>
+    <color name="onBackground">#1A1C1E</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="onSurface">#1A1C1E</color>
+    <color name="surfaceVariant">#E0E2EC</color>
+    <color name="onSurfaceVariant">#43474E</color>
+    <color name="outline">#74777F</color>
 
-    <!-- Text Colors -->
-    <color name="textPrimary">#212121</color>
-    <color name="textSecondary">#757575</color>
-    <color name="textOnPrimary">#FFFFFF</color>
+    <!-- Error -->
+    <color name="error">#BA1A1A</color>
+    <color name="onError">#FFFFFF</color>
 
-    <!-- Accent / Errors -->
-    <color name="error">#B00020</color>
-
-    <!-- Gravity Gradient Colors -->
+    <!-- Medical Gravity Gradient (Kept for severity indicators) -->
     <color name="gravity_0">#E0E0E0</color>
     <color name="gravity_1">#FFCDD2</color>
     <color name="gravity_2">#E57373</color>
     <color name="gravity_3">#F44336</color>
     <color name="gravity_4">#B71C1C</color>
 
-    <!-- Legacy / Compatibility -->
+    <!-- Compatibility Aliases (To avoid breaking existing references) -->
+    <color name="primaryColor">@color/primary</color>
+    <color name="secondaryColor">@color/secondary</color>
+    <color name="backgroundColor">@color/background</color>
+    <color name="surfaceColor">@color/surface</color>
+    <color name="textPrimary">@color/onSurface</color>
+    <color name="textSecondary">@color/onSurfaceVariant</color>
+    <color name="textOnPrimary">@color/onPrimary</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
 </resources>
