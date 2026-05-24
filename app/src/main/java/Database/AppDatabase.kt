@@ -19,7 +19,7 @@ import Dominio.User
         Misurazione::class
     ],
     // Aumenta questo numero SOLO se cambi la struttura delle tabelle (aggiungi colonne, etc.)
-    version = 8, //aumentato da 7 a 8
+    version = 9, //aumentato da 8 a 9 per datiInput
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -30,6 +30,13 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun misurazioneDao(): MisurazioneDao
 
     companion object {
+        // Migrazione dalla versione 8 alla 9: aggiunta colonna datiInput a misurazioni
+        val MIGRATION_8_9 = object : Migration(8, 9) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                runCatching { db.execSQL("ALTER TABLE misurazioni ADD COLUMN datiInput TEXT") }
+            }
+        }
+
         // Migrazione dalla versione 7 alla 8: aggiunta colonna sesso
         val MIGRATION_7_8 = object : Migration(7, 8) {
             override fun migrate(db: SupportSQLiteDatabase) {
@@ -64,7 +71,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "dermcalc_database"
                 )
-                    .addMigrations(MIGRATION_6_7, MIGRATION_7_8) // Registrazione delle migrazioni
+                    .addMigrations(MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9) // Registrazione delle migrazioni
                     .fallbackToDestructiveMigration(true) // Evita crash bloccanti se la migrazione fallisce
                     .build()
 

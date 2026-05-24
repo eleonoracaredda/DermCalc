@@ -27,6 +27,9 @@ data class Misurazione(
     // Data in cui è stata effettuata la misurazione
     val data: Date,
 
+    // Dati di input salvati in formato stringa (es. "peso:70,altezza:175" o JSON)
+    val datiInput: String? = null,
+
     //Note
     val note: String? = null
 )

@@ -146,7 +146,12 @@ class EasiActivity : AppCompatActivity() {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
             val note = etNotes.text.toString()
-            salvaEasi(pazienteId, totalScore, severita, note)
+
+            val datiInput = regions.joinToString(";") {
+                "${it.eritema},${it.edema},${it.escoriazioni},${it.lichenificazione},${it.area}"
+            }
+
+            salvaEasi(pazienteId, totalScore, severita, note, datiInput)
         }
 
         findViewById<Button>(R.id.btnBack).setOnClickListener {
@@ -226,7 +231,7 @@ class EasiActivity : AppCompatActivity() {
         tvProgressDetails.text = "$completedRegions di 4 regioni completate"
     }
 
-    private fun salvaEasi(idPaziente: Int, valore: Double, severita: String, note: String?) {
+    private fun salvaEasi(idPaziente: Int, valore: Double, severita: String, note: String?, datiInput: String) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.insertMisurazione(
                 Misurazione(
@@ -235,6 +240,7 @@ class EasiActivity : AppCompatActivity() {
                     valore = valore,
                     severita = severita,
                     data = Date(),
+                    datiInput = datiInput,
                     note = note
                 )
             )

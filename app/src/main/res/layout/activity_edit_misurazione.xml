@@ -75,6 +75,15 @@
                         android:textColor="@color/textPrimary"
                         android:layout_marginBottom="20dp"/>
 
+                    <!-- Container per campi dinamici (es. Peso/Altezza per BMI) -->
+                    <LinearLayout
+                        android:id="@+id/containerDatiInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginBottom="16dp" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilValore"
                         style="@style/Widget.DermCalc.EditText"

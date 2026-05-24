@@ -45,25 +45,24 @@ class MisurazioniListActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener { finish() }
 
-        // Carico le misurazioni del paziente
+        // Carico le misurazioni del paziente in modo reattivo
         lifecycleScope.launch {
+            repository.getStoricoPaziente(pazienteId).collect { lista ->
+                // Se non ci sono misurazioni → mostro empty state
+                if (lista.isEmpty()) {
+                    empty.visibility = View.VISIBLE
+                    rv.visibility = View.GONE
+                } else {
+                    empty.visibility = View.GONE
+                    rv.visibility = View.VISIBLE
 
-            val lista = repository.getStoricoPaziente(pazienteId)
-
-            // Se non ci sono misurazioni → mostro empty state
-            if (lista.isEmpty()) {
-                empty.visibility = View.VISIBLE
-                rv.visibility = View.GONE
-            } else {
-                empty.visibility = View.GONE
-                rv.visibility = View.VISIBLE
-
-                // Adapter con click per aprire la modifica
-                rv.adapter = MisurazioniAdapter(lista) { mis ->
-                    val intent =
-                        Intent(this@MisurazioniListActivity, EditMisurazioneActivity::class.java)
-                    intent.putExtra("MISURAZIONE_ID", mis.id)
-                    startActivity(intent)
+                    // Adapter con click per aprire la modifica
+                    rv.adapter = MisurazioniAdapter(lista) { mis ->
+                        val intent =
+                            Intent(this@MisurazioniListActivity, EditMisurazioneActivity::class.java)
+                        intent.putExtra("MISURAZIONE_ID", mis.id)
+                        startActivity(intent)
+                    }
                 }
             }
         }

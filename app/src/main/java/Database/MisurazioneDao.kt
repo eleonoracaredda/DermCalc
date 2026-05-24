@@ -2,6 +2,7 @@ package Database
 
 import androidx.room.*
 import Dominio.Misurazione
+import kotlinx.coroutines.flow.Flow
 
 // Interfaccia DAO per l'accesso ai dati delle misurazioni nel database
 @Dao
@@ -17,7 +18,7 @@ interface MisurazioneDao {
         WHERE pazienteId = :id
         ORDER BY data ASC
     """)
-    suspend fun getStorico(id: Int): List<Misurazione>
+    fun getStorico(id: Int): Flow<List<Misurazione>>
 
     // Storico filtrato per tipo (BMI, PASI, EASI)
     @Query("""

@@ -74,7 +74,7 @@ class BmiActivity : AppCompatActivity() {
                 tvResultValue.text = "%.1f".format(bmi)
                 tvSeverityLabel.text = severity
 
-                salvaBmi(pazienteId, bmi, severity, note)
+                salvaBmi(pazienteId, bmi, severity, note, weight, height)
             } else {
                 Toast.makeText(this, "Inserisci tutti i valori", Toast.LENGTH_SHORT).show()
             }
@@ -86,7 +86,7 @@ class BmiActivity : AppCompatActivity() {
         return true
     }
 
-    private fun salvaBmi(idPaziente: Int, valore: Double, severita: String, note: String) {
+    private fun salvaBmi(idPaziente: Int, valore: Double, severita: String, note: String, weight: Double, height: Double) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.insertMisurazione(
                 Misurazione(
@@ -95,6 +95,7 @@ class BmiActivity : AppCompatActivity() {
                     valore = valore,
                     severita = severita,
                     data = Date(),
+                    datiInput = "weight:$weight,height:$height",
                     note = note
                 )
             )

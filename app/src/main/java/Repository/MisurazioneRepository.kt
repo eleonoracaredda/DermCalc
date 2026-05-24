@@ -2,6 +2,7 @@ package Repository
 
 import Database.AppDatabase
 import Dominio.Misurazione
+import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
 class MisurazioneRepository(private val db: AppDatabase) {
@@ -21,8 +22,8 @@ class MisurazioneRepository(private val db: AppDatabase) {
         db.misurazioneDao().delete(misurazione)
     }
 
-    // Storico completo del paziente
-    suspend fun getStoricoPaziente(idPaziente: Int): List<Misurazione> {
+    // Storico completo del paziente (Reattivo tramite Flow)
+    fun getStoricoPaziente(idPaziente: Int): Flow<List<Misurazione>> {
         return db.misurazioneDao().getStorico(idPaziente)
     }
 

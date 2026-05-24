@@ -146,7 +146,12 @@ class PasiActivity : AppCompatActivity() {
             val totalScore = calculateTotalPasi()
             val severita = pasiCalculator.severity(totalScore)
             val note = etNotes.text.toString()
-            salvaPasi(pazienteId, totalScore, severita, note)
+
+            val datiInput = regions.joinToString(";") {
+                "${it.eritema},${it.indurimento},${it.desquamazione},${it.area}"
+            }
+
+            salvaPasi(pazienteId, totalScore, severita, note, datiInput)
         }
 
         findViewById<Button>(R.id.btnBack).setOnClickListener {
@@ -229,7 +234,7 @@ class PasiActivity : AppCompatActivity() {
         tvProgressDetails.text = "$completedRegions di 4 regioni completate"
     }
 
-    private fun salvaPasi(idPaziente: Int, valore: Double, severita: String, note: String?) {
+    private fun salvaPasi(idPaziente: Int, valore: Double, severita: String, note: String?, datiInput: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 repository.insertMisurazione(
@@ -239,6 +244,7 @@ class PasiActivity : AppCompatActivity() {
                         valore = valore,
                         severita = severita,
                         data = Date(),
+                        datiInput = datiInput,
                         note = note
                     )
                 )
