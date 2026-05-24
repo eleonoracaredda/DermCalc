@@ -14,7 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="12dp"
+        android:paddingTop="20dp">
 
         <!-- Avatar -->
         <FrameLayout
@@ -72,10 +73,10 @@
         <!-- Pulsante Modifica -->
         <ImageButton
             android:id="@+id/btnEditPaziente"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Modifica Paziente"
+            android:contentDescription="@string/modifica_paziente"
             android:src="@drawable/ic_edit"
             app:tint="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"

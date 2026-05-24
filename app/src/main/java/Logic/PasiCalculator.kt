@@ -1,6 +1,6 @@
-package com.example.dermcalc_princ.logic
+package Logic
 
-import com.example.dermcalc_princ.dominio.DatiDistretto
+import Dominio.DatiDistretto
 
 // Classe per il calcolo del PASI (Psoriasis Area and Severity Index)
 // Il calcolo si basa sulla somma dei segni clinici pesati per l'estensione dell'area 

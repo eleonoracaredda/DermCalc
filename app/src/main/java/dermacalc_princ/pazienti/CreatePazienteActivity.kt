@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.pazienti
+package dermacalc_princ.pazienti
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,15 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.dominio.Pazienti
-import com.example.dermcalc_princ.utils.SessionManager
+import Database.AppDatabase
+import Dominio.Pazienti
+import Utils.SessionManager
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Utils.LocaleHelper
 import android.content.Context
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class CreatePazienteActivity : AppCompatActivity() {
 
@@ -45,10 +48,10 @@ class CreatePazienteActivity : AppCompatActivity() {
         val etDataInizioTerapia = findViewById<TextInputEditText>(R.id.etDataInizioTerapia)
         val etCaregiverNome = findViewById<TextInputEditText>(R.id.etCaregiverNome)
         val etCaregiverTelefono = findViewById<TextInputEditText>(R.id.etCaregiverTelefono)
-        val swConsenso = findViewById<com.google.android.material.switchmaterial.SwitchMaterial>(R.id.swConsenso)
-        val rgSesso = findViewById<android.widget.RadioGroup>(R.id.rgSesso)
-        val rbMaschio = findViewById<android.widget.RadioButton>(R.id.rbMaschio)
-        val rbFemmina = findViewById<android.widget.RadioButton>(R.id.rbFemmina)
+        val swConsenso = findViewById<SwitchMaterial>(R.id.swConsenso)
+        val rgSesso = findViewById<RadioGroup>(R.id.rgSesso)
+        val rbMaschio = findViewById<RadioButton>(R.id.rbMaschio)
+        val rbFemmina = findViewById<RadioButton>(R.id.rbFemmina)
         val btnSalva = findViewById<Button>(R.id.btnSalvaPaziente)
 
         val database = AppDatabase.getDatabase(this)

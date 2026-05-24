@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.calcolatori
+package dermacalc_princ.calcolatori
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,19 +7,20 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.dominio.Misurazione
+import Database.AppDatabase
+import Dominio.Misurazione
 import java.util.Date
-import com.example.dermcalc_princ.logic.EasiCalculator
+import Logic.EasiCalculator
 import com.example.dermcalc_princ.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.example.dermcalc_princ.repository.MisurazioneRepository
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Repository.MisurazioneRepository
+import Utils.LocaleHelper
 import android.content.Context
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 class EasiActivity : AppCompatActivity() {
 
@@ -57,7 +58,7 @@ class EasiActivity : AppCompatActivity() {
     private lateinit var tvAreaVal: TextView
     private lateinit var tvTotalScore: TextView
     private lateinit var tvCurrentRegionScore: TextView
-    private lateinit var progressBar: com.google.android.material.progressindicator.LinearProgressIndicator
+    private lateinit var progressBar: LinearProgressIndicator
     private lateinit var tvProgressDetails: TextView
     private lateinit var etNotes: EditText
 

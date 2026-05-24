@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.pazienti
+package dermacalc_princ.pazienti
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,23 +6,22 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import com.example.dermcalc_princ.database.AppDatabase
-import com.example.dermcalc_princ.auth.RegisterActivity
-import com.example.dermcalc_princ.home.HomeActivity
-import com.example.dermcalc_princ.utils.SessionManager
+import Database.AppDatabase
+import dermacalc_princ.auth.RegisterActivity
+import dermacalc_princ.home.HomeActivity
+import Utils.SessionManager
 import kotlinx.coroutines.launch
-import com.example.dermcalc_princ.database.PazienteDao
 import android.text.Editable
 import android.text.TextWatcher
 import com.google.android.material.textfield.TextInputEditText
 
-import com.example.dermcalc_princ.utils.LocaleHelper
+import Utils.LocaleHelper
 import android.content.Context
+import android.view.View
 
 // Activity principale per la gestione dell'elenco pazienti associati al medico loggato
 class PazientiActivity : AppCompatActivity() {
@@ -34,7 +33,7 @@ class PazientiActivity : AppCompatActivity() {
     private lateinit var rvPazienti: RecyclerView
     private lateinit var btnNuovoPaziente: Button
     private lateinit var etSearch: TextInputEditText
-    private lateinit var llEmptyState: android.view.View
+    private lateinit var llEmptyState: View
     private lateinit var database: AppDatabase
     private lateinit var sessionManager: SessionManager
 
@@ -124,11 +123,11 @@ class PazientiActivity : AppCompatActivity() {
 
             // Mostra o nasconde l'empty state
             if (pazientiList.isEmpty()) {
-                llEmptyState.visibility = android.view.View.VISIBLE
-                rvPazienti.visibility = android.view.View.GONE
+                llEmptyState.visibility = View.VISIBLE
+                rvPazienti.visibility = View.GONE
             } else {
-                llEmptyState.visibility = android.view.View.GONE
-                rvPazienti.visibility = android.view.View.VISIBLE
+                llEmptyState.visibility = View.GONE
+                rvPazienti.visibility = View.VISIBLE
             }
 
             // Configurazione dell'adapter con le relative callback

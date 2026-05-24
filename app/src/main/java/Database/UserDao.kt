@@ -1,10 +1,11 @@
-package com.example.dermcalc_princ.database
+package Database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.dermcalc_princ.dominio.User
+import androidx.room.Update
+import Dominio.User
 
 // Interfaccia DAO per la gestione degli utenti (autenticazione e registrazione)
 @Dao
@@ -23,6 +24,6 @@ interface UserDao {
     suspend fun getUserByEmail(email: String): User?
 
     // Aggiorna un utente esistente (per reset password)
-    @androidx.room.Update
+    @Update
     suspend fun updateUser(user: User)
 }

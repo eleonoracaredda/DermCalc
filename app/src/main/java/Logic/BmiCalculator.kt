@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.logic
+package Logic
 
 // Classe per il calcolo dell'Indice di Massa Corporea (BMI)
 class BmiCalculator {
