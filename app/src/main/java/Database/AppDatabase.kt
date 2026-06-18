@@ -72,7 +72,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "dermcalc_database"
                 )
                     .addMigrations(MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9) // Registrazione delle migrazioni
-                    .fallbackToDestructiveMigration(true) // Evita crash bloccanti se la migrazione fallisce
+                    // .fallbackToDestructiveMigration(true) // Commentato per evitare la cancellazione automatica dei dati in caso di errore di migrazione
                     .build()
 
                 INSTANCE = instance
