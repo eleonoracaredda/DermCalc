@@ -76,8 +76,38 @@ class BmiActivity : AppCompatActivity() {
             val note = etNotes.text.toString()
 
             if (weightStr.isNotEmpty() && heightStr.isNotEmpty()) {
-                val weight = weightStr.toDouble()
-                val height = heightStr.toDouble()
+
+                val weight = weightStr.toDoubleOrNull()
+                val height = heightStr.toDoubleOrNull()
+
+                if (weight == null || height == null) {
+                    Toast.makeText(
+                        this,
+                        "Inserire valori numerici validi",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
+                // Controllo peso
+                if (weight < 20 || weight > 300) {
+                    Toast.makeText(
+                        this,
+                        "Il peso deve essere compreso tra 20 e 300 kg",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
+                // Controllo altezza
+                if (height < 60 || height > 250) {
+                    Toast.makeText(
+                        this,
+                        "L'altezza deve essere compresa tra 60 e 250 cm",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
 
                 val bmi = bmiCalculator.calculate(weight, height)
                 val severity = bmiCalculator.getSeverity(bmi)
@@ -86,15 +116,21 @@ class BmiActivity : AppCompatActivity() {
                 tvResultValue.text = String.format("%.1f", bmi)
                 tvSeverityLabel.text = severity
                 tvSeverityLabel.visibility = View.VISIBLE
-                
+
                 updateSeverityUI(bmi, severity)
 
                 salvaBmi(pazienteId, bmi, severity, note, weight, height)
+
             } else {
-                Toast.makeText(this, getString(R.string.compila_tutti_i_campi), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.compila_tutti_i_campi),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        }
     }
+    }
+
 
     private fun updateSeverityUI(bmi: Double, severity: String) {
         val color = when (severity) {
