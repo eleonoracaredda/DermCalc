@@ -19,12 +19,12 @@
     <string name="desc_quattro">Very Severe (4)</string>
 
     <string name="area_0">0% (0)</string>
-    <string name="area_1">1-9% (1)</string>
-    <string name="area_2">10-29% (2)</string>
-    <string name="area_3">30-49% (3)</string>
-    <string name="area_4">50-69% (4)</string>
-    <string name="area_5">70-89% (5)</string>
-    <string name="area_6">90-100% (6)</string>
+    <string name="area_1">1–9% (1)</string>
+    <string name="area_2">10–29% (2)</string>
+    <string name="area_3">30–49% (3)</string>
+    <string name="area_4">50–69% (4)</string>
+    <string name="area_5">70–89% (5)</string>
+    <string name="area_6">90–100% (6)</string>
 
     <string name="distretto_testa">Head</string>
     <string name="distretto_testa_collo">Head and neck</string>
@@ -47,8 +47,8 @@
     <string name="calcolatore_bmi">BMI Calculator</string>
     <string name="peso_kg">Weight (kg)</string>
     <string name="altezza_cm">Height (cm)</string>
-    <string name="calcola_e_salva1">Calculate and Save</string>
-    <string name="risultato">Result: -</string>
+
+    <string name="risultato">Result: –</string>
     <string name="risultato_bmi_label">BMI Result: %1$.2f (%2$s)</string>
 
     <string name="codice_fiscale">Tax Code</string>
@@ -59,10 +59,7 @@
     <string name="registrati">Register</string>
 
     <string name="menu_principale">Main Menu</string>
-    <string name="calcolatore_bmi1">BMI Calculator</string>
-    <string name="calcolatore_easi1">EASI Calculator</string>
     <string name="log_out">Logout</string>
-    <string name="calcolatore_pasi1">PASI Calculator</string>
     <string name="calcolatore_pasi">PASI Calculator</string>
 
     <string name="indurimento_spessore_infiltrazione">Induration (thickness/infiltration)</string>
@@ -100,7 +97,7 @@
     <string name="aggiungi_paziente">Add Patient</string>
     <string name="modifica_paziente">Edit Patient</string>
     <string name="nuovo_paziente">New Patient</string>
-    <string name="cerca_paziente">Search patient...</string>
+    <string name="cerca_paziente">Search patient…</string>
 
     <string name="nessun_paziente_trovato">No patient found</string>
     <string name="incoraggiamento_pazienti">Start by adding your first patient\nusing the button below.</string>
@@ -131,6 +128,11 @@
     <string name="telefono_caregiver">Caregiver Phone</string>
 
     <string name="risultato_caps">RESULT</string>
+    <string name="bmi_placeholder">--</string>
+    <string name="dash">–</string>
+    <string name="bmi_18_5">18.5</string>
+    <string name="bmi_25">25</string>
+    <string name="bmi_30">30</string>
 
     <string name="recupero_password">Password Recovery</string>
     <string name="forgot_subtitle">Enter your details to reset your password</string>
@@ -157,7 +159,7 @@
     <string name="default_score">0.0</string>
     <string name="dottore_default">Dr. Name Surname</string>
     <string name="email_default">email@example.com</string>
-    <string name="modifica_profilo_desc">Edit Profile</string>
+
     <string name="email_gia_registrata">Email already registered</string>
     <string name="codice_fiscale_gia_registrato">Tax code already registered</string>
     <string name="profilo_aggiornato">Profile updated!</string>
@@ -173,6 +175,19 @@
     <string name="dati_verificati">Data verified</string>
     <string name="dati_non_corrispondenti">Data mismatch</string>
     <string name="password_reimpostata">Password reset successfully</string>
+    <string name="totale_easi">TOTAL EASI</string>
+    <string name="modifica_misurazione">Edit Measurement</string>
+    <string name="tipo_di_misurazione">MEASUREMENT TYPE</string>
+    <string name="bmi">BMI</string>
+    <string name="valore">Value</string>
+    <string name="note">Notes</string>
+    <string name="_12_05_2024_14_22">12/05/2024 14:22</string>
+    <string name="salva_modifiche">Save changes</string>
+    <string name="elimina_misurazione">Delete measurement</string>
+    <string name="slash">–</string>
+    <string name="easi">EASI</string>
+    <string name="pasi">PASI</string>
+    <string name="ultima_misurazione">LAST MEASUREMENT</string>
 
     <string-array name="body_parts_easi">
         <item>Head and neck</item>

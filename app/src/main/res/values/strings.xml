@@ -20,12 +20,12 @@
     <string name="desc_quattro">Molto Grave (4)</string>
 
     <string name="area_0">0% (0)</string>
-    <string name="area_1">1-9% (1)</string>
-    <string name="area_2">10-29% (2)</string>
-    <string name="area_3">30-49% (3)</string>
-    <string name="area_4">50-69% (4)</string>
-    <string name="area_5">70-89% (5)</string>
-    <string name="area_6">90-100% (6)</string>
+    <string name="area_1">1–9% (1)</string>
+    <string name="area_2">10–29% (2)</string>
+    <string name="area_3">30–49% (3)</string>
+    <string name="area_4">50–69% (4)</string>
+    <string name="area_5">70–89% (5)</string>
+    <string name="area_6">90–100% (6)</string>
 
     <string name="distretto_testa">Testa</string>
     <string name="distretto_testa_collo">Testa e collo</string>
@@ -48,8 +48,8 @@
     <string name="calcolatore_bmi">Calcolatore BMI</string>
     <string name="peso_kg">Peso (kg)</string>
     <string name="altezza_cm">Altezza (cm)</string>
-    <string name="calcola_e_salva1">Calcola e Salva</string>
-    <string name="risultato">Risultato: -</string>
+
+    <string name="risultato">Risultato: –</string>
     <string name="risultato_bmi_label">Risultato BMI: %1$.2f (%2$s)</string>
 
     <string name="codice_fiscale">Codice Fiscale</string>
@@ -60,10 +60,7 @@
     <string name="registrati">Registrati</string>
 
     <string name="menu_principale">Menu Principale</string>
-    <string name="calcolatore_bmi1">Calcolatore BMI</string>
-    <string name="calcolatore_easi1">Calcolatore EASI</string>
     <string name="log_out">Log out</string>
-    <string name="calcolatore_pasi1">Calcolatore PASI</string>
     <string name="calcolatore_pasi">Calcolatore PASI</string>
 
     <string name="indurimento_spessore_infiltrazione">Indurimento (spessore/infiltrazione)</string>
@@ -103,7 +100,7 @@
     <string name="aggiungi_paziente">Aggiungi Paziente</string>
     <string name="modifica_paziente">Modifica Paziente</string>
     <string name="nuovo_paziente">Nuovo Paziente</string>
-    <string name="cerca_paziente">Cerca paziente...</string>
+    <string name="cerca_paziente">Cerca paziente…</string>
 
     <string name="nessun_paziente_trovato">Nessun paziente trovato</string>
     <string name="incoraggiamento_pazienti">Inizia aggiungendo il tuo primo paziente\ncon il tasto qui sotto.</string>
@@ -134,6 +131,11 @@
     <string name="telefono_caregiver">Telefono Caregiver</string>
 
     <string name="risultato_caps">RISULTATO</string>
+    <string name="bmi_placeholder">--</string>
+    <string name="dash">–</string>
+    <string name="bmi_18_5">18.5</string>
+    <string name="bmi_25">25</string>
+    <string name="bmi_30">30</string>
 
     <string name="recupero_password">Recupero Password</string>
     <string name="forgot_subtitle">Inserisci i tuoi dati per reimpostare la password</string>
@@ -160,7 +162,7 @@
     <string name="default_score">0.0</string>
     <string name="dottore_default">Dott. Nome Cognome</string>
     <string name="email_default">email@example.com</string>
-    <string name="modifica_profilo_desc">Modifica Profilo</string>
+
     <string name="email_gia_registrata">Email già registrata</string>
     <string name="codice_fiscale_gia_registrato">Codice fiscale già registrato</string>
     <string name="profilo_aggiornato">Profilo aggiornato!</string>
@@ -176,6 +178,19 @@
     <string name="dati_verificati">Dati verificati</string>
     <string name="dati_non_corrispondenti">Dati non corrispondenti</string>
     <string name="password_reimpostata">Password reimpostata con successo</string>
+    <string name="totale_easi">TOTALE EASI</string>
+    <string name="modifica_misurazione">Modifica Misurazione</string>
+    <string name="tipo_di_misurazione">TIPO DI MISURAZIONE</string>
+    <string name="bmi">BMI</string>
+    <string name="valore">Valore</string>
+    <string name="note">Note</string>
+    <string name="_12_05_2024_14_22">12/05/2024 14:22</string>
+    <string name="salva_modifiche">Salva modifiche</string>
+    <string name="elimina_misurazione">Elimina misurazione</string>
+    <string name="slash">–</string>
+    <string name="easi">EASI</string>
+    <string name="pasi">PASI</string>
+    <string name="ultima_misurazione">ULTIMA MISURAZIONE</string>
 
     <string-array name="body_parts_easi">
         <item>Testa e collo</item>

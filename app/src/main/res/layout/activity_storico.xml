@@ -3,7 +3,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
@@ -54,7 +53,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ULTIMA MISURAZIONE"
+                        android:text="@string/ultima_misurazione"
                         android:textColor="@color/primaryColor"
                         android:textSize="12sp"
                         android:textStyle="bold"
@@ -76,7 +75,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="BMI"
+                                android:text="@string/bmi"
                                 android:textSize="14sp"
                                 android:textColor="@color/textSecondary" />
 
@@ -84,7 +83,7 @@
                                 android:id="@+id/tvLastBmi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="-"
+                                android:text="@string/slash"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary" />
@@ -114,7 +113,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="PASI"
+                                android:text="@string/pasi"
                                 android:textSize="14sp"
                                 android:textColor="@color/textSecondary" />
 
@@ -122,7 +121,7 @@
                                 android:id="@+id/tvLastPasi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="-"
+                                android:text="@string/slash"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary" />
@@ -152,7 +151,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="EASI"
+                                android:text="@string/easi"
                                 android:textSize="14sp"
                                 android:textColor="@color/textSecondary" />
 
@@ -160,7 +159,7 @@
                                 android:id="@+id/tvLastEasi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="-"
+                                android:text="@string/slash"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary" />
@@ -302,7 +301,8 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_history"
                 app:tint="@color/primary"
-                android:alpha="0.6" />
+                android:alpha="0.6"
+                android:importantForAccessibility="no" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -332,6 +332,7 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="16dp"
         android:text="@string/indietro" />

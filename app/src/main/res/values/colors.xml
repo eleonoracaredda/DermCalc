@@ -24,8 +24,8 @@
     <color name="surface">#FFFFFF</color>
     <color name="onSurface">#1A1C1E</color>
     <color name="surfaceVariant">#E0E2EC</color>
-    <color name="onSurfaceVariant">#43474E</color>
-    <color name="outline">#74777F</color>
+    <color name="onSurfaceVariant">#41474D</color>
+    <color name="outline">#646970</color>
 
     <!-- Error -->
     <color name="error">#BA1A1A</color>
@@ -38,9 +38,15 @@
     <color name="gravity_3">#F44336</color>
     <color name="gravity_4">#B71C1C</color>
 
+    <!-- BMI Gauge Colors -->
+    <color name="bmi_underweight">#4FC3F7</color>
+    <color name="bmi_normal">#81C784</color>
+    <color name="bmi_overweight">#FFF176</color>
+    <color name="bmi_obese">#E57373</color>
+
     <!-- Compatibility Aliases (To avoid breaking existing references) -->
     <color name="primaryColor">@color/primary</color>
-    <color name="primaryLightColor">#5E8BCF</color>
+    <color name="primaryLightColor">#4372B7</color>
     <color name="primaryDarkColor">#00356F</color>
     <color name="secondaryColor">@color/secondary</color>
     <color name="secondaryLightColor">#82E9DE</color>

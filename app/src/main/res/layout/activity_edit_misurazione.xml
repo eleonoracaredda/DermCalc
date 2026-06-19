@@ -2,7 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
@@ -30,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Modifica Misurazione"
+                android:text="@string/modifica_misurazione"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +39,7 @@
             <!-- Card Principale -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardEdit"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -49,7 +48,10 @@
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
-                app:layout_constraintTop_toBottomOf="@id/headerView">
+                app:layout_constraintTop_toBottomOf="@id/headerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_max="488dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -61,7 +63,7 @@
                         android:id="@+id/tvTipoLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TIPO DI MISURAZIONE"
+                        android:text="@string/tipo_di_misurazione"
                         android:textColor="@color/primaryColor"
                         android:textSize="11sp"
                         android:textStyle="bold"
@@ -71,7 +73,7 @@
                         android:id="@+id/tvTipo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BMI"
+                        android:text="@string/bmi"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/textPrimary"
@@ -91,7 +93,7 @@
                         style="@style/Widget.DermCalc.EditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Valore">
+                        android:hint="@string/valore">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etValore"
@@ -106,7 +108,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Severità">
+                        android:hint="@string/severita">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etSeverita"
@@ -120,7 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Note">
+                        android:hint="@string/note">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etNote"
@@ -135,7 +137,7 @@
                         android:id="@+id/tvData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12/05/2024 14:22"
+                        android:text="@string/_12_05_2024_14_22"
                         android:textColor="@color/textSecondary"
                         android:textSize="13sp"
                         android:layout_marginTop="16dp"
@@ -145,44 +147,47 @@
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Bottoni Azione -->
-            <LinearLayout
-                android:id="@+id/llButtons"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSalva"
+                style="@style/Widget.DermCalc.Button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/cardEdit">
+                android:text="@string/salva_modifiche"
+                app:layout_constraintWidth_max="320dp"
+                app:layout_constraintTop_toBottomOf="@id/cardEdit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSalva"
-                    style="@style/Widget.DermCalc.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Salva modifiche" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnElimina"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/elimina_misurazione"
+                android:textColor="@color/error"
+                app:layout_constraintTop_toBottomOf="@id/btnSalva"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnElimina"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Elimina misurazione"
-                    android:textColor="@color/error" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnIndietro"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="40dp"
-                    android:text="@string/indietro"
-                    android:textColor="@color/primaryColor" />
-
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIndietro"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="40dp"
+                android:text="@string/indietro"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintTop_toBottomOf="@id/btnElimina"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

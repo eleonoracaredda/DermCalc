@@ -40,7 +40,7 @@
             <!-- Card Input -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardInputs"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -49,20 +49,25 @@
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
-                app:layout_constraintTop_toBottomOf="@id/headerView">
+                app:layout_constraintTop_toBottomOf="@id/headerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_max="488dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="24dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilWeight"
                         style="@style/Widget.DermCalc.EditText"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/peso_kg"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:startIconDrawable="@drawable/ic_bmi"
                         app:startIconTint="@color/primaryColor">
 
@@ -76,10 +81,13 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilHeight"
                         style="@style/Widget.DermCalc.EditText"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:hint="@string/altezza_cm"
+                        app:layout_constraintTop_toBottomOf="@id/tilWeight"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:startIconDrawable="@drawable/ic_bmi"
                         app:startIconTint="@color/primaryColor">
 
@@ -93,10 +101,13 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilNotes"
                         style="@style/Widget.DermCalc.EditText"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:hint="@string/note_hint">
+                        android:hint="@string/note_hint"
+                        app:layout_constraintTop_toBottomOf="@id/tilHeight"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etNotes"
@@ -110,25 +121,32 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCalculateBmi"
                         style="@style/Widget.DermCalc.Button"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="@string/calcola_e_salva1" />
+                        android:text="@string/calcola_e_salva"
+                        app:layout_constraintTop_toBottomOf="@id/tilNotes"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintWidth_max="320dp" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Card Risultato con Gauge Visivo -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardResult"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
-                app:layout_constraintTop_toBottomOf="@id/cardInputs">
+                app:layout_constraintTop_toBottomOf="@id/cardInputs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_max="488dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,7 +168,7 @@
                         android:id="@+id/tvResultValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--"
+                        android:text="@string/bmi_placeholder"
                         android:textColor="@color/primaryColor"
                         android:textSize="48sp"
                         android:textStyle="bold" />
@@ -163,8 +181,8 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="6dp"
                         android:background="@drawable/bg_severity_badge"
-                        android:text="-"
-                        android:textColor="@color/white"
+                        android:text="@string/dash"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="invisible"
@@ -172,51 +190,103 @@
                         tools:backgroundTint="@color/secondaryColor" />
 
                     <!-- Gauge Visivo -->
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/gaugeContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginTop="24dp">
 
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        <View
+                            android:id="@+id/viewUnderweight"
+                            android:layout_width="0dp"
+                            android:layout_height="12dp"
+                            android:background="@color/bmi_underweight"
+                            app:layout_constraintHorizontal_weight="18.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/viewNormal"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="12dp"/>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="12dp"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="8dp">
-                                <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="18.5" android:background="#4FC3F7" /> <!-- Sottopeso -->
-                                <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="6.5" android:background="#81C784" /> <!-- Normale -->
-                                <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="5" android:background="#FFF176" /> <!-- Sovrappeso -->
-                                <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="10" android:background="#E57373" /> <!-- Obeso -->
-                            </LinearLayout>
+                        <View
+                            android:id="@+id/viewNormal"
+                            android:layout_width="0dp"
+                            android:layout_height="12dp"
+                            android:background="@color/bmi_normal"
+                            app:layout_constraintHorizontal_weight="6.5"
+                            app:layout_constraintStart_toEndOf="@id/viewUnderweight"
+                            app:layout_constraintEnd_toStartOf="@+id/viewOverweight"
+                            app:layout_constraintTop_toTopOf="@id/viewUnderweight"/>
 
-                            <ImageView
-                                android:id="@+id/ivGaugeIndicator"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/ic_arrow_drop_down"
-                                app:tint="@color/primaryColor"
-                                android:contentDescription="@null"
-                                android:layout_gravity="top|start"
-                                android:translationX="-10dp"
-                                android:visibility="invisible"
-                                tools:visibility="visible"
-                                tools:translationX="150dp"/>
-                        </FrameLayout>
+                        <View
+                            android:id="@+id/viewOverweight"
+                            android:layout_width="0dp"
+                            android:layout_height="12dp"
+                            android:background="@color/bmi_overweight"
+                            app:layout_constraintHorizontal_weight="5"
+                            app:layout_constraintStart_toEndOf="@id/viewNormal"
+                            app:layout_constraintEnd_toStartOf="@+id/viewObese"
+                            app:layout_constraintTop_toTopOf="@id/viewUnderweight"/>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <View
+                            android:id="@+id/viewObese"
+                            android:layout_width="0dp"
+                            android:layout_height="12dp"
+                            android:background="@color/bmi_obese"
+                            app:layout_constraintHorizontal_weight="10"
+                            app:layout_constraintStart_toEndOf="@id/viewOverweight"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/viewUnderweight"/>
+
+                        <ImageView
+                            android:id="@+id/ivGaugeIndicator"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_drop_down"
+                            app:tint="@color/primaryColor"
+                            android:contentDescription="@null"
+                            android:visibility="invisible"
+                            tools:visibility="visible"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:translationX="-10dp" />
+
+                        <TextView
+                            android:id="@+id/tvLabel18"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18.5" android:textSize="10sp" android:layout_alignParentStart="true" android:layout_marginStart="120dp" tools:ignore="SmallSp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25" android:textSize="10sp" android:layout_centerHorizontal="true" tools:ignore="SmallSp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30" android:textSize="10sp" android:layout_alignParentEnd="true" android:layout_marginEnd="80dp" tools:ignore="SmallSp" />
-                        </RelativeLayout>
-                    </LinearLayout>
+                            android:text="@string/bmi_18_5"
+                            android:textSize="10sp"
+                            app:layout_constraintTop_toBottomOf="@id/viewUnderweight"
+                            app:layout_constraintStart_toEndOf="@id/viewUnderweight"
+                            app:layout_constraintEnd_toEndOf="@id/viewUnderweight"
+                            android:layout_marginTop="4dp"
+                            tools:ignore="SmallSp" />
+
+                        <TextView
+                            android:id="@+id/tvLabel25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bmi_25"
+                            android:textSize="10sp"
+                            app:layout_constraintTop_toBottomOf="@id/viewNormal"
+                            app:layout_constraintStart_toEndOf="@id/viewNormal"
+                            app:layout_constraintEnd_toEndOf="@id/viewNormal"
+                            android:layout_marginTop="4dp"
+                            tools:ignore="SmallSp" />
+
+                        <TextView
+                            android:id="@+id/tvLabel30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bmi_30"
+                            android:textSize="10sp"
+                            app:layout_constraintTop_toBottomOf="@id/viewOverweight"
+                            app:layout_constraintStart_toEndOf="@id/viewOverweight"
+                            app:layout_constraintEnd_toEndOf="@id/viewOverweight"
+                            android:layout_marginTop="4dp"
+                            tools:ignore="SmallSp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -226,6 +296,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="40dp"
                 android:text="@string/indietro"

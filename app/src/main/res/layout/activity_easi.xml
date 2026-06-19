@@ -40,7 +40,7 @@
             <!-- Card Selezione Distretto -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardBodyPart"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -49,6 +49,9 @@
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/headerView">
 
                 <LinearLayout
@@ -58,12 +61,14 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvSelectDistrictLabel"
                         style="@style/TextAppearance.DermCalc.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/seleziona_distretto"
                         android:textStyle="bold"
-                        android:textColor="@color/primaryColor" />
+                        android:textColor="@color/primaryColor"
+                        android:labelFor="@id/chipGroupBodyPart" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chipGroupBodyPart"
@@ -108,13 +113,16 @@
             <!-- Card Gravità -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardGravity"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardBodyPart">
 
                 <LinearLayout
@@ -132,11 +140,13 @@
 
                     <!-- Eritema -->
                     <TextView
+                        android:id="@+id/tvEritemaLabel"
                         style="@style/TextAppearance.DermCalc.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/eritema" />
+                        android:text="@string/eritema"
+                        android:labelFor="@id/sbEritema" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,19 +162,23 @@
                         <TextView
                             android:id="@+id/tvEritemaValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
+                            android:accessibilityLiveRegion="polite"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
 
                     <!-- Edema -->
                     <TextView
+                        android:id="@+id/tvEdemaLabel"
                         style="@style/TextAppearance.DermCalc.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@string/edema" />
+                        android:text="@string/edema"
+                        android:labelFor="@id/sbEdema" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -180,19 +194,23 @@
                         <TextView
                             android:id="@+id/tvEdemaValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
+                            android:accessibilityLiveRegion="polite"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
 
                     <!-- Escoriazioni -->
                     <TextView
+                        android:id="@+id/tvEscoriazioniLabel"
                         style="@style/TextAppearance.DermCalc.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@string/escoriazioni" />
+                        android:text="@string/escoriazioni"
+                        android:labelFor="@id/sbEscoriazioni" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -208,19 +226,23 @@
                         <TextView
                             android:id="@+id/tvEscoriazioniValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
+                            android:accessibilityLiveRegion="polite"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
 
                     <!-- Lichenificazione -->
                     <TextView
+                        android:id="@+id/tvLichenificazioneLabel"
                         style="@style/TextAppearance.DermCalc.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@string/lichenificazione" />
+                        android:text="@string/lichenificazione"
+                        android:labelFor="@id/sbLichenificazione" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -236,21 +258,25 @@
                         <TextView
                             android:id="@+id/tvLichenificazioneValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
+                            android:accessibilityLiveRegion="polite"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
 
                     <!-- Area -->
                     <TextView
+                        android:id="@+id/tvAreaLabel"
                         style="@style/TextAppearance.DermCalc.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/area"
                         android:textColor="@color/primaryDarkColor"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:labelFor="@id/sbArea" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -266,9 +292,11 @@
                         <TextView
                             android:id="@+id/tvAreaValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
+                            android:accessibilityLiveRegion="polite"
                             android:text="@string/area_0" />
                     </LinearLayout>
                 </LinearLayout>
@@ -278,11 +306,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNotes"
                 style="@style/Widget.DermCalc.EditText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="12dp"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardGravity">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNotes"
@@ -298,18 +329,21 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCalculateEasi"
                 style="@style/Widget.DermCalc.Button"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/calcola_e_salva"
+                app:layout_constraintWidth_max="320dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilNotes" />
 
             <!-- Risultato Progressivo -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardEasiResult"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -318,6 +352,9 @@
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnCalculateEasi">
 
                 <LinearLayout
@@ -329,9 +366,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="AVANZAMENTO VALUTAZIONE"
+                        android:text="@string/avanzamento_valutazione"
                         android:textColor="@color/textSecondary"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:letterSpacing="0.1" />
 
@@ -351,7 +388,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="1 di 4 regioni completate"
+                        android:text="@string/regioni_completate_default"
                         android:textSize="12sp"
                         android:textColor="@color/textSecondary" />
 
@@ -376,7 +413,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="TOTALE EASI"
+                                android:text="@string/totale_easi"
                                 android:textSize="12sp"
                                 android:textColor="@color/primaryColor"
                                 android:textStyle="bold" />
@@ -384,7 +421,7 @@
                                 android:id="@+id/tvTotalScore"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0.0"
+                                android:text="@string/default_score"
                                 android:textSize="32sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary" />
@@ -413,7 +450,7 @@
                             android:background="@drawable/ic_launcher_background"
                             android:backgroundTint="@color/backgroundColor"
                             android:padding="8dp"
-                            android:text="Regione: 0.0"
+                            android:text="@string/regione_score_default"
                             android:textSize="13sp"
                             android:textColor="@color/textSecondary" />
                     </LinearLayout>
@@ -425,6 +462,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="40dp"
                 android:text="@string/indietro"

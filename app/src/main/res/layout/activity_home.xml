@@ -34,6 +34,7 @@
                 android:layout_marginTop="32dp"
                 android:padding="2dp"
                 android:src="@drawable/ic_person"
+                android:importantForAccessibility="no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent"
@@ -89,29 +90,18 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/paziente_selezionato"
+                        android:textAllCaps="true"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/paziente_selezionato"
-                            android:textAllCaps="true"
-                            android:textColor="@color/primaryColor"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.1" />
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_search"
-                            app:tint="@color/textSecondary" />
-                    </LinearLayout>
+                        app:drawableEndCompat="@drawable/ic_search"
+                        app:drawableTint="@color/textSecondary" />
 
                     <TextView
                         android:id="@+id/tvSelectedPaziente"
@@ -130,7 +120,7 @@
                         android:layout_marginTop="2dp"
                         android:textColor="@color/textSecondary"
                         android:textSize="14sp"
-                        tools:text="Codice: FRNRST80... | Età: 43 anni" />
+                        tools:text="Codice: FRNRST80… | Età: 43 anni" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -182,12 +172,13 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_bmi"
+                            android:importantForAccessibility="no"
                             app:tint="@color/primaryColor" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@string/calcolatore_bmi1"
+                            android:text="@string/calcolatore_bmi"
                             android:textStyle="bold"
                             android:textSize="16sp" />
                         <TextView
@@ -224,12 +215,13 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_pasi"
+                            android:importantForAccessibility="no"
                             app:tint="@color/primaryColor" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@string/calcolatore_pasi1"
+                            android:text="@string/calcolatore_pasi"
                             android:textStyle="bold"
                             android:textSize="16sp" />
                         <TextView
@@ -266,12 +258,13 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_easi"
+                            android:importantForAccessibility="no"
                             app:tint="@color/primaryColor" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@string/calcolatore_easi1"
+                            android:text="@string/calcolatore_easi"
                             android:textStyle="bold"
                             android:textSize="16sp" />
                         <TextView
@@ -308,6 +301,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_history"
+                            android:importantForAccessibility="no"
                             app:tint="@color/primaryColor" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -354,6 +348,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/ic_search"
+                        android:importantForAccessibility="no"
                         app:tint="@color/primaryColor" />
 
                     <LinearLayout

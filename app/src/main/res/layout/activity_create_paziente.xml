@@ -3,7 +3,6 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
@@ -28,13 +27,16 @@
         <!-- CARD DATI ANAGRAFICI -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardAnagrafica"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/surfaceVariant"
+            app:layout_constraintWidth_max="488dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCreateTitle">
 
             <LinearLayout
@@ -156,13 +158,16 @@
         <!-- CARD INFORMAZIONI CLINICHE -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardClinica"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/surfaceVariant"
+            app:layout_constraintWidth_max="488dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardAnagrafica">
 
             <LinearLayout
@@ -233,13 +238,16 @@
         <!-- CARD CAREGIVER -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardCaregiver"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/surfaceVariant"
+            app:layout_constraintWidth_max="488dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardClinica">
 
             <LinearLayout
@@ -296,23 +304,29 @@
         <!-- Consenso -->
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/swConsenso"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/consenso_trattamento"
             android:textColor="@color/textPrimary"
             android:textSize="14sp"
+            app:layout_constraintWidth_max="488dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardCaregiver" />
 
         <!-- Bottone Salva -->
         <Button
             android:id="@+id/btnSalvaPaziente"
             style="@style/Widget.DermCalc.Button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             android:text="@string/salva_paziente"
+            app:layout_constraintWidth_max="320dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/swConsenso"
             app:layout_constraintBottom_toBottomOf="parent" />
 

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme updated to Material Design 3 -->
     <style name="Theme.DermCalc" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -38,6 +38,7 @@
 
     <!-- Custom Button Style (M3) -->
     <style name="Widget.DermCalc.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">48dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:textAllCaps">false</item>
@@ -45,6 +46,8 @@
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:maxWidth">320dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
         <!-- Shape is handled by M3 defaults (ExtraLarge by default) -->
     </style>
 

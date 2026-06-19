@@ -40,7 +40,7 @@
             <!-- Card Selezione Distretto -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardBodyPart"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -49,6 +49,9 @@
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/headerView">
 
                 <LinearLayout
@@ -108,13 +111,16 @@
             <!-- Card Gravità -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardGravity"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardBodyPart">
 
                 <LinearLayout
@@ -152,8 +158,9 @@
                         <TextView
                             android:id="@+id/tvEritemaValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
@@ -180,8 +187,9 @@
                         <TextView
                             android:id="@+id/tvIndurimentoValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
@@ -208,8 +216,9 @@
                         <TextView
                             android:id="@+id/tvDesquamazioneValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
                             android:text="@string/desc_zero" />
                     </LinearLayout>
@@ -238,8 +247,9 @@
                         <TextView
                             android:id="@+id/tvAreaValue"
                             style="@style/TextAppearance.DermCalc.Value"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:minWidth="80dp"
                             android:gravity="end"
                             android:text="@string/area_0" />
                     </LinearLayout>
@@ -250,11 +260,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNotes"
                 style="@style/Widget.DermCalc.EditText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="12dp"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardGravity">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNotes"
@@ -270,24 +283,30 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCalculatePasi"
                 style="@style/Widget.DermCalc.Button"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/calcola_e_salva"
+                app:layout_constraintWidth_max="320dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilNotes" />
 
             <!-- Risultato Progressivo -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardPasiResult"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/surfaceVariant"
+                app:layout_constraintWidth_max="488dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnCalculatePasi">
 
                 <LinearLayout
@@ -396,6 +415,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="40dp"
                 android:text="@string/indietro"
