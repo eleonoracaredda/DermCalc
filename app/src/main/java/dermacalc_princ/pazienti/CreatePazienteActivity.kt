@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import database.AppDatabase
-import dominio.Pazienti
+import Database.AppDatabase
+import Dominio.Pazienti
 import Utils.SessionManager
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -23,7 +23,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 class CreatePazienteActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
-        // Applica la lingua prima di caricare la UI
         super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
 
@@ -31,18 +30,15 @@ class CreatePazienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_paziente)
 
-        // Recuperiamo il medico loggato dalla sessione
         val sessionManager = SessionManager(this)
         val doctorId = sessionManager.getDoctorId()
 
-        // Se non c'è una sessione valida, torniamo al login
         if (doctorId == null) {
             Toast.makeText(this, "Errore sessione: effettua nuovamente il login", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
-        // Riferimenti ai componenti della UI
         val etNome = findViewById<TextInputEditText>(R.id.etNome)
         val etCognome = findViewById<TextInputEditText>(R.id.etCognome)
         val etCodiceFiscale = findViewById<TextInputEditText>(R.id.etCodiceFiscale)
@@ -61,12 +57,12 @@ class CreatePazienteActivity : AppCompatActivity() {
         val database = AppDatabase.getDatabase(this)
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
 
-        // Se passiamo un ID, siamo in modalità modifica
+        // Verifica se l'activity è stata aperta per modificare un paziente esistente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         var pazienteEsistente: Pazienti? = null
 
         if (pazienteId != -1) {
-            // Carichiamo i dati del paziente per pre-popolare i campi
+            // Se l'ID è presente, recupera i dati del paziente dal database per popolare i campi
             lifecycleScope.launch {
                 pazienteEsistente = database.pazienteDao().getById(pazienteId)
                 pazienteEsistente?.let {
@@ -74,28 +70,24 @@ class CreatePazienteActivity : AppCompatActivity() {
                     etCognome.setText(it.cognome)
                     etCodiceFiscale.setText(it.codiceFiscale)
                     etDataNascita.setText(dateFormat.format(it.dataNascita))
-                    
-                    // Gestione sesso
+                    // Imposta il sesso corretto nel RadioGroup
                     if (it.sesso == "M") rbMaschio.isChecked = true else rbFemmina.isChecked = true
-                    
                     etTerapia.setText(it.terapia ?: "")
                     etComorbilita.setText(it.comorbilita ?: "")
-                    
-                    // Data inizio terapia opzionale
+                    // Formatta e visualizza la data inizio terapia se presente
                     it.dataInizioTerapia?.let { data -> etDataInizioTerapia.setText(dateFormat.format(data)) }
-                    
                     etCaregiverNome.setText(it.caregiverNome ?: "")
                     etCaregiverTelefono.setText(it.caregiverTelefono ?: "")
                     swConsenso.isChecked = it.consenso
-                    
-                    // Cambiamo la label del pulsante
+                    // Cambia il testo del pulsante in modalità modifica
                     btnSalva.text = "Aggiorna Paziente"
                 }
             }
         }
 
-        // Salvataggio dei dati (nuovo o modifica)
+        // Gestione del click sul pulsante Salva/Aggiorna
         btnSalva.setOnClickListener {
+            // Recupero dei valori inseriti dall'utente
             val nome = etNome.text.toString().trim()
             val cognome = etCognome.text.toString().trim()
             val codiceFiscale = etCodiceFiscale.text.toString().trim()
@@ -108,16 +100,16 @@ class CreatePazienteActivity : AppCompatActivity() {
             val caregiverTelefono = etCaregiverTelefono.text.toString().trim()
             val consenso = swConsenso.isChecked
 
-            // Verifica campi obbligatori
+            // Validazione dei campi obbligatori
             if (nome.isNotEmpty() && cognome.isNotEmpty() && codiceFiscale.isNotEmpty() && dataNascitaStr.isNotEmpty()) {
-                
-                // Parsing delle date
+                // Parsing della data di nascita
                 val dateNascita = try {
                     dateFormat.parse(dataNascitaStr)
                 } catch (e: Exception) {
                     null
                 }
 
+                // Parsing opzionale della data inizio terapia
                 val dateInizioTerapia = if (dataInizioTerapiaStr.isNotEmpty()) {
                     try {
                         dateFormat.parse(dataInizioTerapiaStr)
@@ -129,7 +121,7 @@ class CreatePazienteActivity : AppCompatActivity() {
                 if (dateNascita != null) {
                     lifecycleScope.launch {
                         if (pazienteId != -1 && pazienteEsistente != null) {
-                            // Aggiorna paziente esistente
+                            // Aggiornamento di un paziente esistente (Modalità MODIFICA)
                             val pazienteAggiornato = pazienteEsistente!!.copy(
                                 nome = nome,
                                 cognome = cognome,
@@ -146,13 +138,13 @@ class CreatePazienteActivity : AppCompatActivity() {
                             database.pazienteDao().update(pazienteAggiornato)
                             Toast.makeText(this@CreatePazienteActivity, "Paziente aggiornato con successo", Toast.LENGTH_SHORT).show()
                         } else {
-                            // Crea nuovo record
+                            // Creazione di un nuovo paziente (Modalità INSERIMENTO)
                             val nuovoPaziente = Pazienti(
                                 nome = nome,
                                 cognome = cognome,
                                 codiceFiscale = codiceFiscale,
                                 dataNascita = dateNascita,
-                                dottoreId = doctorId, 
+                                dottoreId = doctorId, // Associa il paziente al medico attualmente loggato
                                 sesso = sesso,
                                 terapia = terapia,
                                 dataInizioTerapia = dateInizioTerapia,
@@ -164,7 +156,7 @@ class CreatePazienteActivity : AppCompatActivity() {
                             database.pazienteDao().insert(nuovoPaziente)
                             Toast.makeText(this@CreatePazienteActivity, "Paziente salvato con successo", Toast.LENGTH_SHORT).show()
                         }
-                        finish() // Torna indietro dopo l'operazione
+                        finish() // Torna alla lista pazienti dopo il salvataggio
                     }
                 } else {
                     Toast.makeText(this, "Formato data nascita non valido (dd/mm/yyyy)", Toast.LENGTH_SHORT).show()
