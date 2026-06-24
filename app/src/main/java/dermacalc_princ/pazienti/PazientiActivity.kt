@@ -1,8 +1,11 @@
 package dermacalc_princ.pazienti
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,23 +13,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import Database.AppDatabase
+import database.AppDatabase
 import dermacalc_princ.auth.RegisterActivity
 import dermacalc_princ.home.HomeActivity
 import Utils.SessionManager
-import kotlinx.coroutines.launch
-import android.text.Editable
-import android.text.TextWatcher
-import com.google.android.material.textfield.TextInputEditText
-
 import Utils.LocaleHelper
-import android.content.Context
-import android.view.View
+import kotlinx.coroutines.launch
+import com.google.android.material.textfield.TextInputEditText
 
 // Activity principale per la gestione dell'elenco pazienti associati al medico loggato
 class PazientiActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
+        // Applica la lingua salvata prima di caricare la UI
         super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
 
@@ -37,7 +36,7 @@ class PazientiActivity : AppCompatActivity() {
     private lateinit var database: AppDatabase
     private lateinit var sessionManager: SessionManager
 
-    // Elementi del profilo del dottore visualizzati nell'intestazione
+    // Header profilo medico
     private lateinit var tvDoctorName: TextView
     private lateinit var tvDoctorEmail: TextView
     private lateinit var btnEditDoctor: ImageButton
@@ -46,7 +45,7 @@ class PazientiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pazienti)
 
-        // Inizializzazione database e sessione
+        // Prepariamo il database e la sessione
         database = AppDatabase.getDatabase(this)
         sessionManager = SessionManager(this)
         
@@ -59,10 +58,9 @@ class PazientiActivity : AppCompatActivity() {
         etSearch = findViewById(R.id.etSearch)
         llEmptyState = findViewById(R.id.llEmptyState)
 
-        // Configurazione del layout manager per la RecyclerView
         rvPazienti.layoutManager = LinearLayoutManager(this)
 
-        // Listener per la ricerca in tempo reale: aggiorna la lista ad ogni carattere digitato
+        // Ricerca istantanea dei pazienti
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -71,57 +69,54 @@ class PazientiActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Listener per aggiungere un nuovo paziente: apre la CreatePazienteActivity
+        // Tasto per aggiungere un nuovo paziente
         btnNuovoPaziente.setOnClickListener {
-            val intent = Intent(this, CreatePazienteActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CreatePazienteActivity::class.java))
         }
 
-        // Listener per modificare il profilo del medico loggato
+        // Tasto per modificare i dati del medico
         btnEditDoctor.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            intent.putExtra("EDIT_MODE", true) // Passa un flag per indicare la modalità modifica
+            intent.putExtra("EDIT_MODE", true)
             startActivity(intent)
         }
 
-        // Caricamento iniziale dei dati
+        // Caricamento dati iniziali
         loadDoctorProfile()
         loadPazienti()
     }
 
     override fun onResume() {
         super.onResume()
-        // Ricarica i dati quando si torna all'activity (es. dopo aggiunta/modifica)
+        // Aggiorna la lista quando si torna sull'activity
         loadDoctorProfile()
         loadPazienti(etSearch.text.toString())
     }
 
-    // Carica le informazioni del medico dalla sessione e dal database
+    // Carica il nome e l'email del dottore nell'header
     private fun loadDoctorProfile() {
         val doctorId = sessionManager.getDoctorId() ?: return
         lifecycleScope.launch {
             val doctor = database.userDao().getUserByTaxCode(doctorId)
             doctor?.let {
-                tvDoctorName.text = "Dott. ${it.firstName} ${it.lastName}"
+                tvDoctorName.text = getString(R.string.dott_format, it.firstName, it.lastName)
                 tvDoctorEmail.text = it.email
             }
         }
     }
 
-    // Carica la lista dei pazienti filtrata per il medico corrente e per l'eventuale query di ricerca
+    // Carica la lista dei pazienti (con eventuale filtro di ricerca)
     private fun loadPazienti(query: String = "") {
         val doctorId = sessionManager.getDoctorId() ?: return
 
         lifecycleScope.launch {
             val pazientiList = if (query.isEmpty()) {
-                // Recupera tutti i pazienti associati al dottore loggato
                 database.pazienteDao().getByDottore(doctorId)
             } else {
-                // Esegue la ricerca filtrata
                 database.pazienteDao().searchPazienti(doctorId, query)
             }
 
-            // Mostra o nasconde l'empty state
+            // Gestione del layout se non ci sono pazienti
             if (pazientiList.isEmpty()) {
                 llEmptyState.visibility = View.VISIBLE
                 rvPazienti.visibility = View.GONE
@@ -130,23 +125,22 @@ class PazientiActivity : AppCompatActivity() {
                 rvPazienti.visibility = View.VISIBLE
             }
 
-            // Configurazione dell'adapter con le relative callback
-            val adapter = PazienteAdapter(
+            // Impostiamo l'adapter con le callback per i click
+            rvPazienti.adapter = PazienteAdapter(
                 pazientiList,
                 onPazienteClick = { paziente ->
-                    // Navigazione alla Home del paziente selezionato
+                    // Naviga alla Home del paziente
                     val intent = Intent(this@PazientiActivity, HomeActivity::class.java)
                     intent.putExtra("PAZIENTE_ID", paziente.id)
                     startActivity(intent)
                 },
                 onEditClick = { paziente ->
-                    // Navigazione alla modifica dei dati del paziente
+                    // Naviga alla modifica del paziente
                     val intent = Intent(this@PazientiActivity, CreatePazienteActivity::class.java)
                     intent.putExtra("PAZIENTE_ID", paziente.id)
                     startActivity(intent)
                 }
             )
-            rvPazienti.adapter = adapter
         }
     }
 }

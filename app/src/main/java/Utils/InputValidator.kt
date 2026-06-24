@@ -2,30 +2,30 @@ package Utils
 
 import android.util.Patterns
 
-// Utility per la validazione formale degli input utente nelle diverse schermate
+// Utility per validare i dati inseriti nelle varie schermate
 object InputValidator {
 
-    // Verifica se l'indirizzo email inserito segue il formato standard (es. nome@dominio.it)
+    // Controlla se l'email ha un formato valido (es. test@esempio.com)
     fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    // Requisiti minimi di sicurezza per la password: deve avere almeno 8 caratteri
+    // Verifica se la password è abbastanza lunga (almeno 8 caratteri)
     fun isPasswordStrong(password: String): Boolean {
         return password.length >= 8
     }
 
-    // Assicura che i nomi inseriti (paziente o medico) non siano stringhe vuote o solo spazi
+    // Controlla che il nome non sia vuoto
     fun isNameValid(name: String): Boolean {
         return name.isNotBlank()
     }
 
-    // Verifica la lunghezza del Codice Fiscale (deve essere esattamente di 16 caratteri)
+    // Verifica la lunghezza standard del Codice Fiscale
     fun isCodiceFiscaleValid(cf: String): Boolean {
         return cf.length == 16
     }
 
-    // Funzione helper che verifica se tutti i campi passati come argomenti sono popolati
+    // Helper per controllare se più campi sono tutti popolati
     fun isNotEmpty(vararg fields: String): Boolean {
         return fields.all { it.isNotBlank() }
     }

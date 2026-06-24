@@ -1,4 +1,4 @@
-package Dominio
+package dominio
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

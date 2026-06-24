@@ -1,7 +1,7 @@
-package Database
+package database
 
 import androidx.room.*
-import Dominio.Pazienti
+import dominio.Pazienti
 
 // Interfaccia DAO per la gestione dei dati anagrafici dei pazienti
 @Dao

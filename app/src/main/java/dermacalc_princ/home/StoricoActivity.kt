@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
-import Database.AppDatabase
-import Dominio.Misurazione
-import Repository.MisurazioneRepository
+import database.AppDatabase
+import dominio.Misurazione
+import repository.MisurazioneRepository
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData

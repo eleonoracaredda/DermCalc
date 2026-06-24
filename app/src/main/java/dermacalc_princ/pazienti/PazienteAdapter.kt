@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import Dominio.Pazienti
+import dominio.Pazienti
 
 class PazienteAdapter(
     private val pazienti: List<Pazienti>,
@@ -24,7 +24,6 @@ class PazienteAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PazienteViewHolder {
-        // Inflata il layout dell'item della lista
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_paziente, parent, false)
         return PazienteViewHolder(view)

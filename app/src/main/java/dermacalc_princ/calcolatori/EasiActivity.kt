@@ -11,8 +11,8 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import Database.AppDatabase
-import Dominio.Misurazione
+import database.AppDatabase
+import dominio.Misurazione
 import java.util.Date
 import Logic.EasiCalculator
 import com.example.dermcalc_princ.R
@@ -20,13 +20,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import Repository.MisurazioneRepository
+import repository.MisurazioneRepository
 import Utils.LocaleHelper
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
+/**
+ * Activity per il calcolo dell'indice EASI (Eczema Area and Severity Index)
+ * Permette la valutazione di 4 regioni corporee e calcola un punteggio totale
+ */
 class EasiActivity : AppCompatActivity() {
 
+    //Applicazione della lingua selezionata all'Activity
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
@@ -35,6 +40,10 @@ class EasiActivity : AppCompatActivity() {
     private lateinit var repository: MisurazioneRepository
     private val easiCalculator = EasiCalculator()
 
+    /**
+     * Struttura dati che rappresenta una regione corporea
+     * con i parametri clinici valutati
+     */
     private data class RegionData(
         var eritema: Int = 0,
         var edema: Int = 0,
@@ -45,9 +54,11 @@ class EasiActivity : AppCompatActivity() {
         fun signsSum() = eritema + edema + escoriazioni + lichenificazione
     }
 
+    // Array delle 4 regioni corporee (testa, tronco, braccia, gambe)
     private val regions = Array(4) { RegionData() }
     private var currentRegionIndex = 0
 
+    //Elementi UI
     private lateinit var sbEritema: SeekBar
     private lateinit var sbEdema: SeekBar
     private lateinit var sbEscoriazioni: SeekBar
@@ -73,6 +84,7 @@ class EasiActivity : AppCompatActivity() {
         db = AppDatabase.getDatabase(this)
         repository = MisurazioneRepository(db)
 
+        //Controllo validità paziente
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         if (pazienteId == -1) {
             Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
@@ -89,11 +101,13 @@ class EasiActivity : AppCompatActivity() {
         updateTotalUI()
     }
 
+    //Gestione pulsante back della toolbar
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
     }
 
+    //Inizializza tutte le view della UI
     private fun initViews() {
         sbEritema = findViewById(R.id.sbEritema)
         sbEdema = findViewById(R.id.sbEdema)
@@ -114,10 +128,12 @@ class EasiActivity : AppCompatActivity() {
         etNotes = findViewById(R.id.etNotes)
     }
 
+    // Configura listener per ChipGroup, SeekBar e pulsanti
     private fun setupListeners(pazienteId: Int) {
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroupBodyPart)
         chipGroup.check(R.id.chipHead)
 
+        // Cambio regione corporea selezionata
         chipGroup.setOnCheckedChangeListener { _, checkedId ->
             currentRegionIndex = when(checkedId) {
                 R.id.chipHead -> 0
@@ -130,6 +146,7 @@ class EasiActivity : AppCompatActivity() {
             updateTotalUI()
         }
 
+        // Listener per aggiornamento automatico valori SeekBar
         val seekBars = listOf(sbEritema, sbEdema, sbEscoriazioni, sbLichenificazione, sbArea)
         seekBars.forEach { sb ->
             sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -145,6 +162,7 @@ class EasiActivity : AppCompatActivity() {
             })
         }
 
+        // Calcolo finale EASI
         findViewById<Button>(R.id.btnCalculateEasi).setOnClickListener {
             val totalScore = calculateTotalEasi()
             val severita = easiCalculator.severity(totalScore)
@@ -162,6 +180,7 @@ class EasiActivity : AppCompatActivity() {
         }
     }
 
+    //Salva i dati della regione corrente
     private fun saveCurrentRegionData() {
         val data = regions[currentRegionIndex]
         data.eritema = sbEritema.progress
@@ -171,6 +190,7 @@ class EasiActivity : AppCompatActivity() {
         data.area = sbArea.progress
     }
 
+    //Carica i dati della regione selezionata nella UI
     private fun loadRegionData(data: RegionData) {
         sbEritema.progress = data.eritema
         sbEdema.progress = data.edema
@@ -180,6 +200,7 @@ class EasiActivity : AppCompatActivity() {
         updateLabels()
     }
 
+    //Aggiorna le etichette descrittive dei valori
     private fun updateLabels() {
         tvEritemaVal.text = getSignDesc(sbEritema.progress)
         tvEdemaVal.text = getSignDesc(sbEdema.progress)
@@ -188,6 +209,7 @@ class EasiActivity : AppCompatActivity() {
         tvAreaVal.text = getAreaDesc(sbArea.progress)
     }
 
+    //Conversione valori segni clinici in descrizione testuale
     private fun getSignDesc(progress: Int) = when(progress) {
         0 -> getString(R.string.desc_zero)
         1 -> getString(R.string.desc_uno)
@@ -196,6 +218,7 @@ class EasiActivity : AppCompatActivity() {
         else -> progress.toString()
     }
 
+    //Conversione area in descrizione testuale
     private fun getAreaDesc(progress: Int) = when(progress) {
         0 -> getString(R.string.area_0)
         1 -> getString(R.string.area_1)
@@ -207,6 +230,7 @@ class EasiActivity : AppCompatActivity() {
         else -> progress.toString()
     }
 
+    //Calcolo punteggio totale EASI su tutte le regioni
     private fun calculateTotalEasi(): Double {
         var total = 0.0
         regions.forEachIndexed { index, data ->
@@ -215,6 +239,7 @@ class EasiActivity : AppCompatActivity() {
         return total
     }
 
+    //Aggiorna tutta la UI (punteggio, severità, progressi)
     private fun updateTotalUI() {
         val total = calculateTotalEasi()
         val currentRegionData = regions[currentRegionIndex]
@@ -257,6 +282,7 @@ class EasiActivity : AppCompatActivity() {
         tvProgressDetails.text = getString(R.string.regioni_completate_default).replace("0", completedRegions.toString())
     }
 
+    //Salvataggio misurazione EASI su database (thread IO)
     private fun salvaEasi(idPaziente: Int, valore: Double, severita: String, note: String?, datiInput: String) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.insertMisurazione(

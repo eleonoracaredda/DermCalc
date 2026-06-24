@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import Database.AppDatabase
-import Dominio.User
+import database.AppDatabase
+import dominio.User
 import kotlinx.coroutines.launch
 import Utils.hashPassword
 import Utils.InputValidator

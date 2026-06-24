@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import Database.AppDatabase
+import database.AppDatabase
 import dermacalc_princ.pazienti.PazientiActivity
 import kotlinx.coroutines.launch
 import Utils.InputValidator
@@ -19,42 +19,39 @@ import Utils.hashPassword
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.view.View
-
-
-
 import Utils.LocaleHelper
 import android.content.Context
 
-// Gestisce l'autenticazione del medico tramite Email e Password
+// Activity principale per l'autenticazione del medico e gestione lingua
 class LoginActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
-        // Applica la lingua salvata prima di creare l'Activity
+        // Applica la lingua scelta prima di creare il contesto
         super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
 
-    // FUNZIONE PER CAMBIARE LINGUA ---
+    // Salva la lingua nelle preferenze e ricarica l'Activity per applicare le modifiche
     private fun setLocale(lang: String) {
         val sessionManager = SessionManager(this)
         val currentLang = sessionManager.getLanguage()
-        if (currentLang == lang) return // Evita loop infiniti se la lingua è già corretta
+        
+        if (currentLang == lang) return
 
         sessionManager.saveLanguage(lang)
-        recreate()
+        recreate() // Ricarica l'activity con la nuova lingua
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Forza il tema chiaro prima della creazione della view
+        // Disabilita la modalità notte per coerenza stilistica dell'interfaccia
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Gestore della sessione locale (SharedPreferences)
+        // Inizializzazione sessione e UI
         val sessionManager = SessionManager(this)
-
-        // COLLEGAMENTO SPINNER LINGUA
         val spLanguage = findViewById<Spinner>(R.id.spLanguage)
         
-        // Imposta la posizione dello spinner in base alla lingua salvata
+        // Impostiamo lo spinner sulla lingua attualmente salvata (0: IT, 1: EN)
         val savedLang = sessionManager.getLanguage()
         if (savedLang == "en") spLanguage.setSelection(1) else spLanguage.setSelection(0)
 
@@ -66,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // Inizializzazione view
+        // Riferimenti ai componenti grafici
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
@@ -75,30 +72,32 @@ class LoginActivity : AppCompatActivity() {
 
         val database = AppDatabase.getDatabase(this)
 
+        // Logica per il pulsante di Login
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Validazione input prima di interrogare il DB
+            // Controllo che i campi non siano vuoti
             if (!InputValidator.isNotEmpty(email, password)) {
                 Toast.makeText(this, getString(R.string.inserisci_email_password), Toast.LENGTH_SHORT).show()
                 etEmail.error = getString(R.string.campo_obbligatorio)
                 return@setOnClickListener
             }
 
+            // Validazione del formato email
             if (!InputValidator.isEmailValid(email)) {
                 Toast.makeText(this, getString(R.string.formato_email_non_valido), Toast.LENGTH_SHORT).show()
                 etEmail.error = getString(R.string.formato_email_non_valido)
                 return@setOnClickListener
             }
 
-            // Tentativo di login
+            // Verifica credenziali nel database
             lifecycleScope.launch {
                 val user = database.userDao().getUserByEmail(email)
 
-                // Confronto tra l'hash della password inserita e quello nel database
+                // Se l'utente esiste, verifichiamo che l'hash della password coincida
                 if (user != null && user.password == hashPassword(password)) {
-                    // Salvataggio medico corrente nella sessione
+                    // Salviamo i dati dell'utente nella sessione
                     sessionManager.saveDoctor(user.taxCode, user.firstName)
 
                     Toast.makeText(
@@ -107,7 +106,6 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Navigazione alla dashboard principale (Lista Pazienti)
                     startActivity(Intent(this@LoginActivity, PazientiActivity::class.java))
                     finish()
                 } else {
@@ -116,12 +114,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Navigazione al recupero password
+        // Navigazione alla schermata di recupero password
         txtForgotPassword.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
-        // Navigazione alla registrazione
+        // Navigazione alla schermata di registrazione
         txtRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

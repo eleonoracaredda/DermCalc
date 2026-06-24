@@ -1,4 +1,4 @@
-package com.example.dermcalc_princ.misurazioni
+package dermacalc_princ.misurazioni
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import Dominio.Misurazione
+import dominio.Misurazione
 import java.text.SimpleDateFormat
 import java.util.*
 

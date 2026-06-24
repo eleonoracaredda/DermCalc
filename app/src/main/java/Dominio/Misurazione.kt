@@ -1,35 +1,27 @@
-package Dominio
+package dominio
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
-// Entità Room che rappresenta una singola misurazione clinica salvata nel database
+// Entità Room per una singola misurazione clinica
 @Entity(tableName = "misurazioni")
 data class Misurazione(
 
-    // Identificatore univoco della misurazione (generato automaticamente)
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true) // ID autogenerato
     val id: Int = 0,
 
-    // ID del paziente a cui appartiene questa misurazione (chiave esterna logica)
-    val pazienteId: Int,
+    val pazienteId: Int,        // ID del paziente associato
 
-    // Tipologia di indice calcolato: PASI, EASI, BMI, BSA
-    val tipo: String,
+    val tipo: String,           // Tipo di indice (PASI, EASI, BMI, BSA)
 
-    // Valore numerico risultante dal calcolo
-    val valore: Double,
+    val valore: Double,         // Risultato numerico
 
-    // Categoria di gravità associata al valore (es. Lieve, Moderata, Severa)
-    val severita: String,
+    val severita: String,       // Livello di gravità (es. Lieve)
 
-    // Data in cui è stata effettuata la misurazione
-    val data: Date,
+    val data: Date,             // Data della misurazione
 
-    // Dati di input salvati in formato stringa (es. "peso:70,altezza:175" o JSON)
-    val datiInput: String? = null,
+    val datiInput: String? = null, // Dati grezzi usati per il calcolo (es. in formato JSON)
 
-    //Note
-    val note: String? = null
+    val note: String? = null    // Eventuali annotazioni del medico
 )

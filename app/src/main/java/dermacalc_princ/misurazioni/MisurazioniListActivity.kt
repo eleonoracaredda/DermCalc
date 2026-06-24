@@ -10,9 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dermcalc_princ.R
-import Database.AppDatabase
-import com.example.dermcalc_princ.misurazioni.MisurazioniAdapter
-import Repository.MisurazioneRepository
+import database.AppDatabase
+import repository.MisurazioneRepository
 import Utils.LocaleHelper
 import kotlinx.coroutines.launch
 

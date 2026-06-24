@@ -1,4 +1,4 @@
-package Dominio
+package dominio
 
 // Rappresenta i dati clinici relativi a un singolo distretto corporeo per il calcolo del PASI
 data class DatiDistretto(
