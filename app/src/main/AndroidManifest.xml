@@ -20,7 +20,8 @@
 
         <activity
             android:name="dermacalc_princ.auth.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.home.HomeActivity"
@@ -28,23 +29,28 @@
 
         <activity
             android:name="dermacalc_princ.auth.RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.auth.ForgotPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.calcolatori.BmiActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.calcolatori.EasiActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.calcolatori.PasiActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.home.StoricoActivity"
@@ -52,11 +58,13 @@
 
         <activity
             android:name="dermacalc_princ.pazienti.PazientiActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.pazienti.CreatePazienteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="dermacalc_princ.misurazioni.MisurazioniListActivity"
@@ -64,7 +72,8 @@
 
         <activity
             android:name="dermacalc_princ.misurazioni.EditMisurazioneActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

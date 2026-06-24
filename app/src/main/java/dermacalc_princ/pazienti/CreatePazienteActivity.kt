@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.dermcalc_princ.R
 import com.google.android.material.textfield.TextInputEditText
-import Database.AppDatabase
-import Dominio.Pazienti
+import database.AppDatabase
+import dominio.Pazienti
 import Utils.SessionManager
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
