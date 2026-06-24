@@ -24,60 +24,58 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 
-// Classe HomeActivity: Dashboard principale dell'app per il paziente selezionato
+// Dashboard principale per il paziente selezionato
 class HomeActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
+        // Applica la lingua scelta
         super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        // Carica il layout modernizzato della Home
         setContentView(R.layout.activity_home)
 
         val sessionManager = SessionManager(this)
         
-        // Header Utente: Benvenuto Dottore
+        // Header con il nome del dottore
         val tvDoctorHeaderName = findViewById<TextView>(R.id.tvDoctorHeaderName)
         val doctorName = sessionManager.getDoctorName()
         if (doctorName != null) {
-            tvDoctorHeaderName.text = "Dott. $doctorName"
+            tvDoctorHeaderName.text = getString(R.string.bentornato_dott, doctorName)
         }
         
-        // Riferimenti alle Card per il layout a griglia
+        // Riferimenti alle Card dei calcolatori e storico
         val cardBmi = findViewById<MaterialCardView>(R.id.cardBmi)
         val cardPasi = findViewById<MaterialCardView>(R.id.cardPasi)
         val cardEasi = findViewById<MaterialCardView>(R.id.cardEasi)
         val cardStorico = findViewById<MaterialCardView>(R.id.cardStorico)
         val cardMisurazioniList = findViewById<MaterialCardView>(R.id.cardMisurazioniList)
         
-        // Riferimenti ad altri elementi UI
+        // Pulsanti di navigazione e info paziente
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnBackToList = findViewById<Button>(R.id.btnBackToList)
         val fabEditPatient = findViewById<FloatingActionButton>(R.id.fabEditPatient)
         val tvSelectedPaziente = findViewById<TextView>(R.id.tvSelectedPaziente)
         val tvPazienteDetails = findViewById<TextView>(R.id.tvPazienteDetails)
 
-        // Recupero ID paziente passato da PazientiActivity
+        // ID del paziente passato dalla lista
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         
-        // Caricamento dati del paziente se presente
         if (pazienteId != -1) {
             val database = AppDatabase.getDatabase(this)
             lifecycleScope.launch {
                 val paziente = database.pazienteDao().getById(pazienteId)
-                if (paziente != null) {
-                    tvSelectedPaziente.text = "${paziente.nome} ${paziente.cognome}"
-                    val sessoEsteso = if (paziente.sesso == "M") "Maschio" else "Femmina"
+                paziente?.let {
+                    tvSelectedPaziente.text = "${it.nome} ${it.cognome}"
+                    val sessoEsteso = if (it.sesso == "M") getString(R.string.maschio) else getString(R.string.femmina)
                     val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
-                    tvPazienteDetails.text = "Sesso: $sessoEsteso | Data di nascita: ${dateFormat.format(paziente.dataNascita)}"
+                    tvPazienteDetails.text = "Sesso: $sessoEsteso | Nascita: ${dateFormat.format(it.dataNascita)}"
                 }
             }
         }
 
-        // Floating Action Button per modificare il paziente selezionato
+        // Tasto per modificare l'anagrafica del paziente
         fabEditPatient.setOnClickListener {
             if (pazienteId != -1) {
                 val intent = Intent(this, CreatePazienteActivity::class.java)
@@ -86,12 +84,12 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Torna alla lista pazienti
+        // Torna all'elenco generale
         btnBackToList.setOnClickListener {
             finish()
         }
 
-        // Gestione Logout
+        // Effettua il logout e torna al login
         btnLogout.setOnClickListener {
             sessionManager.logout()
             val intent = Intent(this, LoginActivity::class.java)
@@ -100,35 +98,25 @@ class HomeActivity : AppCompatActivity() {
             finish()
         }
 
-        // Click listeners per le card dei calcolatori
+        // Navigazione verso i vari calcolatori
         cardBmi.setOnClickListener {
-            val intent = Intent(this, BmiActivity::class.java)
-            intent.putExtra("PAZIENTE_ID", pazienteId)
-            startActivity(intent)
+            startActivity(Intent(this, BmiActivity::class.java).apply { putExtra("PAZIENTE_ID", pazienteId) })
         }
 
         cardPasi.setOnClickListener {
-            val intent = Intent(this, PasiActivity::class.java)
-            intent.putExtra("PAZIENTE_ID", pazienteId)
-            startActivity(intent)
+            startActivity(Intent(this, PasiActivity::class.java).apply { putExtra("PAZIENTE_ID", pazienteId) })
         }
 
         cardEasi.setOnClickListener {
-            val intent = Intent(this, EasiActivity::class.java)
-            intent.putExtra("PAZIENTE_ID", pazienteId)
-            startActivity(intent)
+            startActivity(Intent(this, EasiActivity::class.java).apply { putExtra("PAZIENTE_ID", pazienteId) })
         }
 
         cardStorico.setOnClickListener {
-            val intent = Intent(this, StoricoActivity::class.java)
-            intent.putExtra("PAZIENTE_ID", pazienteId)
-            startActivity(intent)
+            startActivity(Intent(this, StoricoActivity::class.java).apply { putExtra("PAZIENTE_ID", pazienteId) })
         }
 
         cardMisurazioniList.setOnClickListener {
-            val intent = Intent(this, MisurazioniListActivity::class.java)
-            intent.putExtra("PAZIENTE_ID", pazienteId)
-            startActivity(intent)
+            startActivity(Intent(this, MisurazioniListActivity::class.java).apply { putExtra("PAZIENTE_ID", pazienteId) })
         }
     }
 }

@@ -24,7 +24,6 @@ class PazienteAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PazienteViewHolder {
-        // Inflata il layout dell'item della lista
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_paziente, parent, false)
         return PazienteViewHolder(view)

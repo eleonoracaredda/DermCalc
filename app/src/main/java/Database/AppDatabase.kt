@@ -18,7 +18,7 @@ import Dominio.User
         Pazienti::class,
         Misurazione::class
     ],
-    // Aumenta questo numero SOLO se cambi la struttura delle tabelle (aggiungi colonne, etc.)
+    // Aumenta questo numero SOLO se si cambia la struttura delle tabelle (aggiungi colonne, etc.)
     version = 9, //aumentato da 8 a 9 per datiInput
     exportSchema = false
 )
@@ -54,8 +54,6 @@ abstract class AppDatabase : RoomDatabase() {
                 runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN dataInizioTerapia INTEGER") }
                 runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN consenso INTEGER NOT NULL DEFAULT 0") }
                 runCatching { db.execSQL("ALTER TABLE pazienti ADD COLUMN comorbilita TEXT") }
-                
-                // Aggiunta campo note alla tabella misurazioni (mancava!)
                 runCatching { db.execSQL("ALTER TABLE misurazioni ADD COLUMN note TEXT") }
             }
         }

@@ -21,19 +21,29 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import Repository.MisurazioneRepository
+import repository.MisurazioneRepository
 import Utils.LocaleHelper
 
+/**
+ * Activity dedicata al calcolo del BMI (Body Mass Index)
+ * Permette l'inserimento di peso e altezza, calcola il BMI,
+ * mostra la categoria e salva la misurazione nel database.
+ */
 class BmiActivity : AppCompatActivity() {
 
+    //Applica la lingua scelta dall'Activity
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
 
+    // Database e repository per il salvataggio dati
     private lateinit var db: AppDatabase
     private lateinit var repository: MisurazioneRepository
+
+    // Logica di calcolo BMI
     private val bmiCalculator = BmiCalculator()
 
+    // Componenti UI risultato
     private lateinit var tvResultValue: TextView
     private lateinit var tvSeverityLabel: TextView
     private lateinit var ivGaugeIndicator: ImageView
@@ -43,9 +53,11 @@ class BmiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmi)
 
+        // Inizializzazione database e repository
         db = AppDatabase.getDatabase(this)
         repository = MisurazioneRepository(db)
 
+        // Recupero ID paziente passato dall'Intent
         val pazienteId = intent.getIntExtra("PAZIENTE_ID", -1)
         if (pazienteId == -1) {
             Toast.makeText(this, "Errore: paziente non selezionato", Toast.LENGTH_SHORT).show()
@@ -70,6 +82,13 @@ class BmiActivity : AppCompatActivity() {
             finish()
         }
 
+        /**
+         * CLICK CALCOLA BMI
+         * - Validazione input
+         * - Calcolo BMI
+         * - Aggiornamento UI
+         * - Salvataggio nel database
+         */
         btnCalculate.setOnClickListener {
             val weightStr = etWeight.text.toString()
             val heightStr = etHeight.text.toString()
@@ -131,7 +150,12 @@ class BmiActivity : AppCompatActivity() {
     }
     }
 
-
+    /**
+     * Aggiorna UI in base alla severità del BMI
+     * - Cambia colore label
+     * - Colora indicatore
+     * - Sposta la “gauge”
+     */
     private fun updateSeverityUI(bmi: Double, severity: String) {
         val color = when (severity) {
             "Sottopeso" -> Color.parseColor("#4FC3F7")
@@ -162,11 +186,13 @@ class BmiActivity : AppCompatActivity() {
         }
     }
 
+    //Gestione freccia "indietro"
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
     }
 
+    //Salva la misurazione BMI nel database in background (coroutine IO)
     private fun salvaBmi(idPaziente: Int, valore: Double, severita: String, note: String, weight: Double, height: Double) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.insertMisurazione(
